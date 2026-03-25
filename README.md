@@ -2,13 +2,10 @@
 
 The Generalized Assignment Problem (GAP) is an **NP-hard** combinatorial optimization problem that consists in assigning tasks to agents with limited capacities. 
 
-## Mathematical Formulation
+# Mathematical Formulation
 
-The full mathematical formulation (with proper LaTeX rendering) is available here:
+![](docs/img/math_formulation.png)
 
-👉 **[Mathematical Formulation](https://josue-tambwe.github.io/GeneralizedAssignmentProblem/math_formulation)**
-
-This page uses MathJax and provides a clean, publication‑quality rendering of the GAP model.
 
 
 # Resolution methods
@@ -71,7 +68,7 @@ To accelerate computation, the solver integrates several HPC techniques:
 ## 1. Clone the repository
 
 ```bash
-git clone https://github.com/<Josue-Tambwe>/GeneralizedAssignmentProblem.git
+git clone https://github.com/Josue-Tambwe/GeneralizedAssignmentProblem.git
 ```
 
 ## 2. Move into the project directory
