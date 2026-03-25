@@ -117,7 +117,7 @@ If omitted, the solver automatically uses the **number of physical CPU cores**, 
 
 - The `--low_cost_construction` option is also optional.  
 When enabled, the solver uses the **cost‑and‑weight priority rule**, which typically produces **higher‑quality** initial solutions.  
-However, this strategy may fail to construct a feasible solution on a few difficult benchmark instances (notably three instances from categories and E).  
+However, this strategy may fail to construct a feasible solution on a few difficult benchmark instances (notably three instances from the category E).  
 For this reason, the default construction strategy is the **risky‑task‑based priority rule**, which always produces a feasible solution whenever one exists.
 
 ![](docs/img/run_greedy_full.png)
