@@ -133,3 +133,19 @@ For this reason, the default construction strategy is the **risky‑task‑based
 
 ![](docs/img/run_greedy_full.png)
 
+
+# References
+
+The theoretical foundations and algorithmic components implemented in this solver are based on well‑established works in Operations Research and combinatorial optimization. Key references include:
+
+- **Jacques Teghem** — *Recherche Opérationnelle, Tome 1*.  
+  Éditions Ellipses, 2012.
+
+- **Johann Dréo, Alain Siarry, Patrick Siarry, Patrick Siarry** — *Métaheuristiques pour l’optimisation difficile*.  
+  Eyrolles, 2006.
+
+- **Rainer Burkard, Mauro Dell’Amico, Silvano Martello** — *Assignment Problems*.  
+  SIAM, 2009.  
+  A comprehensive reference covering the Generalized Assignment Problem and related variants.
+
+
