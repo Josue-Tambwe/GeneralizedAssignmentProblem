@@ -16,7 +16,7 @@
  * @date 17 Mar 2026
  */
 
- #include "metaheuristics/greedy/GreedyLocalSearchMinCost.hpp"
+ #include "metaheuristics/greedy/GreedyLocalSearch.hpp"
 
  namespace gap::greedy::improvement{
 

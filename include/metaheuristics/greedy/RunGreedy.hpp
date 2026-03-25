@@ -25,8 +25,8 @@
  #include "configuration/Config.hpp"
  #include "utils/Logger.hpp"
  #include "utils/Timer.hpp"
- #include "metaheuristics/greedy/GreedyConstructionMinCost.hpp"
- #include "metaheuristics/greedy/GreedyLocalSearchMinCost.hpp"
+ #include "metaheuristics/greedy/GreedyConstruction.hpp"
+ #include "metaheuristics/greedy/GreedyLocalSearch.hpp"
  #include "output/OutputFormat.hpp"
  #include "utils/Logger.hpp"
  #include <iostream>

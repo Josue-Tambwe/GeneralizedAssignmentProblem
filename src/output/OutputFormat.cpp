@@ -50,10 +50,9 @@
         std::cout << "    " << setw(22) << left << "--time_limit=value"
                   << "Time limit in seconds (default: 60)\n";
         std::cout << "    " << setw(22) << left << "--verbose"
-                  << "Enable verbose mode\n\n";
+                  << "Enable verbose mode \n";
         std::cout << "    " << setw(22) << left << "--low_cost_construction"
-                  << "Enable the cost-and-weight based priority rule when building 
-                      initial solution for the Greedy algorithm\n\n";
+                  << "Enable the cost-and-weight based priority rule when building initial solution for the Greedy algorithm\n\n";
     }
 
     void printExampleRun(){

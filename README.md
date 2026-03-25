@@ -2,30 +2,14 @@
 
 The Generalized Assignment Problem (GAP) is an **NP-hard** combinatorial optimization problem that consists in assigning tasks to agents with limited capacities. 
 
-Formally, let $n \ge 1$ be the number of tasks and $m \ge 1$ the number of agents. The objective is to minimize the total assignment cost :
+## Mathematical Formulation
 
+The full mathematical formulation (with proper LaTeX rendering) is available here:
 
-$$
-\min \sum_{i=1}^{m} \sum_{j=1}^{n} c_{ij} \cdot x_{ij}
-$$ ()
+👉 **[Mathematical Formulation](https://josue-tambwe.github.io/GeneralizedAssignmentProblem/math_formulation)**
 
+This page uses MathJax and provides a clean, publication‑quality rendering of the GAP model.
 
-Subject to : 
-
-$$
-\sum_{i=1}^{m} x_{ij} = 1 \quad \forall j \in \{1,\dots,n\} \tag{1}
-$$
-
-$$
-\sum_{j=1}^{n} a_{ij} \cdot x_{ij} \le b_i \quad \forall i \in \{1,\dots,m\} \tag{2}
-$$
-
-With:
-
-- $a_{ij}$ : the **weight** of task $j$ when assigned to agent $i$
-- $b_i$ : the **capacity** of agent $i$
-
-The constraint $(1)$ requires every task to be assigned exactly once and the constraint $(2)$ ensures that the maximum capacity of each agent is not exceeded.
 
 # Resolution methods
 

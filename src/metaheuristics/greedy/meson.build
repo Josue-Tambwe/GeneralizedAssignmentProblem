@@ -12,6 +12,6 @@
 
 # All source files of the greedy subdirectory
 greedy_sources = files('GreedyElement.cpp',
-                       'GreedyConstructionMinCost.cpp',
-                       'GreedyLocalSearchMinCost.cpp',
+                       'GreedyConstruction.cpp',
+                       'GreedyLocalSearch.cpp',
                        'RunGreedy.cpp')

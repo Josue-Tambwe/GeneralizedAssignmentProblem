@@ -16,7 +16,7 @@
  * @date 17 Mar 2026
  */
 
- #include "metaheuristics/greedy/GreedyConstructionMinCost.hpp"
+ #include "metaheuristics/greedy/GreedyConstruction.hpp"
 
  namespace gap::greedy::construction{
 
