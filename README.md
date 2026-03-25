@@ -14,7 +14,7 @@ This solver implements several complementary approaches to tackle the Generalize
 
 ## 1. Greedy Construction Heuristic
 
-Two approches : 
+Two approaches: 
 
 - **cost‑and-weight based** (low cost construction) : builds a feasible solution by iteratively assigning tasks to agents according to a combined **cost‑and-weight** priority rule.
 It generally produces **high‑quality solutions** in terms of objective value.
@@ -90,6 +90,17 @@ cd GeneralizedAssignmentProblem
 ./install.sh
 ```
 ___
+
+# Benchmark Instances
+
+All benchmark instances used in this project come from the well‑known GAP benchmark library maintained by Yagiura et al. at Nagoya University:  
+[Benchmark GAP – Yagiura et al.](http://www.al.cm.is.nagoya-u.ac.jp/~yagiura/gap/)
+
+This dataset is widely used in the literature for evaluating heuristics, metaheuristics, and exact methods for the Generalized Assignment Problem.  
+It contains several categories of instances (A, B, C, D, E), ranging from small and easy to large and highly challenging.  
+In particular, instances from categories **D** and **E** are known to be difficult and are commonly used to stress‑test construction heuristics and local search procedures.
+
+
 # Usage / CLI examples
 
 The executable is located in the `bin/` directory after installation.
@@ -117,13 +128,8 @@ If omitted, the solver automatically uses the **number of physical CPU cores**, 
 
 - The `--low_cost_construction` option is also optional.  
 When enabled, the solver uses the **cost‑and‑weight priority rule**, which typically produces **higher‑quality** initial solutions.  
-However, this strategy may fail to construct a feasible solution on a few difficult benchmark instances (notably three instances from the category E).  
+However, this strategy may fail to construct a feasible solution on a few difficult benchmark instances (notably three instances from benchmark category E).  
 For this reason, the default construction strategy is the **risky‑task‑based priority rule**, which always produces a feasible solution whenever one exists.
 
 ![](docs/img/run_greedy_full.png)
-
-
-
-
-
 
