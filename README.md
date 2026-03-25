@@ -60,6 +60,7 @@ To accelerate computation, the solver integrates several HPC techniques:
 
 - meson
 - doxygen
+k
 
 # Installation : 
 
