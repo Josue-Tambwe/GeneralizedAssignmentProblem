@@ -6,20 +6,24 @@ Formally, let $n \ge 1$ be the number of tasks and $m \ge 1$ the number of agent
 
 
 $$
-Min \sum_{i=1}^{m} \sum_{j=1}^{n} c_{ij} \cdot x_{ij}
+\min \sum_{i=1}^{m} \sum_{j=1}^{n} c_{ij} \cdot x_{ij}
 $$ ()
 
 
 Subject to : 
 
-$ \sum_{i=1}^{m} x_{ij} = 1 \quad  \forall j \in \{1,\dots, n\}  \quad  \quad \quad \; (1) $
+$$
+\sum_{i=1}^{m} x_{ij} = 1 \quad \forall j \in \{1,\dots,n\} \tag{1}
+$$
 
-$ \sum_{j=1}^{n} a_{ij} \cdot x_{ij} \le b_{i} \quad  \forall i \in \{1,\dots, m\} \quad(2) $
+$$
+\sum_{j=1}^{n} a_{ij} \cdot x_{ij} \le b_i \quad \forall i \in \{1,\dots,m\} \tag{2}
+$$
 
-With : 
-- $ a_{ij}$ the **weight** of **task** $j$ when assigned to **agent** $i$
-- $ b_{i}$ the **maximum capacity** of
- **agent** $i$
+With:
+
+- $a_{ij}$ : the **weight** of task $j$ when assigned to agent $i$
+- $b_i$ : the **capacity** of agent $i$
 
 The constraint $(1)$ requires every task to be assigned exactly once and the constraint $(2)$ ensures that the maximum capacity of each agent is not exceeded.
 
@@ -83,7 +87,7 @@ To accelerate computation, the solver integrates several HPC techniques:
 ## 1. Clone the repository
 
 ```bash
-git clone https://github.com/<...>/GeneralizedAssignmentProblem.git
+git clone https://github.com/<Josue-Tambwe>/GeneralizedAssignmentProblem.git
 ```
 
 ## 2. Move into the project directory
