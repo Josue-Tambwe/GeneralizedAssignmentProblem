@@ -147,4 +147,3 @@ The theoretical foundations and algorithmic components implemented in this solve
 - **Rainer Burkard, Mauro Dell’Amico, Silvano Martello** — *Assignment Problems*.  
   SIAM, 2009.  
   
-
