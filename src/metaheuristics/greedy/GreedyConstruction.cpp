@@ -18,7 +18,7 @@
 
  #include "metaheuristics/greedy/GreedyConstruction.hpp"
 
- namespace gap::greedy::construction{
+ namespace gap::greedy{
 
     std::vector<int> tasksAvailableVector(std::unordered_set<int> &tasks){
 

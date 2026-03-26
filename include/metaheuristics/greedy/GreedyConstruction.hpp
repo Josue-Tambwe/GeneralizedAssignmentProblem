@@ -33,7 +33,7 @@
  #include <queue>
  #include <limits>
 
- namespace gap::greedy::construction{
+ namespace gap::greedy{
 
    /**
      * @brief stores the indexes of available tasks in a 1D vector

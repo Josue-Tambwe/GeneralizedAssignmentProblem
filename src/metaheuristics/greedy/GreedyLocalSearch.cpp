@@ -18,7 +18,7 @@
 
  #include "metaheuristics/greedy/GreedyLocalSearch.hpp"
 
- namespace gap::greedy::improvement{
+ namespace gap::greedy{
 
 
    std::vector<int> computeResidualCapacity(gap::GapSolution &solution,

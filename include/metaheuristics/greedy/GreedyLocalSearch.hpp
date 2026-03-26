@@ -30,7 +30,7 @@
  #include <vector>
  #include <queue>
 
- namespace gap::greedy::improvement{
+ namespace gap::greedy{
 
 
    std::vector<int> computeResidualCapacity(gap::GapSolution &solution,

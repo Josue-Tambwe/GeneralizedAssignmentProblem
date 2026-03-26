@@ -29,7 +29,7 @@
       gap::Logger log;
       // construction
       timer.start();
-      GapSolution solution = greedy::construction::construction(params, instance);
+      GapSolution solution = greedy::construction(params, instance);
       timer.stop();
       double construction_time = timer.getElapsed();
       gap::Status construction_status = solution.getStatus();
@@ -47,7 +47,7 @@
 
         // local search
         timer.start();
-        greedy::improvement::localSearch(params, solution, instance);
+        greedy::localSearch(params, solution, instance);
         gap::Status local_search_status = solution.getStatus();
         timer.stop();
         double local_search_time = timer.getElapsed();
