@@ -35,14 +35,22 @@
 
 
     bool GapSolution::capacityChecker(gap::GapInstance &instance){
+        
         const std::vector<int>& capacity_vector = instance.getCapacity();
         const std::vector<std::vector<int>>& weight_matrix = instance.getWeight();
+        std::vector<int> capacity_used(instance.getNbAgent(), 0);
+        int agent;
+
+        // computation of the capacity used by each agent
+        for(size_t task = 0; task < solution.size(); task++){
+            agent = solution[task];
+            capacity_used[agent] += weight_matrix[agent][task];
+        }
+        // checking that an agent is not overloaded
         for(size_t i = 0; i < nb_agent; i++){
-            int weight_agent = 0; 
-            for(size_t j = 0; j < solution.size(); j++){
-                if(solution[j] == static_cast<int>(i)){weight_agent += weight_matrix[i][j];}
+            if(capacity_used[i] > capacity_vector[i]){
+               return false; 
             }
-            if(weight_agent > capacity_vector[i]){return false;}
         }
         return true;
     }
