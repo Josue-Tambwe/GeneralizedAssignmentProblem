@@ -120,7 +120,7 @@ cd bin
 ## 3. Run the Greedy heuristic (construction + local search)
 
 ```bash
-../gap_solver --algorithm=greedy --instance=../benchmarks/gap_a/a05100 --nb_threads=4 --low_cost_construction
+./gap_solver --algorithm=greedy --instance=../benchmarks/gap_a/a05100 --nb_threads=4 --low_cost_construction
 ```
 
 - The `--nb_threads` option is optional.
