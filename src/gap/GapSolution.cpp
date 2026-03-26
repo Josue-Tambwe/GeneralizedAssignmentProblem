@@ -131,7 +131,7 @@
                 std::cout << std::string(100, '-') << std::endl;
 
             }
-            std::cout << " total cost               : " <<  BRIGHT_YELLOW << obj << RESET << std::endl;
+            std::cout << " total cost               : " << obj << std::endl;
             std::cout << std::string(100, '*') << std::endl;
             std::cout << "\n";
         }
