@@ -13,4 +13,4 @@
 
 # All source files of the input subdirectory
 input_sources = files('Algorithm.cpp',
-                      'ParseOptions.cpp')
+                      'OptionsParser.cpp')

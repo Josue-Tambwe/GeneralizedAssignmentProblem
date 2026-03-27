@@ -10,7 +10,7 @@
  *------------------------------------------------------------------------------
  */
 
- #include "input/ParseOptions.hpp"
+ #include "input/OptionsParser.hpp"
  
  namespace gap{
 
