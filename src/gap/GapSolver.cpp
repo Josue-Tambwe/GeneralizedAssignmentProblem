@@ -26,12 +26,5 @@
 
       runGreedy(params);
 
-      //if(HAS_X86){std::cout << " J'ai x86" << std::endl;}
-      //if(HAS_SSE){std::cout << " J'ai SSE" << std::endl;}
-      //if(HAS_FMA){std::cout << " J'ai FMA" << std::endl;}
-      //if(HAS_AVX512F){std::cout << " J'ai AVX512" << std::endl;}
-      //if(HAS_AVX512FMA){std::cout << " J'ai AVX512FMA" << std::endl;}
-      //if(HAS_ARMV8){std::cout << " J'ai ARMV8" << std::endl;}
-      
       return 0;
    }
