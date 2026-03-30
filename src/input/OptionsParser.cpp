@@ -60,7 +60,7 @@
             // case of a flag
             if(!hasValue){
                 if(arg == "--verbose"){params.verbose = true; continue;}
-                else if(arg == "--low_cost_construction"){params.low_cost_construction = true; continue;}
+                else if(arg == "--low-cost-construction"){params.low_cost_construction = true; continue;}
                 else{gap::Logger log; log.error(" Unknown option: " + arg);}
             }
             // case of an option with argument
@@ -80,20 +80,20 @@
 
                 if(name == "--instance"){params.instance_path = value; continue;}
 
-                if(name == "--nb_threads"){
+                if(name == "--nb-threads"){
                     params.nb_threads = std::stoi(value);
                     if(params.nb_threads < 1){
                         gap::Logger log; 
-                        log.error(" nb_threads must be >= 1");
+                        log.error(" nb-threads must be >= 1");
                     }
                     continue;
                 }
 
-                if(name == "--time_limit"){
+                if(name == "--time-limit"){
                     params.time_limit = std::stoi(value);
                     if(params.time_limit < 1){
                         gap::Logger log; 
-                        log.error(" time_limit must be >= 1");
+                        log.error(" time-limit must be >= 1");
                     }
                     continue;
                 }
