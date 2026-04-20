@@ -26,3 +26,34 @@
  
 const float epsilon = 1e-5; // to avoid division by zero
 
+#ifndef HAS_SSE
+    #define HAS_SSE false
+#endif
+
+#ifndef HAS_AVX2
+    #define HAS_AVX2 false
+#endif
+
+#ifndef HAS_FMA
+    #define HAS_FMA false
+#endif
+
+#ifndef HAS_AVX512F
+    #define HAS_AVX512F false
+#endif
+
+#ifndef HAS_AVX512FMA
+    #define HAS_AVX512FMA false
+#endif
+
+#ifndef HAS_ARMV8
+    #define HAS_ARMV8 false
+#endif
+
+#ifndef HAS_X86
+    #define HAS_X86 false
+#endif
+
+#ifndef HAS_ASIMD
+    #define HAS_ASIMD false
+#endif

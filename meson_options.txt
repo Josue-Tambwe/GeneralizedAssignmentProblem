@@ -16,3 +16,45 @@ option('NUMBER_PHYSICAL_CORES',
         description : 'Number of physical cores on the hardware')
 
 
+
+# SIMD flags (booleans passed from the Bash script)
+
+option('HAS_SSE',
+        type : 'boolean',
+        value : false,
+        description : 'CPU supports SSE')
+
+option('HAS_AVX2',
+        type : 'boolean',
+        value : false,
+        description : 'CPU supports AVX')
+
+option('HAS_FMA',
+        type : 'boolean',
+        value : false,
+        description : 'CPU supports FMA')
+
+option('HAS_AVX512F',
+        type : 'boolean',
+        value : false,
+        description : 'CPU supports AVX-512F')
+
+option('HAS_AVX512FMA',
+        type : 'boolean',
+        value : false,
+        description : 'CPU supports AVX-512 FMA')
+
+option('HAS_ARMV8',
+        type : 'boolean',
+        value : false,
+        description : 'CPU is ARMv8 or higher')
+
+option('HAS_X86',
+        type : 'boolean',
+        value : false,
+        description : 'CPU is x86 ISA')
+
+option('HAS_ASIMD',
+        type : 'boolean',
+        value : false,
+        description : 'ARM CPU supports ASIMD (NEON)')
