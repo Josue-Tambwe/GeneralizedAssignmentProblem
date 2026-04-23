@@ -105,7 +105,7 @@ In particular, instances from categories **D** and **E** are known to be difficu
 
 The executable is located in the `bin/` directory after installation.
 
-## 1. Move to the `bin/` directory
+## 1. Move into the `bin/` directory
 
 ```bash
 cd bin
