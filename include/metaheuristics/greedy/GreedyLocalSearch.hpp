@@ -32,16 +32,42 @@
 
  namespace gap::greedy{
 
+  /**
+    * @brief Computation of  agents residual capacities within the current solution
+    */
 
    std::vector<int> computeResidualCapacity(gap::GapSolution &solution,
                                           gap::GapInstance &instance);
 
+
+  // -------------------------------  BALANCE MOVE (NEIGHBORHOOD) ----------------------------                                   
+  
+   /**
+    * @brief Computation of the assignment cost of an individual agent within the current solution
+    */
+
    std::vector<int> computeIndividualCostAgent(gap::GapSolution &solution,
                                               gap::GapInstance &instance);
+
+
+   /**
+    * @brief The global most and least expensive agents are identified in order to transfer (if it is possible) a task
+    *        from the most expensive agent to the least expensive agent while reducing the global cost
+    */
 
    void findMostAndLeastExpensiveAgents(int &most_expensive_agent,
                                       int &least_expensive_agent,
                                       std::vector<int> &individual_cost_agents);
+
+
+  /**
+    * @brief After  both  global most and least expensive agents are identified, the tasks on the most
+    *        expensive agent are sorted regarding the criteria :  cost / weight
+    *         - cost   :  the cost of the task when assigned to the least expensive agent
+    *         - weight :  the weight of the task when assigned to the least expensive agent 
+    *       This creteria allows the most expensive tasks on the least expensive agent to be treated first
+    *       therefore the residual capacity of the least expensive agent is used to reduce the global cost more drastically
+    */
 
   void sortTaskFromMostToLeastExpensive(int most_expensive_agent,
                                         int least_expensive_agent,
@@ -49,15 +75,30 @@
                                         gap::GapSolution &solution,
                                         gap::GapInstance &instance);
 
+
+   /**
+    * @brief When tasks of the most expensive agent had been sorted regarding the previous criteria on the least expensive agent,
+    *        attempt of re-assignment of tasks are performed
+    */
+
    int assignTaskFromMostToLeastExpensive(std::vector<int> &residual_capacity,
                                         gap::GapSolution &solution,
                                         gap::GapInstance &instance);
 
-  
 
+   /**
+    * @brief After the greedy construction, this movement consists in finding the global most expensive
+    *        agent and re-assigning one of its task global least expensive agent if the global cost is reduced
+    */
+  
    void balanceMove(gap::GapSolution &solution,
                       gap::GapInstance &instance);
 
+  // -------------------------------  END BALANCE MOVE (NEIGHBORHOOD) ---------------------------- 
+
+
+
+  // -------------------------------  CHEAP MOVE (NEIGHBORHOOD) ---------------------------- 
    void sortCheapAgent(int task,
                       int current_agent,
                       std::priority_queue<gap::greedy::Element> &agents,
@@ -94,6 +135,7 @@
                 gap::GapSolution &solution,
                 gap::GapInstance &instance);
 
+  // -------------------------------  END CHEAP MOVE (NEIGHBORHOOD) ---------------------------- 
   
   void localSearch(gap::Params &params,
                 gap::GapSolution &solution,
