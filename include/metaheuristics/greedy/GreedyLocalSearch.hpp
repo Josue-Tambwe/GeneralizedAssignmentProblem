@@ -65,8 +65,8 @@
     *        expensive agent are sorted regarding the criteria :  cost / weight
     *         - cost   :  the cost of the task when assigned to the least expensive agent
     *         - weight :  the weight of the task when assigned to the least expensive agent 
-    *       This creteria allows the most expensive tasks on the least expensive agent to be treated first
-    *       therefore the residual capacity of the least expensive agent is used to reduce the global cost more drastically
+    *       This creteria allows the most expensive (relatively to their weight) tasks on the least expensive agent to be treated first
+    *       therefore the residual capacity of the least expensive agent is used more efficiently to drastically reduce the global cost
     */
 
   void sortTaskFromMostToLeastExpensive(int most_expensive_agent,
