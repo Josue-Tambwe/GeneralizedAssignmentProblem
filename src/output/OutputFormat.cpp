@@ -45,13 +45,13 @@
     void printOptionalOptions(){
         std::cout << " Optional options:\n";
         std::cout << " -----------------\n";
-        std::cout << "    " << setw(22) << left << "--nb_threads=value"
+        std::cout << "    " << setw(22) << left << "--nb-threads=value"
                   << "Number of threads (default: NUMBER_PHYSICAL_CORES)\n";
-        std::cout << "    " << setw(22) << left << "--time_limit=value"
+        std::cout << "    " << setw(22) << left << "--time-limit=value"
                   << "Time limit in seconds (default: 60)\n";
         std::cout << "    " << setw(22) << left << "--verbose"
                   << "Enable verbose mode \n";
-        std::cout << "    " << setw(22) << left << "--low_cost_construction"
+        std::cout << "    " << setw(22) << left << "--low-cost-construction"
                   << "Enable the cost-and-weight based priority rule when building initial solution for the Greedy algorithm\n\n";
     }
 
@@ -61,7 +61,7 @@
         std::cout << "    gap_solver --algorithm=greedy "
                   << "--instance=../benchmarks/gap_a/a05100\n";
         std::cout << "    gap_solver --algorithm=antColony "
-                  << "--instance=data/inst.dat --time_limit=120 --verbose\n\n";
+                  << "--instance=data/inst.dat --time-limit=120 --verbose\n\n";
     }
 
 
