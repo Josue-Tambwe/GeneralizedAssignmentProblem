@@ -48,6 +48,8 @@
                                               std::int64_t &obj) const;
 
         public:
+        
+            // constructor
             GapSolution(gap::GapInstance &instance);
             /**
             * @brief checks weither the solution is feasible or not with respect to the instance data associated with

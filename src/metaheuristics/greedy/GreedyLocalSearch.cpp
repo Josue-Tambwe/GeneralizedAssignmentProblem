@@ -38,6 +38,10 @@
 
 
    }
+
+   
+
+   // -------------------------------  BALANCE MOVE (NEIGHBORHOOD) ----------------------------
    
    void findMostAndLeastExpensiveAgents(int &most_expensive_agent,
                                       int &least_expensive_agent,
@@ -52,6 +56,8 @@
       }
 
    }
+
+
 
    void sortTaskFromMostToLeastExpensive(int most_expensive_agent,
                                         int least_expensive_agent,
@@ -76,6 +82,7 @@
 
    }
 
+
    int assignTaskFromMostToLeastExpensive(std::vector<int> &residual_capacity,
                                         gap::GapSolution &solution,
                                         gap::GapInstance &instance){
@@ -83,6 +90,7 @@
       std::vector<int> individual_cost_agents = computeIndividualCostAgent(solution, instance);
       int most_expensive_agent = 0;
       int least_expensive_agent = 0;
+      
       findMostAndLeastExpensiveAgents(most_expensive_agent,
                                     least_expensive_agent,
                                     individual_cost_agents);
@@ -127,6 +135,7 @@
    }
 
 
+
    void balanceMove(gap::GapSolution &solution,
                       gap::GapInstance &instance){
 
@@ -141,11 +150,13 @@
 
    }
 
+// -------------------------------  END BALANCE MOVE (NEIGHBORHOOD) ---------------------------- 
 
 
 
 
-   
+
+// -------------------------------  CHEAP MOVE (NEIGHBORHOOD) ----------------------------------
 
    void sortCheapAgent(int task,
                       int current_agent,
@@ -165,6 +176,7 @@
 
    }
 
+
    void computeScoreTask(int task,
                         std::vector<int> &residual_capacity,
                         std::vector<int> &tasks_scores,
@@ -174,14 +186,15 @@
 
       std::priority_queue<gap::greedy::Element> agents;
       std::vector<int>& solution_vector =  solution.getSolutionVector();
-      const std::vector<std::vector<int>>& weight_matrix = instance.getWeight();
-      const std::vector<std::vector<int>> & cost_matrix = instance.getCost();
       int current_agent = solution_vector[task];
 
       sortCheapAgent(task,
                      current_agent,
                      agents,
                      instance);
+      
+      const std::vector<std::vector<int>>& weight_matrix = instance.getWeight();
+      const std::vector<std::vector<int>> & cost_matrix = instance.getCost();
 
       while(!agents.empty()){
 
@@ -224,6 +237,7 @@
       }
 
    }
+
 
    int findBestTask(int nb_threads,
                   std::vector<int> &residual_capacity,
@@ -269,6 +283,7 @@
 
    }
 
+
    int assignTaskToCheapAgent (int nb_threads,
                               std::vector<int> &residual_capacity,
                               gap::GapSolution &solution,
@@ -305,6 +320,7 @@
 
    }
 
+
    void cheapMove(int nb_threads,
                 gap::GapSolution &solution,
                 gap::GapInstance &instance){
@@ -335,6 +351,12 @@
       }
       return individual_cost_agents;
    }
+
+// -------------------------------  END CHEAP MOVE (NEIGHBORHOOD) ---------------------------- 
+
+
+
+
 
 
    void localSearch(gap::Params &params,

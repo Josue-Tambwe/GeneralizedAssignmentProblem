@@ -65,7 +65,7 @@ class GapInstance{
     public:
 
         /**
-         * @brief builds instance from a file 
+         * @brief constructor : builds instance from a file 
          */
         GapInstance(gap::Params params);
         
