@@ -88,7 +88,7 @@
 
    /**
     * @brief After the greedy construction, this movement consists in finding the global most expensive
-    *        agent and re-assigning one of its task global least expensive agent if the global cost is reduced
+    *        agent and re-assigning one of its task to the global least expensive agent if the global cost is reduced
     */
   
    void balanceMove(gap::GapSolution &solution,
