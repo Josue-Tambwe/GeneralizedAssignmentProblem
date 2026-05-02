@@ -45,12 +45,12 @@
 
 
 
-    gap::GapSolution generateReferenceAnt(gap::GapInstance &instance){
+    gap::GapSolution generateReferenceAnt(gap::Params &params, gap::GapInstance &instance){
 
         // greedy construction
         gap::GapSolution greedy_solution = gap::greedy::constructionRiskyTasks(instance);
-        // local search with the balance move neighborhood
-        gap::greedy::balanceMove(greedy_solution, instance);
+        // local search 
+        gap::greedy::localSearch(params, greedy_solution, instance);
 
         return greedy_solution;
 
@@ -288,7 +288,7 @@
                           float inverse_max_weight,
                           gap::Params &params,
                           std::vector<int> &residual_capacity,
-                          AlignedMatrix &pheromone_matrix,
+                          std::vector<std::vector<float>> &pheromone_matrix,
                           gap::GapInstance &instance){
 
         
@@ -324,7 +324,7 @@
                             int max_weight,
                             gap::Params &params,
                             std::vector<int> &residual_capacity,
-                            AlignedMatrix &pheromone_matrix,
+                            std::vector<std::vector<float>> &pheromone_matrix,
                             gap::GapSolution &ant,
                             gap::GapInstance &instance){
 
@@ -384,7 +384,7 @@
                                            std::vector<int> &residual_capacity,
                                            std::vector<int> &agent_indexes,
                                            std::vector<float> &agent_scores,
-                                           AlignedMatrix &pheromone_matrix,
+                                           std::vector<std::vector<float>> &pheromone_matrix,
                                            gap::Params &params,
                                            gap::GapInstance &instance){
 
@@ -457,7 +457,7 @@
                               int max_weight,
                               gap::Params &params,
                               std::vector<int> &residual_capacity,
-                              AlignedMatrix &pheromone_matrix,
+                              std::vector<std::vector<float>> &pheromone_matrix,
                               gap::GapSolution &ant,
                               gap::GapInstance &instance){
 
@@ -506,7 +506,7 @@
                                 std::vector<int> &residual_capacity,
                                 double probability_threshold,
                                 gap::Params &params,
-                                AlignedMatrix &pheromone_matrix,
+                                std::vector<std::vector<float>> &pheromone_matrix,
                                 gap::GapSolution &ant,
                                 gap::GapInstance &instance){
 
@@ -583,7 +583,7 @@
                                      std::vector<std::unordered_set<int>> &ants_tasks,
                                      std::vector<bool> &ants_construction_status,
                                      std::vector<std::vector<int>> &residual_capacities,
-                                     AlignedMatrix &pheromone_matrix,
+                                     std::vector<std::vector<float>> &pheromone_matrix,
                                      std::vector<gap::GapSolution> &colony,
                                      gap::GapInstance &instance){
 
@@ -610,7 +610,7 @@
     bool antConstruction(double probability_threshold,
                         gap::Params &params,
                         std::vector<bool> &ants_construction_status,
-                        AlignedMatrix &pheromone_matrix,
+                        std::vector<std::vector<float>> &pheromone_matrix,
                         std::vector<gap::GapSolution> &colony,
                         gap::GapInstance &instance){
 

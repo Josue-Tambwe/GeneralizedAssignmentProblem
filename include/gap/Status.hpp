@@ -24,6 +24,8 @@
  #include <ostream>
 
  namespace gap{
+
+    
     enum Status{
         FEASIBLE,
         INFEASIBLE,

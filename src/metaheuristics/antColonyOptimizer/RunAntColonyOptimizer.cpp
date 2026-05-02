@@ -53,6 +53,7 @@
 
 
 
+
     void RunACO(gap::Params &params){
 
         gap::GapInstance instance(params);
@@ -60,12 +61,12 @@
         printHeaderACO(params, instance);
         printHeaderLineACO();
         gap::Timer timer = Timer();
+        gap::Logger log;
         timer.start();
 
-        gap::Logger log;
 
         // initialization of the reference ant
-        gap::GapSolution reference_ant = generateReferenceAnt(instance);
+        gap::GapSolution reference_ant = generateReferenceAnt(params, instance);
         std::int64_t reference_value = reference_ant.objectiveValue(instance);
 
 
@@ -76,10 +77,10 @@
 
 
         // initialization of the pheromone matrix
-        AlignedMatrix pheromone_matrix(static_cast<int>(instance.getNbAgent()),
-                                       static_cast<int>(instance.getNbTask()));
+        std::vector<std::vector<float>> pheromone_matrix(instance.getNbAgent(),
+                                                        std::vector<float>(instance.getNbTask(),
+                                                        computeInitialPheromone(inverse_reference_value, params)));
 
-        pheromone_matrix.initialize(computeInitialPheromone(inverse_reference_value, params));
 
 
         double preprocessing_time = timer.getElapsed();
@@ -121,7 +122,7 @@
 
 
             // pheromones evaporation
-            scalarPheromoneMatrixEvaporation(params, pheromone_matrix);
+            pheromoneMatrixEvaporation(params, pheromone_matrix);
 
 
             // finding the best ant within the colony
@@ -179,7 +180,7 @@
         while(!stoppingCriteria(iteration, timer.getElapsed(), params));
 
         std::cout << "\n" << std::endl;
-        log.info("ACO algorithm completed. Final best known solution :");
+        log.info("Ant Colony Optimizer algorithm completed. Final best known solution :");
         global_best_ant.print(instance);
 
         finalStatisticsACO(preprocessing_time,

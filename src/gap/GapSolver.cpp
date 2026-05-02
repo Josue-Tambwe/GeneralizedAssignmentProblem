@@ -30,7 +30,6 @@
 
       if(params.algorithm == Algorithm::AntColonyOptimizer){ACO::RunACO(params);}
 
-      //ACO::test(params);
 
       return 0;
    }

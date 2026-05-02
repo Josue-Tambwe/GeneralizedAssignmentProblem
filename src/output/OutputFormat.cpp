@@ -336,8 +336,8 @@
                 << std::right << std::setw(w_set_sep)    << " : "
                 << std::left  << std::setw(w_set_value)  << params.nb_threads;
 
-        std::cout << std::left << std::setw(w_flags - 16) << "verbose";
-        std::cout << std::right << std::setw(11) << " : ";
+        std::cout << std::left << std::setw(w_flags - 19) << "verbose";
+        std::cout << std::right << std::setw(3) << " : ";
 
         if(params.verbose)
         {
@@ -360,20 +360,6 @@
                   << std::left  << std::setw(w_set_label)  << "nb physical cores"
                   << std::right << std::setw(w_set_sep)    << " : "
                   << std::left  << std::setw(w_set_value)  << NUMBER_PHYSICAL_CORES;
-        std::cout << std::left << std::setw(w_flags - 16) << "SIMD vectorization";
-        std::cout << std::right << std::setw(3) << " : ";
-
-        if(params.simd)
-        {
-        std::cout << GREEN << "Enabled" << RESET;
-        }
-
-        else
-        {
-        std::cout << RED << "Disabled" << RESET;
-        }
-
-        std::cout << std::left  << std::setw(w_flags) << "";
 
 
         // line 3 
@@ -610,7 +596,7 @@
 
         std::cout << "\n";
         const int init_sep = 2;
-        const int w_item   = 30;
+        const int w_item   = 27;
 
 
         double average_time = (timer.getElapsed() - preprocessing_time) / iteration;

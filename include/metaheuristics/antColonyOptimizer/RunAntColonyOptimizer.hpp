@@ -28,7 +28,6 @@
  #include "utils/Timer.hpp"
  #include "configuration/Config.hpp"
  #include "output/OutputFormat.hpp"
- #include "metaheuristics/antColonyOptimizer/AlignedMatrix.hpp"
  #include "metaheuristics/antColonyOptimizer/AcoUtils.hpp"
  #include "metaheuristics/antColonyOptimizer/AntConstruction.hpp"
  #include "metaheuristics/antColonyOptimizer/PheromonesUpdate.hpp"
@@ -39,14 +38,16 @@
  
  namespace gap::ACO{
 
-    /**
+
+   /**
     * @brief return the best ant (elite) within the colony
     */
     gap::GapSolution& findBestAnt(std::int64_t &best_value,
-                                 std::int64_t &worst_value,
-                                 std::int64_t &cumulative_score,
-                                 std::vector<gap::GapSolution> &colony,
-                                 gap::GapInstance &instance);
+                                  std::int64_t &worst_value,
+                                  std::int64_t &cumulative_score,
+                                  std::vector<gap::GapSolution> &colony,
+                                  gap::GapInstance &instance);
+
 
 
 
@@ -55,9 +56,5 @@
     */
     void RunACO(gap::Params &params);
                                     
-
-
-    void test(gap::Params &params);
-
 
  }

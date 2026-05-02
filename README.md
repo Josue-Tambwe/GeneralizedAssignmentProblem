@@ -52,9 +52,8 @@ This approach guarantees optimality but may become expensive for large instances
 
 To accelerate computation, the solver integrates several HPC techniques:
 
-- **CPU multi‑threading** : parallel evaluation of neighborhoods, construction heuristics, and pheromone updates. Multi‑threading provides a substantial speed‑up, especially on large instances where independent evaluations can be processed concurrently.
+- **CPU multi‑threading** : parallel evaluation of neighborhoods, construction heuristics and pheromone updates. Multi‑threading provides a substantial speed‑up, especially on large instances where independent evaluations can be processed concurrently.
 
-- **SIMD vectorization** : attempted on pheromone evaporation. However, vectorizing the evaporation step did not yield meaningful speed‑ups, as this **operation is memory‑bound**, which means its performance is limited by memory bandwidth rather than arithmetic throughput. 
 
 # Dependencies :
 

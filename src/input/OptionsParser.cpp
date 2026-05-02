@@ -66,8 +66,7 @@
         // greedy
         params.low_cost_construction = false;
 
-        // ACO
-        params.simd = false; 
+        // ACO 
         params.use_max_iterations = false; 
         params.use_time_limit = false; 
         
@@ -98,8 +97,6 @@
                 if(arg == "--verbose"){params.verbose = true; continue;}
 
                 else if(arg == "--low-cost-construction"){params.low_cost_construction = true; continue;}
-
-                if(arg == "--simd"){params.simd = true; continue;}
 
                 else{gap::Logger log; log.error(" Unknown option: " + arg);}
             }

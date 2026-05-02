@@ -25,7 +25,6 @@
  #include "gap/GapSolution.hpp"
  #include "input/Parameters.hpp"
  #include "configuration/Config.hpp"
- #include "metaheuristics/antColonyOptimizer/AlignedMatrix.hpp"
  #include "metaheuristics/antColonyOptimizer/AcoUtils.hpp"
  #include <vector>
  #include <unordered_set>
@@ -36,15 +35,13 @@
  namespace gap::ACO{
 
 
-    //----------------------------------- WITHOUT SIMD VECTORIZATION -----------------------------------
-
     /**
      *@brief performs a partial evaporation on the pheromone matrix  (for a single thread)
      */
-    void partialScalarEvaporation(int start,
-                                  int end,
-                                  float rho,
-                                  AlignedMatrix &pheromone_matrix);
+    void partialEvaporation(int start,
+                           int end,
+                           float rho,
+                           std::vector<std::vector<float>> &pheromone_matrix);
 
 
 
@@ -52,8 +49,8 @@
     /**
      *@brief performs the evaporation on the pheromone matrix without using SIMD vectorization
      */
-    void scalarPheromoneMatrixEvaporation(gap::Params &params,
-                                          AlignedMatrix &pheromone_matrix);
+    void pheromoneMatrixEvaporation(gap::Params &params,
+                                    std::vector<std::vector<float>> &pheromone_matrix);
 
 
 
@@ -65,10 +62,9 @@
                           float max_pheromone,
                           gap::GapSolution &solution,
                           gap::GapInstance &instance,
-                          AlignedMatrix &pheromone_matrix);
+                          std::vector<std::vector<float>> &pheromone_matrix);
 
 
-    //----------------------------------- END WITHOUT SIMD VECTORIZATION -----------------------------------
-
+    
 
  }

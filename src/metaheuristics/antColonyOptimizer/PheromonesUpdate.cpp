@@ -24,17 +24,15 @@
 
 
 
-    //----------------------------------- WITHOUT SIMD VECTORIZATION -----------------------------------
 
-
-    void partialScalarEvaporation(int start,
-                                  int end,
-                                  float rho,
-                                  AlignedMatrix &pheromone_matrix){
+    void partialEvaporation(int start,
+                            int end,
+                            float rho,
+                            std::vector<std::vector<float>> &pheromone_matrix){
 
         for(int task = start; task <= end; task++){
 
-            for(int agent = 0; agent < static_cast<int>(pheromone_matrix.getNbAgent()); agent++){
+            for(int agent = 0; agent < static_cast<int>(pheromone_matrix.size()); agent++){
 
                 pheromone_matrix[agent][task] = std::max(min_pheromone, 
                                                         (1.0f - rho) * pheromone_matrix[agent][task]);
@@ -49,11 +47,11 @@
 
 
 
-    void scalarPheromoneMatrixEvaporation(gap::Params &params,
-                                          AlignedMatrix &pheromone_matrix){
+    void pheromoneMatrixEvaporation(gap::Params &params,
+                                    std::vector<std::vector<float>> &pheromone_matrix){
 
 
-        int work_size = static_cast<int>(pheromone_matrix.getNbTask());
+        int work_size = static_cast<int>(pheromone_matrix[0].size());
         int nb_threads_used = std::min(params.nb_threads, work_size);
         std::vector<std::thread> workers(nb_threads_used);
 
@@ -63,7 +61,7 @@
             int start = start_index(id, work_size, nb_threads_used);
             int end = end_index(id, work_size, nb_threads_used);
 
-            workers[id] = std::thread(partialScalarEvaporation,
+            workers[id] = std::thread(partialEvaporation,
                                       start,
                                       end,
                                       params.rho,
@@ -85,7 +83,7 @@
                           float max_pheromone,
                           gap::GapSolution &solution,
                           gap::GapInstance &instance,
-                          AlignedMatrix &pheromone_matrix){
+                          std::vector<std::vector<float>> &pheromone_matrix){
 
 
         float delta = computeDelta(solution.objectiveValue(instance),
@@ -105,8 +103,6 @@
     }
 
 
-
-    //----------------------------------- END WITHOUT SIMD VECTORIZATION -----------------------------------
 
 
 

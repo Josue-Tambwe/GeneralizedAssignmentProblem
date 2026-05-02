@@ -27,7 +27,6 @@
  #include "gap/Status.hpp"
  #include "utils/Logger.hpp"
  #include "configuration/Config.hpp"
- #include "metaheuristics/antColonyOptimizer/AlignedMatrix.hpp"
  #include "metaheuristics/antColonyOptimizer/AcoUtils.hpp"
  #include "metaheuristics/greedy/GreedyConstruction.hpp"
  #include "metaheuristics/greedy/GreedyLocalSearch.hpp"
@@ -54,9 +53,9 @@ namespace gap::ACO{
 
     /**
      * @brief computes the reference ant solution with  a greedy construction (risky-tasks)
-     *        with a local search in the balance move neighborhood
+     *        with a greedy local search 
      */
-      gap::GapSolution generateReferenceAnt(gap::GapInstance &instance);
+      gap::GapSolution generateReferenceAnt(gap::Params &params, gap::GapInstance &instance);
 
 
 
@@ -64,7 +63,7 @@ namespace gap::ACO{
     /**
      * @brief computes the inverse of the reference value 
      *        which is the objective value of a greedy solution 
-     *        with a local search in the balance move neighborhood
+     *        with a greedy local search 
      */                        
       float computeInverseReferenceValue(gap::GapSolution &solution,
                                         gap::GapInstance &instance);
@@ -157,7 +156,7 @@ namespace gap::ACO{
                                 float inverse_max_weight,
                                 gap::Params &params,
                                 std::vector<int> &residual_capacity,
-                                AlignedMatrix &pheromone_matrix,
+                                std::vector<std::vector<float>> &pheromone_matrix,
                                 gap::GapInstance &instance);
 
 
@@ -169,7 +168,7 @@ namespace gap::ACO{
                                   int max_weight,
                                   gap::Params &params,
                                   std::vector<int> &residual_capacity,
-                                  AlignedMatrix &pheromone_matrix,
+                                  std::vector<std::vector<float>> &pheromone_matrix,
                                   gap::GapSolution &ant,
                                   gap::GapInstance &instance);
 
@@ -194,7 +193,7 @@ namespace gap::ACO{
                                                 std::vector<int> &residual_capacity,
                                                 std::vector<int> &agent_indexes,
                                                 std::vector<float> &agent_scores,
-                                                AlignedMatrix &pheromone_matrix,
+                                                std::vector<std::vector<float>> &pheromone_matrix,
                                                 gap::Params &params,
                                                 gap::GapInstance &instance);
 
@@ -217,7 +216,7 @@ namespace gap::ACO{
                                     int max_weight,
                                     gap::Params &params,
                                     std::vector<int> &residual_capacity,
-                                    AlignedMatrix &pheromone_matrix,
+                                    std::vector<std::vector<float>> &pheromone_matrix,
                                     gap::GapSolution &ant,
                                     gap::GapInstance &instance);
 
@@ -231,7 +230,7 @@ namespace gap::ACO{
                                       std::vector<int> &residual_capacity,
                                       double probability_threshold,
                                       gap::Params &params,
-                                      AlignedMatrix &pheromone_matrix,
+                                      std::vector<std::vector<float>> &pheromone_matrix,
                                       gap::GapSolution &ant,
                                       gap::GapInstance &instance);
 
@@ -249,7 +248,7 @@ namespace gap::ACO{
                                      std::vector<std::unordered_set<int>> &ants_tasks,
                                      std::vector<bool> &ants_construction_status,
                                      std::vector<std::vector<int>> &residual_capacities,
-                                     AlignedMatrix &pheromone_matrix,
+                                     std::vector<std::vector<float>> &pheromone_matrix,
                                      std::vector<gap::GapSolution> &colony,
                                      gap::GapInstance &instance);
 
@@ -262,7 +261,7 @@ namespace gap::ACO{
           bool antConstruction(double probability_threshold,
                               gap::Params &params,
                               std::vector<bool> &ants_construction_status,
-                              AlignedMatrix &pheromone_matrix,
+                              std::vector<std::vector<float>> &pheromone_matrix,
                               std::vector<gap::GapSolution> &colony,
                               gap::GapInstance &instance);
 

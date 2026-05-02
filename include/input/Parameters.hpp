@@ -39,7 +39,6 @@
         bool low_cost_construction;
 
         // ACO
-        bool simd;
         bool use_max_iterations;
         bool use_time_limit;
         int nb_ants;
