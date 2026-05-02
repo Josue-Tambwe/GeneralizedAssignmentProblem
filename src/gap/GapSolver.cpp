@@ -16,7 +16,9 @@
  */
    
    #include "input/OptionsParser.hpp"
+   #include "input/Algorithm.hpp"
    #include "metaheuristics/greedy/RunGreedy.hpp"
+   #include "metaheuristics/antColonyOptimizer/RunAntColonyOptimizer.hpp"
 
    using namespace gap; 
 
@@ -24,7 +26,11 @@
 
       Params params = parseOptions(argc, argv);
 
-      runGreedy(params);
+      if(params.algorithm == Algorithm::Greedy){runGreedy(params);}
+
+      if(params.algorithm == Algorithm::AntColonyOptimizer){ACO::RunACO(params);}
+
+      //ACO::test(params);
 
       return 0;
    }

@@ -20,6 +20,7 @@
 
  namespace gap::greedy{
 
+
     std::vector<int> tasksAvailableVector(std::unordered_set<int> &tasks){
 
         std::vector<int> tasks_available(tasks.size());
@@ -28,6 +29,8 @@
         return tasks_available;
     }
 
+
+    //--------------------------------------- COST & WEIGHT CONSTRUCTION --------------------------------------------
 
     void findPartialMinMaxCostWeightAgent(int agent,
                                       std::vector<int> &tasks_available,
@@ -63,6 +66,9 @@
 
     }
 
+
+
+
     void findGlobalMinMaxCostWeightAgent(std::vector<int> &tasks_available,
                                             std::vector<int> &max_cost_vector,
                                             std::vector<float> &inverse_range_cost_vector,
@@ -82,15 +88,17 @@
     }
 
 
+
+
     float computePartialScoreTask(int agent,
                                 int task,
                                 std::vector<float> &alpha_vector,
                                 int max_cost,
                                 int task_cost,
-                                float &inverse_range_cost,
+                                float inverse_range_cost,
                                 int max_weight,
                                 int task_weight,
-                                float &inverse_range_weight,
+                                float inverse_range_weight,
                                 std::vector<int> &residual_capacity,
                                 gap::GapInstance &instance){
         
@@ -104,6 +112,9 @@
            return task_score;
         }
     }
+
+
+
 
     void computeGroupScoreTask(int start,
                                 int end,
@@ -137,8 +148,8 @@
                                                         inverse_range_weight_vector[agent],
                                                         residual_capacity,
                                                         instance);
-                if(score >= 0.0f && score > tasks_scores[task]){
 
+                if(score >= 0.0f && score > tasks_scores[task]){
                     tasks_scores[task] = score;
                     tasks_best_agent[task] = agent;
                 }                                           
@@ -147,6 +158,8 @@
         }
 
     }
+
+
 
 
     void findBestTAskandBestAgent(int &best_agent,
@@ -210,6 +223,7 @@
 
 
         }
+
         // waiting for all threads the finish
         for(auto &worker : workers){worker.join();}
 
@@ -221,10 +235,13 @@
                 best_task = task_id;
             }
         }
+
         if(best_task_score >= 0.0f){best_agent = tasks_best_agent[best_task];}
+
         else{ best_task = -1; best_agent = -1;}
 
     }
+
 
 
 
@@ -268,16 +285,20 @@
         return false;
     }
 
+
+
+
     gap::GapSolution constructionLowCost(gap::Params params, gap::GapInstance &instance){
 
         // initialization
         gap::GapSolution solution = gap::GapSolution(instance);
         std::vector<int> residual_capacity(instance.getCapacity());
         std::unordered_set<int> tasks;
-        int task = 0;
-        for(size_t j = 0; j < instance.getNbTask(); j++){tasks.insert(task); task++ ;}
+
+        for(size_t task = 0; task < instance.getNbTask(); task++){tasks.insert(task);}
 
         while(!tasks.empty()){
+
             bool assignment_performed = assignTaskToAgent(params.nb_threads,
                                                          tasks, 
                                                          residual_capacity, 
@@ -298,25 +319,51 @@
 
     }
 
-    /*---------------------------------------------------------------------------------------------*/
+    //--------------------------------------- END COST & WEIGHT CONSTRUCTION --------------------------------------------
+
+
+
+
+
+
+    //--------------------------------------- RISKY TASKS CONSTRUCTION --------------------------------------------
+
+
+    std::vector<float> computeInverseResidualCapacity(std::vector<int> &residual_capacity){
+
+        std::vector<float> inverse_residual_capacity(residual_capacity.size());
+
+        for(size_t agent = 0; agent < residual_capacity.size(); agent++){
+
+            inverse_residual_capacity[agent] = 1.0f / (residual_capacity[agent] + epsilon);
+        }
+
+        return inverse_residual_capacity;
+
+    }
+
+
+
 
     float computeMaxPressureTask(int task,
-                                std::vector<int> &residual_capacity,
+                                std::vector<float> &inverse_residual_capacity,
                                 gap::GapInstance &instance){
 
         const std::vector<std::vector<int>>& weight_matrix = instance.getWeight();
         float max_pressure = 0.0f;
 
         for(int agent = 0; agent < static_cast<int>(instance.getNbAgent()); agent++){
-            float pressure = static_cast<float>(weight_matrix[agent][task]) / (residual_capacity[agent] + epsilon);
+            float pressure = weight_matrix[agent][task] * inverse_residual_capacity[agent] ;
             if(pressure > max_pressure){max_pressure = pressure;}
         }
         return max_pressure;
     }
 
 
+
+
     int findMostRiskyTask(std::vector<int> &tasks_available,
-                        std::vector<int> &residual_capacity,
+                        std::vector<float> &inverse_residual_capacity,
                         gap::GapInstance &instance){
 
         float max_pressure = 0.0f;
@@ -324,11 +371,19 @@
         int most_risky_task = -1;
 
         for(int task : tasks_available){
-            float task_pressure = computeMaxPressureTask(task, residual_capacity, instance);
+
+            float task_pressure = computeMaxPressureTask(task, 
+                                                         inverse_residual_capacity, 
+                                                         instance);
+
             if(max_pressure < task_pressure){max_pressure = task_pressure; most_risky_task = task;}
+
         }
+
         return most_risky_task;
     }
+
+
 
     int findBestAgent(int task,
                       std::vector<int> &residual_capacity,
@@ -354,15 +409,19 @@
         
     }
 
+
+
+
     bool assignRiskyTaskToAgent(std::unordered_set<int> &tasks,
                                std::vector<int> &residual_capacity,
                                gap::GapSolution &solution,
                                gap::GapInstance &instance){
 
         std::vector<int> tasks_available = tasksAvailableVector(tasks); 
+        std::vector<float> inverse_residual_capacity = computeInverseResidualCapacity(residual_capacity);
         
         int most_risky_task = findMostRiskyTask(tasks_available,
-                                                residual_capacity,
+                                                inverse_residual_capacity,
                                                 instance);
 
         int best_agent = findBestAgent(most_risky_task,
@@ -393,14 +452,15 @@
 
     }
 
+
+
     gap::GapSolution constructionRiskyTasks(gap::GapInstance &instance){
 
         // initialization
         gap::GapSolution solution = gap::GapSolution(instance);
         std::vector<int> residual_capacity(instance.getCapacity());
         std::unordered_set<int> tasks;
-        int task = 0;
-        for(size_t j = 0; j < instance.getNbTask(); j++){tasks.insert(task); task++ ;}
+        for(size_t task = 0; task < instance.getNbTask(); task++){tasks.insert(task);}
 
 
         while(!tasks.empty()){
@@ -423,6 +483,10 @@
 
     }
 
+     //------------------------------ END RISKY TASKS CONSTRUCTION ---------------------------------
+
+
+
 
     gap::GapSolution construction(gap::Params params, gap::GapInstance &instance){
 
@@ -434,4 +498,6 @@
         }
 
     }
+
+
  }

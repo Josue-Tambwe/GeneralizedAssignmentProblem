@@ -11,5 +11,7 @@
 
 
 # All source files of the antColonyOptimizer subdirectory
-ACO_sources = files('AntColonyOptimizer.cpp'
-                       )
+ACO_sources = files('RunAntColonyOptimizer.cpp',
+                    'AlignedMatrix.cpp',
+                    'AntConstruction.cpp',
+                    'PheromonesUpdate.cpp')

@@ -17,8 +17,8 @@
     gap::Algorithm parseAlgorithm(std::string value){
 
         if(value == "greedy"){return gap::Algorithm::Greedy;}
-        if(value == "antColony"){return gap::Algorithm::AntColonyOptimizer;}
-        if(value == "BandB"){return gap::Algorithm::BranchAndBound;}
+        if(value == "aco"){return gap::Algorithm::AntColonyOptimizer;}
+        if(value == "bab"){return gap::Algorithm::BranchAndBound;}
         else{return gap::Algorithm::Unknown;}
     }
 

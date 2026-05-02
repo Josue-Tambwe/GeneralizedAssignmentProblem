@@ -92,7 +92,7 @@
     */
   
    void balanceMove(gap::GapSolution &solution,
-                      gap::GapInstance &instance);
+                    gap::GapInstance &instance);
 
   // -------------------------------  END BALANCE MOVE (NEIGHBORHOOD) ---------------------------- 
 
@@ -154,7 +154,7 @@
 
 
   /**
-    * @brief This method performs in a loop the re-assignment of task from the current agent to the cheaper agent 
+    * @brief This method computes, in a loop ,  the re-assignment of task from the current agent to the cheaper agent 
     *        while reducing the global cost, until an improvement is no longer possible
     */                
   int assignTaskToCheapAgent (int nb_threads,

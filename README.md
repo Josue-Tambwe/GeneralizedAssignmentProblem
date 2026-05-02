@@ -59,6 +59,7 @@ To accelerate computation, the solver integrates several HPC techniques:
 # Dependencies :
 
 - meson
+- ninja
 - doxygen
 
 # Installation : 

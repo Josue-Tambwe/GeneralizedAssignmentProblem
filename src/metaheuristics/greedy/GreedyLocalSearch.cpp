@@ -84,8 +84,8 @@
 
 
    int assignTaskFromMostToLeastExpensive(std::vector<int> &residual_capacity,
-                                        gap::GapSolution &solution,
-                                        gap::GapInstance &instance){
+                                          gap::GapSolution &solution,
+                                          gap::GapInstance &instance){
 
       std::vector<int> individual_cost_agents = computeIndividualCostAgent(solution, instance);
       int most_expensive_agent = 0;
@@ -137,7 +137,7 @@
 
 
    void balanceMove(gap::GapSolution &solution,
-                      gap::GapInstance &instance){
+                    gap::GapInstance &instance){
 
       std::vector<int> residual_capacity = computeResidualCapacity(solution, instance);
       int re_assignment_performed;   
@@ -219,12 +219,12 @@
 
 
    void computeGroupScoreTask(int start,
-                            int end,
-                            std::vector<int> &residual_capacity,
-                            std::vector<int> &tasks_scores,
-                            std::vector<int> &tasks_best_agent,
-                            gap::GapSolution &solution,
-                            gap::GapInstance &instance){
+                              int end,
+                              std::vector<int> &residual_capacity,
+                              std::vector<int> &tasks_scores,
+                              std::vector<int> &tasks_best_agent,
+                              gap::GapSolution &solution,
+                              gap::GapInstance &instance){
 
       for(int i = start; i <= end; i++){
 
@@ -264,7 +264,7 @@
                                     std::ref(solution),
                                     std::ref(instance));
       }
-      // waiting for all threads
+      // waiting for all threads to finish
       for(int id = 0; id < nb_threads; id++){
          workers[id].join();
       }

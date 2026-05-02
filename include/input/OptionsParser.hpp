@@ -31,6 +31,16 @@
 
  namespace gap{
 
-    void checkRequiredOptions(int argc, char** argv);
-    gap::Params parseOptions(int argc, char** argv);
+   /**
+    * @brief checks that all required options has been given by the user
+    */
+   void checkRequiredOptions(int argc, char** argv, gap::Params &params);
+
+   
+
+   /**
+    * @brief performs the parsing of all options given by the user
+    */
+   gap::Params parseOptions(int argc, char** argv);
+
  }

@@ -25,19 +25,23 @@
       printHeader();
       printHeaderGreedy(params, instance);
 
-      Timer timer = Timer();
+      gap::Timer timer = Timer();
       gap::Logger log;
+
       // construction
       timer.start();
       GapSolution solution = greedy::construction(params, instance);
       timer.stop();
+
       double construction_time = timer.getElapsed();
       gap::Status construction_status = solution.getStatus();
+
       if(construction_status != gap::Status::FEASIBLE && construction_status != gap::Status::OPTIMAL){
 
         log.warning("the greedy construction heuristic failed.");
         std::cout << " Processing time : " << construction_time << " (s) \n" << std::endl;
         return;
+
       }else{
 
         std::int64_t construction_value = solution.objectiveValue(instance);
@@ -54,13 +58,18 @@
         timer.reset();
 
         if(local_search_status != gap::Status::FEASIBLE && local_search_status != gap::Status::OPTIMAL){
+
+
           log.warning("the local search improvement failed.");
           std::cout << " Processing time : " << local_search_time << " (s) \n" << std::endl;
           return;
+
         }else{
+
           log.info("the local search has been performed successfuly !");
           std::int64_t local_search_value = solution.objectiveValue(instance);
           solution.print(instance);
+          
           finalStatisticsGreedy(construction_time,
                            construction_value,
                            construction_status,

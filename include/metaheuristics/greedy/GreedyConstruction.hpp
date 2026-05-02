@@ -40,7 +40,9 @@
      */
 
    std::vector<int> tasksAvailableVector(std::unordered_set<int> &tasks);
+
     
+  //--------------------------------------- COST & WEIGHT CONSTRUCTION --------------------------------------------
 
     void findPartialMinMaxCostConsumptionAgent(int agent,
                                       std::vector<int> &tasks_available,
@@ -71,27 +73,27 @@
                                   std::vector<float> &alpha_vector,
                                   int max_cost,
                                   int task_cost,
-                                  float &inverse_range_cost,
+                                  float inverse_range_cost,
                                   int max_weight,
                                   int task_weight,
-                                  float &inverse_range_weight,
+                                  float inverse_range_weight,
                                   std::vector<int> &residual_capacity,
                                   gap::GapInstance &instance);
 
     void computeGroupScoreTask(int start,
-                          int end,
-                          std::vector<int> &tasks_available,
-                          std::vector<float> &alpha_vector,
-                          std::vector<int> &max_cost_vector,
-                          const std::vector<std::vector<int>> & cost_matrix,
-                          std::vector<float> &inverse_range_cost_vector,
-                          std::vector<int> &max_weight_vector,
-                          const std::vector<std::vector<int>>& weight_matrix,
-                          std::vector<float> inverse_range_weight_vector,
-                          std::vector<int> &residual_capacity,
-                          std::unordered_map<int, float> &tasks_scores,
-                          std::unordered_map<int, int> &tasks_best_agent,
-                          gap::GapInstance &instance);
+                              int end,
+                              std::vector<int> &tasks_available,
+                              std::vector<float> &alpha_vector,
+                              std::vector<int> &max_cost_vector,
+                              const std::vector<std::vector<int>> & cost_matrix,
+                              std::vector<float> &inverse_range_cost_vector,
+                              std::vector<int> &max_weight_vector,
+                              const std::vector<std::vector<int>>& weight_matrix,
+                              std::vector<float> inverse_range_weight_vector,
+                              std::vector<int> &residual_capacity,
+                              std::unordered_map<int, float> &tasks_scores,
+                              std::unordered_map<int, int> &tasks_best_agent,
+                              gap::GapInstance &instance);
 
     void findBestTAskandBestAgent(int &best_agent,
                                 int &best_task,
@@ -114,27 +116,76 @@
 
    gap::GapSolution constructionLowCost(gap::Params params, gap::GapInstance &instance);
 
-   /*---------------------------------------------------------------------------------------------*/
-   // when the greedy construction with the min-cost criterion failed
+   
+  //--------------------------------------- END COST & WEIGHT CONSTRUCTION --------------------------------------------
+
+
+
+
+
+   //--------------------------------------- RISKY TASKS CONSTRUCTION --------------------------------------------
+
+
+    /**
+     * @brief computes the inverse : 1 / residual capacity, for all agent.
+     */
+   std::vector<float> computeInverseResidualCapacity(std::vector<int> &residual_capacity);
+
+
+
+
+   /**
+     * @brief computes the heuristic score  of a task wich is the maximimum value : weight / residual capacity
+     *        for all agent
+     */
 
    float computeMaxPressureTask(int task,
-                                std::vector<int> &residual_capacity,
+                                std::vector<float> &inverse_residual_capacity,
                                 gap::GapInstance &instance);
 
+
+
+    /**
+     * @brief finds the task that puts the maximum pressure on agent with respect to their residual capacities
+     */
    int findMostRiskyTask(std::vector<int> &tasks_available,
-                        std::vector<int> &residual_capacity,
+                        std::vector<float> &inverse_residual_capacity,
                         gap::GapInstance &instance);
 
+
+
+    /**
+     * @brief finds the agent that the given task puts the least pressure on
+     */
    int findBestAgent(int task,
                     std::vector<int> &residual_capacity,
                     gap::GapInstance &instance);
 
+
+
+    /**
+     * @brief performs the assignment of the task found to its best agent found
+     */
    bool assignRiskyTaskToAgent(std::unordered_set<int> &tasks,
                                std::vector<int> &residual_capacity,
                                gap::GapSolution &solution,
                                gap::GapInstance &instance);
-          
+
+
+
+    /**
+     * @brief constructs the solution based on the risky-task criteria
+     */
    gap::GapSolution constructionRiskyTasks(gap::GapInstance &instance);
 
+   //--------------------------------------- END RISKY TASKS CONSTRUCTION --------------------------------------------
+
+
+   /**
+     * @brief constructs the solution  (risky-task criteria or the cost-weight criteria)
+     */
    gap::GapSolution construction(gap::Params params, gap::GapInstance &instance);
+
+
+
  }

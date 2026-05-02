@@ -23,10 +23,6 @@
 
  namespace gap{
 
-    /** 
-     * @brief computes the starting index of the chunck for a thread within
-     *        a vector of work items
-    */
 
     int start_index(int id, int work_size, int nb_threads){
         int base = work_size / nb_threads;
@@ -38,11 +34,7 @@
         return start;
     }
 
-
-    /** 
-    * @brief computes the ending index of the chunck for a thread within
-    *        a vector of work items
-    */
+    
     int end_index(int id, int work_size, int nb_threads){
         int base = work_size / nb_threads;
         int rest = work_size % nb_threads;
@@ -57,10 +49,7 @@
     }
 
 
-    /** 
-    * @brief creates a local random number generator for a thread within its scope
-    *        
-    */
+    
     std::mt19937& getThreadLocalRng() {
         thread_local std::mt19937 gen(
             std::hash<std::thread::id>{}(std::this_thread::get_id())

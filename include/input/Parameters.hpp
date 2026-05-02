@@ -13,6 +13,7 @@
 
 /** 
  * @file Parameters.hpp
+ * @class Params
  * @brief Stores options and flags defines by the user
  * @author Josué Tambwe
  * @date 11 Mar 2026
@@ -26,12 +27,32 @@
  namespace gap{
 
     struct Params{
-        gap::Algorithm algorithm;
+
+        // general
+        gap::Algorithm algorithm; 
         std::string instance_path;
+        double time_limit;
         int nb_threads;
-        int time_limit;
         bool verbose;
+
+        // greedy
         bool low_cost_construction;
+
+        // ACO
+        bool simd;
+        bool use_max_iterations;
+        bool use_time_limit;
+        int nb_ants;
+        int nb_max_iterations;
+        float gamma;
+        float rho;
+        char influence;
+        /* Possible value for the attribute "influence"
+         - 'p' : pheromone -> alpha = 2 and beta = 1
+         - 'b' : balance   -> alpha = 1 and beta = 1
+         - 'h ': heuristic -> alpha = 1 and beta = 2
+        */
+
     };
 
 

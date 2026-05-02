@@ -48,7 +48,9 @@
                                               std::int64_t &obj) const;
 
         public:
-        
+            
+            // default constructor
+            GapSolution() = default;
             // constructor
             GapSolution(gap::GapInstance &instance);
             /**
