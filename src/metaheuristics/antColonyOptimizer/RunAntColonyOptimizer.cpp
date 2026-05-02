@@ -24,17 +24,25 @@
 
 
     gap::GapSolution& findBestAnt(std::int64_t &best_value,
+                                  std::int64_t &worst_value,
+                                  std::int64_t &cumulative_score,
                                   std::vector<gap::GapSolution> &colony,
                                   gap::GapInstance &instance){
 
+
         best_value = colony[0].objectiveValue(instance);
+        worst_value = colony[0].objectiveValue(instance);
+        cumulative_score = colony[0].objectiveValue(instance);
         int best_index = 0;
 
         for(int ant = 1; ant < static_cast<int>(colony.size()); ant++){
 
             std::int64_t obj_value = colony[ant]. objectiveValue(instance);
+            cumulative_score += obj_value;
 
             if(obj_value < best_value){best_index = ant; best_value = obj_value;}
+            if(obj_value > worst_value){worst_value = obj_value;}
+
         }
 
         return colony[best_index];
@@ -42,11 +50,15 @@
     }
 
 
+
+
+
     void RunACO(gap::Params &params){
 
         gap::GapInstance instance(params);
         printHeader();
         printHeaderACO(params, instance);
+        printHeaderLineACO();
         gap::Timer timer = Timer();
         timer.start();
 
@@ -70,7 +82,7 @@
         pheromone_matrix.initialize(computeInitialPheromone(inverse_reference_value, params));
 
 
-        //double preprocessing_time = timer.getElapsed();
+        double preprocessing_time = timer.getElapsed();
         double inverse_max_time = 1.0 / (params.time_limit + 1e-5);
         double inverse_max_iteration = 1.0 / (static_cast<double>(params.nb_max_iterations) + 1e-5);
         float max_pheromone = computeMaximumPheromone(params);
@@ -79,7 +91,6 @@
 
         do{
             iteration++;
-            //std::cout << " \n \n iteration : " << iteration << std::endl;
             double probability_threshold = computeProbabilityThreshold(iteration,
                                                                        inverse_max_iteration,
                                                                        timer.getElapsed(),
@@ -115,9 +126,14 @@
 
             // finding the best ant within the colony
             std::int64_t local_best_value = 0;
+            std::int64_t local_worst_value = 0;
+            std::int64_t cumulative_score = 0;
+
             gap::GapSolution& local_best_ant = findBestAnt(local_best_value,
-                                                     colony,
-                                                     instance);
+                                                           local_worst_value,
+                                                           cumulative_score,
+                                                           colony,
+                                                           instance);
 
             
             if(local_best_value <= reference_value){
@@ -132,32 +148,51 @@
                 
             }
 
+
+            printACOIteration(iteration,
+                              timer.getElapsed(),
+                              local_worst_value,
+                              cumulative_score,
+                              local_best_value,
+                              global_best_value,
+                              (local_best_value < global_best_value),
+                              params);
+
+            
             // updating the best solution
             if(local_best_value < global_best_value){
 
                 global_best_ant = local_best_ant;
                 global_best_value = local_best_value;
 
-            }
+                if(params.verbose){
+                    std::cout << "\n" << std::endl;
+                    log.info(" The best solution has been improved !");
+                    global_best_ant.print(instance); 
+                    printHeaderLineACO();
+                }
 
-            // info
-            printACOLine(timer.getElapsed(),
-                         iteration,
-                         local_best_value,
-                         global_best_value,
-                         "Rien pour l'instant");
+            }
+            
 
         }
         while(!stoppingCriteria(iteration, timer.getElapsed(), params));
 
+        std::cout << "\n" << std::endl;
+        log.info("ACO algorithm completed. Final best known solution :");
         global_best_ant.print(instance);
 
-        
+        finalStatisticsACO(preprocessing_time,
+                           iteration,
+                           global_best_value,
+                           global_best_ant.getStatus(),
+                           timer,
+                           params);
 
+        
     }
 
 
 
-
-
  }
+

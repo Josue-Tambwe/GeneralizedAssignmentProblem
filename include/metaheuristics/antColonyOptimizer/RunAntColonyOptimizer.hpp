@@ -43,8 +43,10 @@
     * @brief return the best ant (elite) within the colony
     */
     gap::GapSolution& findBestAnt(std::int64_t &best_value,
-                                    std::vector<gap::GapSolution> &colony,
-                                    gap::GapInstance &instance);
+                                 std::int64_t &worst_value,
+                                 std::int64_t &cumulative_score,
+                                 std::vector<gap::GapSolution> &colony,
+                                 gap::GapInstance &instance);
 
 
 

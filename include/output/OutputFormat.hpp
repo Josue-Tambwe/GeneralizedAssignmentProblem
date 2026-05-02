@@ -21,6 +21,7 @@
  #pragma once
 
  #include "gap/Status.hpp"
+ #include "utils/Timer.hpp"
  #include "output/OutputConfig.hpp"
  #include "configuration/Config.hpp"
  #include "input/Parameters.hpp"
@@ -35,23 +36,23 @@
  namespace gap{
 
 
-    void printHeader();
+   void printHeader();
 
-    void printUsage();
+   void printUsage();
 
-    void printRequiredOptions();
+   void printRequiredOptions();
 
-    void printOptionalOptions();
+   void printOptionalOptions();
 
-    void printExampleRun();
+   void printExampleRun();
 
-    void printHelp();
+   void printHelp();
 
-    void printHeaderGreedy(gap::Params& params,
+   void printHeaderGreedy(gap::Params &params,
                            gap::GapInstance &instance);
 
 
-    void finalStatisticsGreedy(double construction_time,
+   void finalStatisticsGreedy(double construction_time,
                         std::int64_t construction_value,
                         gap::Status &construction_status,
                         double local_time,
@@ -59,15 +60,30 @@
                         gap::Status &local_search_status);
 
 
-    void printHeaderACO(gap::Params& params,
+   void printHeaderACO(gap::Params &params,
                         gap::GapInstance &instance);
 
 
-   void printACOLine(double time,
-                     int iteration,
-                     std::int64_t best_ant,
-                     std::int64_t global_best,
-                     const std::string& info);
+
+   void printHeaderLineACO();
+
+
+   void printACOIteration(int iteration,
+                           double time,
+                           std::int64_t worst,
+                           std::int64_t cumulative_score,
+                           std::int64_t local_best,
+                           std::int64_t global_best,
+                           bool improvement,
+                           gap::Params &params);
+
+
+   void finalStatisticsACO(double preprocessing_time,
+                            int iteration,
+                            std::int64_t obj_value,
+                            gap::Status status,
+                            gap::Timer &timer,
+                            gap::Params &params);
 
       
  }

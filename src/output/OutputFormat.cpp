@@ -120,7 +120,7 @@
 
 
 
-    void printHeaderGreedy(gap::Params& params,
+    void printHeaderGreedy(gap::Params &params,
                            gap::GapInstance &instance){
 
         const gap::InstanceStatistics& stats = instance.getStatistics();
@@ -354,12 +354,12 @@
 
         // line 2
         std::cout << std::left  << std::setw(w_inst_label) << " number of tasks"
-                << std::right << std::setw(w_inst_sep)   << " : "
-                << std::left  << std::setw(w_inst_value) << stats.nb_task
-                << std::left  << std::setw(w_algo)       << ""
-                << std::left  << std::setw(w_set_label)  << "nb physical cores"
-                << std::right << std::setw(w_set_sep)    << " : "
-                << std::left  << std::setw(w_set_value)  << NUMBER_PHYSICAL_CORES;
+                  << std::right << std::setw(w_inst_sep)   << " : "
+                  << std::left  << std::setw(w_inst_value) << stats.nb_task
+                  << std::left  << std::setw(w_algo)       << ""
+                  << std::left  << std::setw(w_set_label)  << "nb physical cores"
+                  << std::right << std::setw(w_set_sep)    << " : "
+                  << std::left  << std::setw(w_set_value)  << NUMBER_PHYSICAL_CORES;
         std::cout << std::left << std::setw(w_flags - 16) << "SIMD vectorization";
         std::cout << std::right << std::setw(3) << " : ";
 
@@ -431,11 +431,11 @@
                 if(params.use_time_limit){
                         std::cout << std::left  << std::setw(w_flags) << "";
                         std::cout << std::left  << std::setw(w_inst_label) << ""
-                                << std::right << std::setw(w_inst_sep)   << ""
-                                << std::left  << std::setw(w_inst_value) << ""
-                                << std::left << std::setw(w_set_label) << "time limit (sec)"
-                                << std::right << std::setw(w_set_sep)    << " : "
-                                << std::left << std::setw(w_set_value) << params.time_limit;
+                                  << std::right << std::setw(w_inst_sep)   << ""
+                                  << std::left  << std::setw(w_inst_value) << ""
+                                  << std::left << std::setw(w_set_label) << "time limit (sec)"
+                                  << std::right << std::setw(w_set_sep)    << " : "
+                                  << std::left << std::setw(w_set_value) << params.time_limit;
 
                         std::cout << "\n";
                 }
@@ -444,11 +444,11 @@
                 if(params.use_max_iterations){
                         std::cout << std::left  << std::setw(w_flags) << "";
                         std::cout << std::left  << std::setw(w_inst_label) << ""
-                                << std::right << std::setw(w_inst_sep)   << ""
-                                << std::left  << std::setw(w_inst_value) << ""
-                                << std::left << std::setw(w_set_label) << "max iterations"
-                                << std::right << std::setw(w_set_sep)    << " : "
-                                << std::left << std::setw(w_set_value) << params.nb_max_iterations;
+                                  << std::right << std::setw(w_inst_sep)   << ""
+                                  << std::left  << std::setw(w_inst_value) << ""
+                                  << std::left << std::setw(w_set_label) << "max iterations"
+                                  << std::right << std::setw(w_set_sep)    << " : "
+                                  << std::left << std::setw(w_set_value) << params.nb_max_iterations;
 
                         std::cout << "\n";
                 }
@@ -460,25 +460,243 @@
 
 
 
-    void printACOLine(double time,
-                  int iteration,
-                  std::int64_t best_ant,
-                  std::int64_t global_best,
-                  const std::string& info){
+    void printHeaderLineACO(){
 
-        // Largeurs des colonnes
-        const int w_time   = 12;
+        const int init_sep = 2;
+
         const int w_iter   = 10;
-        const int w_best   = 16;
-        const int w_global = 16;
-        const int w_info   = 40;   // colonne plus large pour les commentaires
+        const int iter_sep = 8;
 
-        std::cout << std::left  << std::setw(w_time)   << std::fixed << std::setprecision(4) << time
-                << std::left  << std::setw(w_iter)   << iteration
-                << std::left  << std::setw(w_best)   << best_ant
-                << std::left  << std::setw(w_global) << global_best
-                << std::left  << std::setw(w_info)   << info
-                << "\n";
+        const int w_time   = 12;
+        const int time_sep = 10;
+
+        const int w_worst  = 14;
+        const int worst_sep = 10;
+
+        const int w_avg    = 14;
+        const int av_sep = 18;
+
+        const int w_local  = 16;
+        const int local_sep = 6;
+
+        const int w_global = 16;
+
+        std::cout << "\n";
+
+        // line 1
+        std::cout << YELLOW;
+        std::cout << std::right << std::setw(init_sep)   << ""
+                  << std::left  << std::setw(w_iter) << "Iterations" 
+                  << std::right << std::setw(iter_sep)   << ""
+
+                  << std::left  << std::setw(w_time) << "Time (s)"
+                  << std::right << std::setw(time_sep)  << ""
+
+                  << std::left  << std::setw(w_worst) << "Worst ant"
+                  << std::right << std::setw(worst_sep)  << ""
+
+                  << std::left  << std::setw(w_avg) << "Average value"
+                  << std::right << std::setw(av_sep)   << ""
+
+                  << std::left  << std::setw(w_local) << "Best ant"
+                  << std::right << std::setw(local_sep)   << ""
+
+                  << std::left  << std::setw(w_global) << "Best known solution"
+                  << RESET
+                  << "\n";
+
+        // line 2
+        std::cout << std::right << std::setw(init_sep)   << ""
+                  << std::left  << std::setw(w_iter)  << std::string(10, '-')
+                  << std::right << std::setw(iter_sep)   << ""
+
+                  << std::left  << std::setw(w_time)   << std::string(8, '-')
+                  << std::right << std::setw(time_sep)   << ""
+
+                  << std::left  << std::setw(w_worst)  << std::string(9, '-')
+                  << std::right << std::setw(worst_sep)   << ""
+
+                  << std::left  << std::setw(w_avg)    << std::string(13, '-')
+                  << std::right << std::setw(av_sep)   << ""
+
+                  << std::left  << std::setw(w_local)  << std::string(8, '-')
+                  << std::right << std::setw(local_sep)   << ""
+
+                  << std::left  << std::setw(w_global) << std::string(19, '-')
+                  << "\n\n";
+
+
+    }
+
+
+
+
+    void printACOIteration(int iteration,
+                        double time,
+                        std::int64_t worst,
+                        std::int64_t cumulative_score,
+                        std::int64_t local_best,
+                        std::int64_t global_best,
+                        bool improvement,
+                        gap::Params &params){
+                                
+                                
+        const int init_sep = 2;
+        
+        const int w_iter   = 6;
+        const int iter_sep = 8;
+
+        const int w_time   = 12;
+        const int time_sep = 8;
+                        
+        const int w_worst  = 15;
+        const int worst_sep = 7;
+
+        const int w_avg    = 21;
+        const int av_sep   = 10;
+
+        const int w_local  = 17;
+        const int local_sep = 12;
+
+        const int w_global = 21;
+
+        double average = static_cast<double>(cumulative_score) / params.nb_ants;
+
+        std::cout << std::right << std::setw(init_sep)   << ""
+                  << std::right  << std::setw(w_iter)     << iteration
+                  << std::right << std::setw(iter_sep)   << ""
+
+                  << std::right << std::setw(w_time)      << std::fixed << std::setprecision(4) << time
+                  << std::right << std::setw(time_sep)    << ""
+
+                  << std::right << std::setw(w_worst)     << worst
+                  << std::right << std::setw(worst_sep)   << ""
+
+                  << std::right << std::setw(w_avg)       << std::fixed << std::setprecision(2) << average
+                  << std::right << std::setw(av_sep)      << "";
+
+        if(improvement){
+            std::cout << GREEN 
+                      << std::right << std::setw(w_local) << local_best 
+                      << RESET;
+        }
+        else{
+            std::cout << std::right << std::setw(w_local) << local_best;
+        }
+
+        std::cout << std::right << std::setw(local_sep) << "";
+
+
+        if(improvement){
+            std::cout << BRIGHT_YELLOW
+                      << std::right << std::setw(w_global) << global_best
+                      << RESET;
+        }
+        else{
+            std::cout << std::right << std::setw(w_global) << global_best;
+        }
+
+        std::cout << "\n \n";
+    }
+
+
+
+    void finalStatisticsACO(double preprocessing_time,
+                            int iteration,
+                            std::int64_t obj_value,
+                            gap::Status status,
+                            gap::Timer &timer,
+                            gap::Params &params){
+
+        std::cout << "\n";
+        const int init_sep = 2;
+        const int w_item   = 30;
+
+
+        double average_time = (timer.getElapsed() - preprocessing_time) / iteration;
+
+        std::cout << std::right << std::setw(init_sep)   << ""
+                  << std::right  << YELLOW << "Summary" << RESET << "\n"
+                  << std::string(init_sep, ' ')
+                  << std::string(7, '-')
+                  << "\n \n";
+
+        std::cout << std::string(init_sep, ' ')
+                  << std::right << std::setw(init_sep) 
+                  << std::left << std::setw(w_item)  << "Preprocessing time"
+                  << std::right  << " :  " 
+                  << std::left << preprocessing_time << " seconds"
+                  << "\n"
+
+                  << std::string(init_sep, ' ')
+                  << std::left << std::setw(w_item)   << "Average time per iteration"
+                  << std::right  << " :  " 
+                  << std::left << average_time  << " seconds"
+                  << "\n"
+
+                  << std::string(init_sep, ' ')
+                  << std::left << std::setw(w_item)   << "Total elapsed time"
+                  << std::right  << " :  " 
+                  << std::left << timer.getElapsed() << " seconds"
+                  << "\n"
+
+                  << std::string(init_sep, ' ')
+                  << std::left << std::setw(w_item)   << "Number of iterations"
+                  << std::right  << " :  " 
+                  << std::left << iteration
+                  << "\n\n"
+
+                  << std::string(init_sep, ' ')
+                  << std::left << std::setw(w_item)   << "Number of ants"
+                  << std::right  << " :  " 
+                  << std::left << params.nb_ants
+                  << "\n"
+
+                  << std::string(init_sep, ' ')
+                  << std::left << std::setw(w_item)   << "Rho"
+                  << std::right  << " :  " 
+                  << std::left << params.rho
+                  << "\n"
+
+                  << std::string(init_sep, ' ')
+                  << std::left << std::setw(w_item)   << "Gamma"
+                  << std::right  << " :  " 
+                  << std::left << params.gamma
+                  << "\n"
+
+                  << std::string(init_sep, ' ')
+                  << std::left << std::setw(w_item)   << "Influence"
+                  << std::right  << " :  " ;
+
+                  if(params.influence == 'b'){
+                        std::cout << BRIGHT_CYAN;
+                        std::cout  << "balance" << RESET;}
+
+                  if(params.influence == 'h'){
+                        std::cout << BRIGHT_CYAN;
+                        std::cout << "heuristic" << RESET;}
+
+                  if(params.influence == 'p'){
+                        std::cout << BRIGHT_CYAN;
+                        std::cout  << "pheromone" << RESET;}
+
+                  std::cout << "\n\n";
+
+                  std::cout << std::string(init_sep, ' ')
+                  << std::left << std::setw(w_item)   << "Solution status"
+                  << std::right  << " :  " 
+                  << std::left << status
+                  << "\n";
+        
+                  std::cout << std::string(init_sep, ' ')
+                  << std::left << std::setw(w_item)   << "Objective value"
+                  << std::right  << " :  " ;
+                  std::cout << BRIGHT_YELLOW;
+                  std::cout << std::left  << obj_value
+                  << RESET
+                  << "\n\n";
+                  
+
      }
 
 

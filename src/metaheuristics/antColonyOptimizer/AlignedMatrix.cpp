@@ -45,7 +45,6 @@
     AlignedMatrix::~AlignedMatrix(){
         for(size_t line = 0; line < nb_agent; line++){free(matrix[line]);}
         delete[] matrix;
-        std::cout << " mémoire libérée avec succès! " << std::endl;
     }
 
     // operator overloading
