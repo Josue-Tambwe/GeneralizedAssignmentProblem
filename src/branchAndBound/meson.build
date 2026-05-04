@@ -9,23 +9,8 @@
 # See the LICENSE file for more details.
 #------------------------------------------------------------------------------
 
-# subdirectories
-subdir('gap')
-subdir('branchAndBound')
-subdir('utils')
-subdir('metaheuristics')
-subdir('input')
-subdir('hpc')
-subdir('output')
 
-
-# combining all source files
-all_sources = gap_sources + utils_sources + metaheuristics_sources + input_sources + hpc_sources + output_sources + branch_and_bound_sources
-
-
-# the final binary file
-executable('gap_solver', 
-            all_sources,
-            include_directories : inc,
-            install : true,
-            install_dir : 'bin')
+# all source file of the branch and bound subdirectory
+branch_and_bound_sources = files('BaBNode.cpp',
+                                 'BestFirstStrategy.cpp',
+                                 'DepthFirstStrategy.cpp')

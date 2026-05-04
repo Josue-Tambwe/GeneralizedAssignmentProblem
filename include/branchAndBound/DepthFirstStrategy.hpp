@@ -12,36 +12,37 @@
 
 
 /** 
- * @file GreedyElement.hpp
- * @class Element
- * @brief Represents an agent or task of an instance of the Generalized Assignment Problem
+ * @file DepthFirstStrategy.hpp
+ * @brief Defines the data structure of the depth-first node selection strategy in the Branch and Bound algorithm
+ * @class DepthFirst
  * @author Josué Tambwe
- * @date 25 Feb 2026
+ * @date 4 May 2026
  */
+
 
  #pragma once
 
- namespace gap::greedy{
+ #include "branchAndBound/BaBNode.hpp"
+ #include <stack>
+ #include <limits>
 
-    class Element{
+
+ namespace gap::BaB{
+
+    class DepthFirst{
 
         private:
-        
-            int id;
-            float score;
+            std::stack<gap::BaB::BaBNode> node_list; // list of opened nodes
 
         public:
 
-            //constructor 
-            Element(int id, float &score);
+            // constructor
+            DepthFirst() = default;
 
-            // getters
-            int getId();
-            float getScore();
-            
-            // operator overloading
-            bool operator<(const Element &other) const;
-
+            double getLowestDualBound() const;
+            gap::BaB::BaBNode pop();
+            bool isEmpty() const;
+            void add(gap::BaB::BaBNode node);
     };
+
  }
- 

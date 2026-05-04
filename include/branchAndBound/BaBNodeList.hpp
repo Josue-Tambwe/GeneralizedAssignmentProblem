@@ -12,36 +12,43 @@
 
 
 /** 
- * @file GreedyElement.hpp
- * @class Element
- * @brief Represents an agent or task of an instance of the Generalized Assignment Problem
+ * @file BaBNodeList.hpp
+ * @brief Defines the data structure of the list of opened nodes in the Branch and Bound algorithm
+ * @class BaBNodeList
  * @author Josué Tambwe
- * @date 25 Feb 2026
+ * @date 4 May 2026
  */
 
  #pragma once
 
- namespace gap::greedy{
+ 
+ #include "branchAndBound/BaBNode.hpp"
 
-    class Element{
+ namespace gap::BaB{
+
+    template <typename Strategy>
+
+    class BaBNodeList{
 
         private:
-        
-            int id;
-            float score;
+            Strategy strategy; // BestFirstStrategy or DepthFirstStrategy
 
         public:
 
-            //constructor 
-            Element(int id, float &score);
+            // constructor
+            BaBNodeList() = default;
 
-            // getters
-            int getId();
-            float getScore();
-            
-            // operator overloading
-            bool operator<(const Element &other) const;
+
+            double getLowestDualBound() const {return strategy.getLowestDualBound();}
+
+            gap::BaB::BaBNode pop(){return strategy.pop();}
+
+            bool isEmpty() const {return strategy.isEmpty();}
+
+            void add(gap::BaB::BaBNode node){strategy.add(node);}
 
     };
+
+
  }
  

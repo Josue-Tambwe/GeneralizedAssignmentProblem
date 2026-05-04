@@ -12,36 +12,36 @@
 
 
 /** 
- * @file GreedyElement.hpp
- * @class Element
- * @brief Represents an agent or task of an instance of the Generalized Assignment Problem
+ * @file DepthFirstStrategy.cpp
  * @author Josué Tambwe
- * @date 25 Feb 2026
+ * @date 4 May 2026
  */
 
- #pragma once
+ #include "branchAndBound/DepthFirstStrategy.hpp"
 
- namespace gap::greedy{
 
-    class Element{
+ namespace gap::BaB{
 
-        private:
-        
-            int id;
-            float score;
 
-        public:
+    double DepthFirst::getLowestDualBound() const {
 
-            //constructor 
-            Element(int id, float &score);
+        if(!node_list.empty()){
+            return node_list.top().getDualBound();
+        }
 
-            // getters
-            int getId();
-            float getScore();
-            
-            // operator overloading
-            bool operator<(const Element &other) const;
+        return std::numeric_limits<double>::max();
+    }
 
-    };
+
+    gap::BaB::BaBNode DepthFirst::pop(){
+
+        gap::BaB::BaBNode element = node_list.top();
+        node_list.pop();
+        return element;
+    }
+
+
+    bool DepthFirst::isEmpty() const {return node_list.empty();}
+
+    void DepthFirst::add(gap::BaB::BaBNode node){node_list.push(node);}
  }
- 

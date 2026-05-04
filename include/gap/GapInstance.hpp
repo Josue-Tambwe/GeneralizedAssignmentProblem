@@ -50,7 +50,7 @@ struct InstanceStatistics{
 };
 
 class GapInstance{
-    private : 
+    private: 
         std::string file_name; ///< Name of the instance
         size_t nb_agent; ///<  Number of agents
         size_t nb_task; ///< Number of tasks

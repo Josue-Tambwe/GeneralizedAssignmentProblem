@@ -12,36 +12,41 @@
 
 
 /** 
- * @file GreedyElement.hpp
- * @class Element
- * @brief Represents an agent or task of an instance of the Generalized Assignment Problem
+ * @file BestFirstStrategy.hpp
+ * @brief Defines the data structure of the best-first node selection strategy in the Branch and Bound algorithm
+ * @class BestFirst
  * @author Josué Tambwe
- * @date 25 Feb 2026
+ * @date 4 May 2026
  */
 
  #pragma once
+ 
+ #include "branchAndBound/BaBNode.hpp"
+ #include <queue>
+ #include <limits>
 
- namespace gap::greedy{
 
-    class Element{
+
+ namespace gap::BaB{
+
+
+    class BestFirst{
 
         private:
-        
-            int id;
-            float score;
+            std::priority_queue<gap::BaB::BaBNode> node_list; // list of opened nodes
 
-        public:
+        public: 
 
-            //constructor 
-            Element(int id, float &score);
+            // constructor
+            BestFirst() = default;
 
-            // getters
-            int getId();
-            float getScore();
-            
-            // operator overloading
-            bool operator<(const Element &other) const;
+
+            double getLowestDualBound() const;
+            gap::BaB::BaBNode pop();
+            bool isEmpty() const;
+            void add(gap::BaB::BaBNode node);
 
     };
+
+
  }
- 
