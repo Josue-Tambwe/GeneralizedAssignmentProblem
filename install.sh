@@ -13,14 +13,12 @@ case "$KERNEL_NAME" in
         OS_TYPE='Linux'
         NUMBER_PHYSICAL_CORES=$(lscpu -p=core | grep -v '^#' | sort -u | wc -l)
         ARCH_TYPE=$(uname -m)
-        CPU_FLAGS=$(lscpu)
         ;;
 
     *Darwin*)
         OS_TYPE='MacOS'
         NUMBER_PHYSICAL_CORES=$(sysctl -n hw.physicalcpu)
         ARCH_TYPE=$(uname -m)
-        CPU_FLAGS=$(sysctl -a)
         ;;
     *)
         echo " Unsupported Operating System"

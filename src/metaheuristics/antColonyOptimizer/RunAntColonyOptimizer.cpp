@@ -67,6 +67,16 @@
 
         // initialization of the reference ant
         gap::GapSolution reference_ant = generateReferenceAnt(params, instance);
+        
+        // flag on the initialization
+        if(reference_ant.getStatus() != gap::Status::FEASIBLE && 
+           reference_ant.getStatus() != gap::Status::OPTIMAL){
+
+            log.warning("the ACO algorithm initialization failed.");
+            std::cout << " Processing time : " << timer.getElapsed() << " (s) \n" << std::endl;
+            return;
+
+        }
         std::int64_t reference_value = reference_ant.objectiveValue(instance);
 
 
@@ -110,7 +120,7 @@
                                                colony,
                                                instance);
 
-            if(!is_feasible){log.warning("the problem is infeasible !"); break;}
+            if(!is_feasible){log.warning("the problem is infeasible !"); return;}
 
 
             // colony improvement by local search and reparation of infeasible ants
