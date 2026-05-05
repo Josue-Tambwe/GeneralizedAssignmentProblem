@@ -28,7 +28,10 @@
 
     struct Params{
 
-        // general
+        // constructor
+        Params();
+
+        // general parameters
         gap::Algorithm algorithm; 
         std::string instance_path;
         double time_limit;
@@ -51,6 +54,16 @@
          - 'b' : balance   -> alpha = 1 and beta = 1
          - 'h ': heuristic -> alpha = 1 and beta = 2
         */
+
+        // Branch and Bound
+        char milp_solver;
+        /* Possible value for the attribute "milp_solver"
+         - 'g' : gurobi
+         - 'h' : highs
+         - 'x ': hexaly 
+        */
+
+        double branching_value;
 
     };
 

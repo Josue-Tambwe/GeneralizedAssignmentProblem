@@ -23,5 +23,13 @@
  #ifndef NUMBER_PHYSICAL_CORES
     #define NUMBER_PHYSICAL_CORES 1 // default value (1 physical core)
  #endif
+
+ #ifndef HAS_GUROBI
+    #define HAS_GUROBI false
+ #endif
+
+ #ifndef HAS_HIGHS
+    #define HAS_HIGHS false
+ #endif
  
 const float epsilon = 1e-5; // to avoid division by zero

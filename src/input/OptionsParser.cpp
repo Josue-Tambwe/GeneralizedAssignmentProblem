@@ -24,8 +24,8 @@
 
             std::string arg = argv[i];
 
-            if (arg.find("--instance=") == 0) {has_algorithm = true;}
-            if (arg.find("--algorithm=") == 0) {has_instance = true;}
+            if (arg.find("--instance=") == 0) {has_instance = true;}
+            if (arg.find("--algorithm=") == 0) {has_algorithm = true;}
             if (arg.find("--nb-ants=") == 0) {has_nb_ants = true;}
         }
 
@@ -53,28 +53,7 @@
 
     gap::Params parseOptions(int argc, char** argv){
 
-        //checkRequiredOptions(argc, argv);
-
         gap::Params params;
-        // default values
-        params.algorithm = gap::Algorithm::Greedy;
-        params.instance_path = "";
-        params.nb_threads = NUMBER_PHYSICAL_CORES;
-        params.time_limit = 10.0;
-        params.verbose = false;
-
-        // greedy
-        params.low_cost_construction = false;
-
-        // ACO 
-        params.use_max_iterations = false; 
-        params.use_time_limit = false; 
-        
-        params.nb_ants = 1; 
-        params.nb_max_iterations = 1; 
-        params.influence = 'b'; 
-        params.gamma = 0.5f; 
-        params.rho = 0.1f;
 
         for(int i = 1; i < argc; i++){
 

@@ -28,6 +28,7 @@ enum  Algorithm {
     Greedy,
     AntColonyOptimizer,
     BranchAndBound,
+    Milp,
     Unknown,
 };
 

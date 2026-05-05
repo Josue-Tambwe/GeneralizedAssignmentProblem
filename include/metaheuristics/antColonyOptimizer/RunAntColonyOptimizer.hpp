@@ -12,11 +12,12 @@
 
 
 /** 
- * @file AntColonyOptimizer.hpp
+ * @file RunAntColonyOptimizer.hpp
  * @brief implements the Ant Colony Optimizer with greedy Local Search (balance move + cheap move)
  * @author Josué Tambwe
  * @date 24 Mar 2026
  */
+ 
  #pragma once
 
  #include "hpc/cpu/Thread.hpp"
