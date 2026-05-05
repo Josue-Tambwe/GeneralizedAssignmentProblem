@@ -12,37 +12,37 @@
 
 
 /** 
- * @file BestFirstStrategy.cpp
+ * @file RunBranchAndBound.cpp
  * @author Josué Tambwe
- * @date 4 May 2026
+ * @date 24 Mar 2026
  */
 
- #include "branchAndBound/BestFirstStrategy.hpp"
 
+
+ #include "branchAndBound/RunBranchAndBound.hpp"
 
  namespace gap::BaB{
 
-    double BestFirst::getLowestDualBound() const {
 
-        if(!node_list.empty()){
-            return node_list.top().getDualBound();
+    void setSolutionVector(std::vector<double> sol, gap::GapSolution solution){
+
+        std::vector<int>& solution_vector =  solution.getSolutionVector();
+
+        for(size_t k = 0; k < solution_vector.size(); k++){
+
+            if(sol[k] > 0.5){
+
+                int agent = convertTo2DAgentIndex(k, solution_vector.size());
+                int task = convertTo2DTaskIndex(k, solution_vector.size());
+
+                solution_vector[task] = agent;
+
+            }
         }
 
-        return std::numeric_limits<double>::max();
     }
 
 
-    gap::BaB::BaBNode BestFirst::pop(){
-
-        gap::BaB::BaBNode element = node_list.top();
-        node_list.pop();
-        return element;
-    }
-
-
-    bool BestFirst::isEmpty() const{return node_list.empty();}
-
-    void BestFirst::add(gap::BaB::BaBNode node){node_list.push(node);}
 
 
  }

@@ -17,15 +17,17 @@ subdir('metaheuristics')
 subdir('input')
 subdir('hpc')
 subdir('output')
+subdir('milpSolver')
 
 
 # combining all source files
-all_sources = gap_sources + utils_sources + metaheuristics_sources + input_sources + hpc_sources + output_sources + branch_and_bound_sources
+all_sources = gap_sources + utils_sources + metaheuristics_sources + input_sources + hpc_sources + output_sources + branch_and_bound_sources + milp_solver_sources
 
 
 # the final binary file
 executable('gap_solver', 
             all_sources,
             include_directories : inc,
+            dependencies : [gurobi_dep, highs_dep],
             install : true,
             install_dir : 'bin')

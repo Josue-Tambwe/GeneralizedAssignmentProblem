@@ -12,37 +12,32 @@
 
 
 /** 
- * @file BestFirstStrategy.cpp
+ * @file RunBranchAndBound.hpp
+ * @brief implements the Branch and Bound (B&B) algorithm
  * @author Josué Tambwe
- * @date 4 May 2026
+ * @date 5 May 2026
  */
 
- #include "branchAndBound/BestFirstStrategy.hpp"
+ #pragma once
+
+
+ #include "gap/GapInstance.hpp"
+ #include "gap/GapSolution.hpp"
+ #include "branchAndBound/BaBUtils.hpp"
+ #include <vector>
+
+
 
 
  namespace gap::BaB{
 
-    double BestFirst::getLowestDualBound() const {
 
-        if(!node_list.empty()){
-            return node_list.top().getDualBound();
-        }
-
-        return std::numeric_limits<double>::max();
-    }
-
-
-    gap::BaB::BaBNode BestFirst::pop(){
-
-        gap::BaB::BaBNode element = node_list.top();
-        node_list.pop();
-        return element;
-    }
-
-
-    bool BestFirst::isEmpty() const{return node_list.empty();}
-
-    void BestFirst::add(gap::BaB::BaBNode node){node_list.push(node);}
+    /**
+     * @brief converts a 1D solution vector into the standard data solution in the GAP solver
+     */
+    void setSolutionVector(std::vector<double> sol, gap::GapSolution solution);
 
 
  }
+
+

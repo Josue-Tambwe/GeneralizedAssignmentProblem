@@ -10,9 +10,41 @@
 #------------------------------------------------------------------------------
 
 # CPU number of physical cores
+
 option('NUMBER_PHYSICAL_CORES',
         type : 'string',
         value : '1',
         description : 'Number of physical cores on the hardware')
+
+
+# MILP Solvers flags
+
+
+# GUROBI
+
+option('HAS_GUROBI',
+        type : 'boolean',
+        value : false,
+        description : 'Build with GUROBI milp backend')
+
+option('GUROBI_HOME',
+        type : 'string',
+        value : '',
+        description : 'Path to Gurobi installation')
+
+
+option('GUROBI_LIB_NAME',
+        type : 'string',
+        value : '',
+        description : 'Name of the Gurobi shared library')
+
+
+
+# HIGHS
+
+option('HAS_HIGHS',
+        type : 'boolean',
+        value : false,
+        description : 'Build with HiGHS milp backend')
 
 

@@ -11,7 +11,4 @@
 
 
 # all source file of the branch and bound subdirectory
-branch_and_bound_sources = files('BaBNode.cpp',
-                                 'BestFirstStrategy.cpp',
-                                 'DepthFirstStrategy.cpp',
-                                 'RunBranchAndBound.cpp')
+milp_solver_sources = files('GurobiBackend.cpp')

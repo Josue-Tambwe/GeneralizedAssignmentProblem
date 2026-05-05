@@ -12,37 +12,41 @@
 
 
 /** 
- * @file BestFirstStrategy.cpp
+ * @file Parameters.cpp
  * @author Josué Tambwe
- * @date 4 May 2026
+ * @date 11 Mar 2026
  */
 
- #include "branchAndBound/BestFirstStrategy.hpp"
+ #include "input/Parameters.hpp"
 
 
- namespace gap::BaB{
+ namespace gap{
 
-    double BestFirst::getLowestDualBound() const {
+    Params::Params(){
 
-        if(!node_list.empty()){
-            return node_list.top().getDualBound();
-        }
+        // default values
+        algorithm = gap::Algorithm::Greedy;
+        instance_path = "";
+        nb_threads = NUMBER_PHYSICAL_CORES;
+        time_limit = 10.0;
+        verbose = false;
 
-        return std::numeric_limits<double>::max();
+        // greedy
+        low_cost_construction = false;
+
+        // ACO 
+        use_max_iterations = false; 
+        use_time_limit = false; 
+        
+        nb_ants = 1; 
+        nb_max_iterations = 1; 
+        influence = 'b'; 
+        gamma = 0.5f; 
+        rho = 0.1f;
+
+        // Branch and Bound
+        milp_solver='g';
+        branching_value = 0.0;
     }
-
-
-    gap::BaB::BaBNode BestFirst::pop(){
-
-        gap::BaB::BaBNode element = node_list.top();
-        node_list.pop();
-        return element;
-    }
-
-
-    bool BestFirst::isEmpty() const{return node_list.empty();}
-
-    void BestFirst::add(gap::BaB::BaBNode node){node_list.push(node);}
-
 
  }

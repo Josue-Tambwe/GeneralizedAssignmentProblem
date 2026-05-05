@@ -27,6 +27,8 @@ case "$KERNEL_NAME" in
         ;;
 esac
 
+
+
 # CPU architecture (logical abstraction)
 
 case "$ARCH_TYPE" in
@@ -43,7 +45,66 @@ case "$ARCH_TYPE" in
 esac
 
 
-set -e
+
+# MILP solvers flags
+
+
+
+HAS_GUROBI=false
+HAS_HIGHS=false
+
+for arg in "$@"; do 
+    case "$arg" in 
+        HAS_GUROBI)
+            HAS_GUROBI=true
+            ;;
+        HAS_HIGHS)
+            HAS_HIGHS=true
+            ;;
+        
+    esac
+
+done
+
+
+# --------------------- GUROBI ----------------------
+
+# If HAS_GUROBI=true, GUROBI_HOME must exist
+if [ "$HAS_GUROBI" = true ]; then
+
+    if [ -z "$GUROBI_HOME" ]; then
+        echo "ERROR: HAS_GUROBI=true but GUROBI_HOME is not set in your environment."
+        exit 1
+    fi
+
+    GUROBI_LIB_NAME=$(ls "$GUROBI_HOME/lib" \
+        | grep -E '^libgurobi[0-9]+\.so$' \
+        | sed -E 's/^lib(.*)\.so/\1/' \
+        | head -n 1)
+
+    if [ -z "$GUROBI_LIB_NAME" ]; then
+        echo "ERROR: Could not detect Gurobi shared library in $GUROBI_HOME/lib"
+        exit 1
+    fi
+
+fi
+
+
+# --------------------- HIGHS ----------------------
+
+if [ "$HAS_HIGHS" = true ]; then
+
+    if ! pkg-config --exists highs; then
+        echo "ERROR: HAS_HIGHS=true but HiGHS is not found by pkg-config."
+        exit 1
+    fi
+
+fi
+
+
+
+
+set -e # abort the installation if a command failed
 
 
 if [ ! -d "build" ]
@@ -52,6 +113,10 @@ then
     meson setup build --prefix="$PWD" \
                       --buildtype=release \
                       -DNUMBER_PHYSICAL_CORES="$NUMBER_PHYSICAL_CORES" \
+                      -DHAS_GUROBI="$HAS_GUROBI" \
+                      -DGUROBI_HOME="$GUROBI_HOME" \
+                      -DGUROBI_LIB_NAME="$GUROBI_LIB_NAME" \
+                      -DHAS_HIGHS="$HAS_HIGHS" \
                       || exit 1
 else
 # when the folder build already exists
@@ -59,6 +124,10 @@ else
                 --prefix="$PWD" \
                 --buildtype=release \
                 -DNUMBER_PHYSICAL_CORES="$NUMBER_PHYSICAL_CORES" \
+                -DHAS_GUROBI="$HAS_GUROBI" \
+                -DGUROBI_HOME="$GUROBI_HOME" \
+                -DGUROBI_LIB_NAME="$GUROBI_LIB_NAME" \
+                -DHAS_HIGHS="$HAS_HIGHS" \
                 || exit 1
 fi
 
