@@ -365,7 +365,7 @@
                 // line 3 
                 std::cout << std::left  << std::setw(w_inst_label) << ""
                         << std::right << std::setw(w_inst_sep)   << ""
-                        << std::left  << std::setw(w_inst_value + 4) << ""
+                        << std::right << std::setw(73)   << ""
                         << std::left << std::setw(w_set_label) << "nb ants"
                         << std::right << std::setw(w_set_sep)    << " : "
                         << std::left << std::setw(w_set_value) << params.nb_ants;
@@ -687,79 +687,172 @@
 
 
 
+        
+        
+
+        void printHeaderBaB(gap::Params& params,
+                            gap::GapInstance &instance){
+
+                const gap::InstanceStatistics& stats = instance.getStatistics();
+
+                const int init_sep = 2;
 
 
-        void printHeaderBaB(gap::Params& params, gap::GapInstance &instance){
+                const int w_inst   = 12;
+                const int w_inst_label = 12;
+                const int w_inst_value = 20;
+                const int w_inst_value_sep = 5;
+                const int inst_sep = 29;
 
-    // ============================
-    // 1. Largeurs des colonnes
-    // ============================
-    const int W1  = 22;   // Colonne 1 : label instance
-    const int W1V = 14;   // Colonne 1 : valeur instance
-    const int W2  = 22;   // Colonne 2 : nom de l'algorithme
-    const int W3  = 20;   // Colonne 3 : label "Setting"
-    const int W3V = 18;   // Colonne 3 : valeur "Setting"
-    const int W4  = 26;   // Colonne 4 : flags
+                const int w_algo  = 14;
+                const int w_algo_value  = 13;
+                const int w_algo_value_sep  = 12;
+                const int algo_sep = 11;
 
-    // ============================
-    // 2. En‑têtes des colonnes
-    // ============================
-    std::cout << std::left << std::setw(W1 + W1V + 5) << " Instance statistics";
-    std::cout << std::left << std::setw(W2)           << " Algorithm";
-    std::cout << std::left << std::setw(W3 + W3V)     << " Setting";
-    std::cout << std::left << std::setw(W4)           << " Flags";
-    std::cout << "\n";
+                const int w_set = 14;
+                const int w_set_label = 13;
+                const int w_set_value = 14;
+                const int w_set_value_sep = 8;
+                const int set_sep = 25;
 
-    // ============================
-    // 3. Lignes de séparation
-    // ============================
-    std::cout << std::left << std::setw(W1 + W1V + 5) << " -------------------"
-              << std::left << std::setw(W2)           << " ---------"
-              << std::left << std::setw(W3 + W3V)     << " -------"
-              << std::left << std::setw(W4)           << " -----"
-              << "\n";
+                const int w_flag  = 16;
+                const int w_flag_label  = 8;
+                
 
-    // ============================
-    // 4. LIGNE TYPE (modèle)
-    // ============================
-    // Colonne 1 : label instance
-    std::cout << std::left << std::setw(W1)  << " <label instance>"
-              << std::right << std::setw(3)  << " : "
-              << std::left  << std::setw(W1V) << "<valeur instance>";
+                std::cout << "\n";
 
-    // Colonne 2 : nom algo
-    std::cout << std::left << std::setw(W2) << "<algo>";
+                // headers
+                std::cout << YELLOW;
+                std::cout << std::right << std::setw(init_sep)   << ""
 
-    // Colonne 3 : label setting
-    std::cout << std::left << std::setw(W3) << "<label setting>"
-              << std::right << std::setw(3) << " : "
-              << std::left  << std::setw(W3V) << "<valeur setting>";
+                        << std::left  << std::setw(w_inst) << "Instance statistics"
+                        << std::right << std::setw(inst_sep)  << ""
 
-    // Colonne 4 : flags
-    std::cout << std::left << std::setw(W4) << "<flag>";
-    std::cout << "\n";
+                        << std::left  << std::setw(w_algo) << "Algorithm"
+                        << std::right << std::setw(algo_sep)  << ""
 
-    // ============================
-    // 5. EXEMPLE DE LIGNE VIDE POUR ALIGNER
-    // ============================
-    std::cout << std::left << std::setw(W1)  << ""
-              << std::right << std::setw(3)  << ""
-              << std::left  << std::setw(W1V) << ""
-              << std::left  << std::setw(W2)  << ""
-              << std::left  << std::setw(W3)  << "<label>"
-              << std::right << std::setw(3)   << " : "
-              << std::left  << std::setw(W3V) << "<valeur>"
-              << "\n";
+                        << std::left  << std::setw(w_set) << "Settings"
+                        << std::right << std::setw(set_sep)   << ""
 
-    // ============================
-    // 6. FIN
-    // ============================
-    std::cout << "\n";
-}
+                        << std::left  << std::setw(w_flag) << "Flags"
+                        << RESET
+                        << "\n";
+
+                
+                std::cout << std::right << std::setw(init_sep)   << ""
+
+                        << std::left  << std::setw(w_inst)   << std::string(19, '-')
+                        << std::right << std::setw(inst_sep)   << ""
+
+                        << std::left  << std::setw(w_algo)  << std::string(9, '-')
+                        << std::right << std::setw(algo_sep)   << ""
+
+                        << std::left  << std::setw(w_set)    << std::string(8, '-')
+                        << std::right << std::setw(set_sep)   << ""
+
+                        << std::left  << std::setw(w_flag)  << std::string(5, '-')
+                        << "\n";
+
+                // line 1
+                std::cout << std::right << std::setw(init_sep)   << ""
+                          << std::left << std::setw(w_inst_label) << "number of agents"
+                          << std::right << std::setw(6) << "" << " : "
+                          << std::left  << std::setw(w_inst_value) << stats.nb_agent
+                          << std::right << std::setw(w_inst_value_sep - 5)   << "";
+
+                std::cout << MAGENTA
+                          << std::left << std::setw(w_algo_value) << "Branch And Bound"
+                          << std::right << std::setw(w_algo_value_sep)   << ""
+                          << RESET;
+
+                std::cout << std::left << std::setw(w_set_label) << "LP solver"
+                          << std::right << std::setw(4) << " : "
+                          <<  BRIGHT_CYAN;
+                if(params.milp_solver == 'g'){std::cout << std::left << std::setw(w_set_value) << "Gurobi";}
+                if(params.milp_solver == 'h'){std::cout << std::left << std::setw(w_set_value) << "Highs";}
+                if(params.milp_solver == 'x'){std::cout << "Hexaly";}
+                std::cout << std::right << std::setw(w_set_value_sep)   << "" << RESET;
+
+                std::cout << std::left << std::setw(w_flag_label) << "verbose"
+                          << std::right << " : ";
+                
+                if(params.verbose){std::cout << GREEN << "Enabled" << RESET;}
+                else{std::cout << RED << "Disabled" << RESET;}
+                std::cout << "\n";
+
+                // line 2
+                std::cout << std::right << std::setw(init_sep)   << ""
+                          << std::left << std::setw(w_inst_label) << "number of tasks"
+                          << std::right  << std::setw(7) << "" << " : "
+                          << std::left  << std::setw(w_inst_value) << stats.nb_task
+                          << std::right << std::setw(w_inst_value_sep)   << ""
+
+                          << std::left << std::setw(w_algo_value) << ""
+                          << std::right << std::setw(w_algo_value_sep - 2)   << "";
+
+                std::cout << std::left << std::setw(w_set_label) << "exploration"
+                          << std::right << std::setw(1)<< "" << " : ";
+                if(params.exploration_strategy == 'b'){std::cout << std::left << std::setw(w_set_value) << "Best First Search";}
+                else{std::cout << std::left << std::setw(w_set_value) << "Depth First Search";}
+                std::cout << "\n";
+
+                // line 3
+                std::cout << std::right << std::setw(init_sep)   << ""
+                          << std::left << std::setw(w_inst_label) << ""
+                          << std::left  << std::setw(w_inst_value) << ""
+                          << std::right << std::setw(w_inst_value_sep + 8)   << ""
+
+                          << std::left << std::setw(w_algo_value) << ""
+                          << std::right << std::setw(w_algo_value_sep + 3)   << "";
+
+                std::cout << std::left << std::setw(w_set_label) << "branching rule"
+                          << std::right <<  " : ";
+                if(params.branching_value == 1.0){std::cout << std::left << std::setw(w_set_value) << "near one";}
+                else if(params.branching_value == 0.0){std::cout << std::left << std::setw(w_set_value) << "near zero";}
+                else{std::cout << std::left << std::setw(w_set_value) << "most fractional";}
+                std::cout << "\n";
+
+                // line 4
+                std::cout << std::right << std::setw(init_sep)   << ""
+                          << std::left << std::setw(w_inst_label) << "task cost range"
+                          << std::right  << std::setw(7) << "" << " : "
+                          << (std::to_string(stats.min_cost_task) + 
+                          " - " + std::to_string(stats.max_cost_task)) << "\n";
 
 
 
+                // line 5
+                std::cout << std::right << std::setw(init_sep)   << ""
+                          << std::left << std::setw(w_inst_label) << "task weight range"
+                          << std::right  << std::setw(5) << "" << " : "
+                          << std::left  << std::setw(w_inst_value)
+                          << (std::to_string(stats.min_weight_task) + " - " 
+                          + std::to_string(stats.max_weight_task))
+                          << std::right << std::setw(28)   << "";
 
+                std::cout << std::left << std::setw(w_set_label) << "target gap (%)"
+                          << std::right  << " : "
+                          << std::left << std::setw(w_set_value) << std::fixed << std::setprecision(3) 
+                          << params.optimality_gap << "\n";
+
+                // line 6
+                std::cout << std::right << std::setw(init_sep)   << ""
+                          << std::left << std::setw(w_inst_label) << "agent capacity range"
+                          << std::right  << std::setw(2) << "" << " : "
+                          << std::left  << std::setw(w_inst_value) 
+                          << (std::to_string(stats.min_capacity_agent) 
+                          + " - " + std::to_string(stats.max_capacity_agent))
+                          << std::right << std::setw(28)   << "";
+
+                std::cout << std::left << std::setw(w_set_label) << "time limit (s)"
+                          << std::right  << " : "
+                          << std::left << std::setw(w_set_value) << std::fixed << std::setprecision(2)
+                          << params.time_limit << "\n \n";
+       
+        }
+
+
+        
 
 
 
@@ -910,7 +1003,7 @@
                                 gap::Params &params){
 
                 const int init_sep = 2;
-                const int w_item   = 17;
+                const int w_item   = 19;
                 const int w_nodes   = 32;
 
 
@@ -957,7 +1050,7 @@
                         << "\n"
 
                         << std::string(init_sep, ' ')
-                        << std::left << std::setw(w_item)   << "current gap (%)"
+                        << std::left << std::setw(w_item)   << "optimality gap (%)"
                         << std::right  << " :  " 
                         << std::left << MAGENTA <<  ((primal_bound - dual_bound) / primal_bound)
                         << RESET

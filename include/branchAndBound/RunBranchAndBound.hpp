@@ -122,7 +122,7 @@
     /**
      * @brief defines the generic Branch And Bound Algorithm
      */
-    void RunBaB(gap::Params &params);
+    void runBaB(gap::Params &params);
 
 
  }

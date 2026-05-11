@@ -410,7 +410,7 @@
 
 
 
-    void RunBaB(gap::Params &params){
+    void runBaB(gap::Params &params){
         
         printHeader();
         if(params.exploration_strategy == 'b'){branchAndBoundBestFirst(params);}

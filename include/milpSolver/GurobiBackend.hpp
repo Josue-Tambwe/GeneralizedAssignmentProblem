@@ -73,9 +73,6 @@
             std::vector<double> getSolution() override;
             double getObjectiveValue() override;
 
-
-            
-
     };
     
 

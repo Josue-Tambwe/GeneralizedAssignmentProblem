@@ -25,7 +25,7 @@
  #include "branchAndBound/BaBNode.hpp"
  #include <stack>
  #include <limits>
- #include <iostream> // to remove
+ #include <iostream>
 
 
  namespace gap::BaB{

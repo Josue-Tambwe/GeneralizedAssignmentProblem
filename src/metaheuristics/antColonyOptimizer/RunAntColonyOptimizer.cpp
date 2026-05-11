@@ -54,7 +54,7 @@
 
 
 
-    void RunACO(gap::Params &params){
+    void runACO(gap::Params &params){
 
         gap::GapInstance instance(params);
         printHeader();

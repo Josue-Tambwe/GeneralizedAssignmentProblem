@@ -55,7 +55,7 @@
     /**
     * @brief runs the Ant Colony Optimizer for the GAP solver
     */
-    void RunACO(gap::Params &params);
+    void runACO(gap::Params &params);
                                     
 
  }

@@ -111,7 +111,7 @@ if [ ! -d "build" ]
 # case of a NON-existing build folder
 then 
     meson setup build --prefix="$PWD" \
-                      --buildtype=debug \
+                      --buildtype=release \
                       -DNUMBER_PHYSICAL_CORES="$NUMBER_PHYSICAL_CORES" \
                       -DHAS_GUROBI="$HAS_GUROBI" \
                       -DGUROBI_HOME="$GUROBI_HOME" \
@@ -122,7 +122,7 @@ else
 # when the folder build already exists
     meson setup --reconfigure build \
                 --prefix="$PWD" \
-                --buildtype=debug \
+                --buildtype=release \
                 -DNUMBER_PHYSICAL_CORES="$NUMBER_PHYSICAL_CORES" \
                 -DHAS_GUROBI="$HAS_GUROBI" \
                 -DGUROBI_HOME="$GUROBI_HOME" \

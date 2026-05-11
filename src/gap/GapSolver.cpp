@@ -39,16 +39,16 @@
 
       Params params = parseOptions(argc, argv);
 
-      //GapInstance instance(params);
+      /*GapInstance instance(params);
 
-      /*std::unique_ptr<MilpSolver> solver = std::make_unique<GurobiBackend>();
+      std::unique_ptr<MilpSolver> solver = std::make_unique<GurobiBackend>();
       solver->buildIntegerModel(instance);
       solver->solveIntegerModel(params.time_limit);
-      std::cout << " \n Solution IP  : " << solver->getObjectiveValue() << "\n " << std::endl;
+      std::cout << " \n Solution IP  : " << solver->getObjectiveValue() << "\n " << std::endl;*/
 
    
 
-      gap::BaB::BaBNode n1(3.0);
+      /*gap::BaB::BaBNode n1(3.0);
       for(int i = 0; i < 9; i++){
          if(i % 2 == 0){n1.fixToOne(i);}
          else{n1.fixToZero(i);}
@@ -86,24 +86,21 @@
 
 
 
-      gap::BaB::RunBaB(params);
-
-
-
-
-
-
-
-
-
-      //if(params.algorithm == Algorithm::Greedy){runGreedy(params);}
-
-      //if(params.algorithm == Algorithm::AntColonyOptimizer){ACO::RunACO(params);}
-
-      
       
 
 
+
+
+
+
+
+
+
+      if(params.algorithm == Algorithm::Greedy){runGreedy(params);}
+
+      else if(params.algorithm == Algorithm::AntColonyOptimizer){ACO::runACO(params);}
+
+      else if(params.algorithm == Algorithm::BranchAndBound){BaB::runBaB(params);}
 
       return 0;
    }
