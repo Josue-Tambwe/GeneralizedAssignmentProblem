@@ -115,6 +115,7 @@
         return solver;
 
     }
+    
 
 
 
@@ -123,20 +124,18 @@
 
         // initialization
         gap::GapInstance instance(params);
+        printHeaderBaB(params, instance);
 
         gap::Timer timer = Timer();
-        //gap::Logger log;
+        gap::Logger log;
         timer.start();
 
         // primal solution (greedy construction + local search)
         gap::GapSolution primal_solution = initializePrimalSolution(instance);
 
         double primal_bound = setInitialPrimalBound(primal_solution, instance);
-
         double preprocessing_time = timer.getElapsed();
-
-        std::cout << " preprocessing time : " << preprocessing_time << " (s) \n ";
-
+        double preprocessing_obj_value = primal_bound;
 
         // initialization of the MILP solver
         std::unique_ptr<MilpSolver> solver = buildLinearModel(params, instance);
@@ -144,9 +143,9 @@
 
         // infeasibility test
         if(!solver->isOptimal()){
-            std::cout << " \n The Problem is infeasible ! \n ";
+            log.warning("the problem is infeasible.");
+            std::cout << " \n Processing time : " << timer.getElapsed() << " (s) \n\n" << std::endl;
             return;
-
         }
 
         // initialization of the dual bound
@@ -158,73 +157,50 @@
         // initialization of the root node
         open_nodes.add(BaBNode(dual_bound));
 
-        std::cout << "\n primal bound : " << primal_bound << " \n ";
-        std::cout << "\n dual bound   : " << dual_bound << " \n ";
-
         printHeaderLineBaB();
 
         size_t processed_nodes = 0;
+        size_t nodes_fathomed_by_infeasibility = 0;
+        size_t nodes_fathomed_by_dominance = 0;
+        size_t nodes_fathomed_by_optimality = 0;
 
         while(!open_nodes.isEmpty() &&
               !stoppingCriteriaBestFirst(primal_bound, dual_bound, timer.getElapsed(), params)){
 
-            //std::cout << " \n iteration : " << iteration << " \n";
+            // undoing variables fixation
+            solver->resetLinearModel();
 
             BaBNode current_node = open_nodes.pop();
 
-
-
             processed_nodes += 1;
 
-            //std::cout << " pop the node : " ;
-            //current_node.print() ;
-            //std::cout << " \n";
-
             solver->addConstraints(current_node);
-
             solver->solveContinuousModel();
 
-            if(solver->isInFeasible()){
-
-               // std::cout << " problème infaisable \n ";
-               solver->resetLinearModel();
-                continue;
-            }
+            if(solver->isInFeasible()){nodes_fathomed_by_infeasibility += 1; continue;}
 
             std::vector<double> relaxed_solution = solver->getSolution();
 
             // dominance test
-            if(solver->getObjectiveValue() > primal_bound){
-                //std::cout << " noeud sondé par dominance  z = " << solver->getObjectiveValue() << " \n";
-                solver->resetLinearModel();
-                continue;
-            }
+            if(solver->getObjectiveValue() > primal_bound){nodes_fathomed_by_dominance += 1; continue;}
 
             // integrality test
             if(isInteger(relaxed_solution)){
 
-                /*std::cout << "noeud sondé par optimalité avec z = " 
-                          << solver->getObjectiveValue() << " \n";*/
+                nodes_fathomed_by_optimality += 1;
                 
                 if(solver->getObjectiveValue() < primal_bound){
 
-                    //std::cout << " meilleure solution améliorée \n";
                     primal_bound = solver->getObjectiveValue();
                     updateSolution(relaxed_solution, primal_solution);
-                    solver->resetLinearModel();
-                    continue;
-                    // rajouter le test de l'arrêt de l'algorithme
-
                 }
+
+                continue;
             }
 
             // branching
 
             int index = branchingVariableIndex(relaxed_solution, params);
-
-            /*std::cout << " \n branching index " << index 
-                      << " value " << relaxed_solution[index]
-                      << " \n ";*/
 
             // x_ij = 0
             BaBNode left_branch_node(solver->getObjectiveValue(), current_node);
@@ -238,18 +214,13 @@
             open_nodes.add(left_branch_node);
             open_nodes.add(right_branch_node);
 
-            // undoing variables fixations
-            solver->resetLinearModel();
-
             // upadting the global dual bound
             if(!open_nodes.isEmpty()){
                dual_bound = open_nodes.getLowestDualBound();
             }
-            else{
-               dual_bound = primal_bound;
-            }
+            else{dual_bound = primal_bound;}
 
-            if(processed_nodes % 500 == 0 || processed_nodes < 10){
+            if(processed_nodes % 1000 == 0 || processed_nodes < 10){
 
                 printBaBIteration(timer.getElapsed(),
                                   processed_nodes,
@@ -258,13 +229,33 @@
                                   primal_bound);
             }
             
+        }
+        std::cout << "\n";
+        log.info("Branch and Bound algorithm completed. Final best known solution :");
 
-
-            //std::cout << "\n \n ";
-
+        // update of solution status
+        if((std::abs(dual_bound - primal_bound) / primal_bound) <= tolerance 
+            || open_nodes.isEmpty()){
+                primal_solution.setStatus(gap::Status::OPTIMAL);
         }
 
         primal_solution.print(instance);
+
+        finalStatisticsBaB(preprocessing_time,
+                           preprocessing_obj_value,
+                           dual_bound,
+                           primal_bound,
+                           timer.getElapsed(),
+                           primal_solution.getStatus(),
+                           processed_nodes,
+                           open_nodes.getSize(),
+                           nodes_fathomed_by_optimality,
+                           nodes_fathomed_by_dominance,
+                           nodes_fathomed_by_infeasibility,
+                           params);
+
+
+
 
     }
 
@@ -277,20 +268,18 @@
 
         // initialization
         gap::GapInstance instance(params);
+        printHeaderBaB(params, instance);
 
         gap::Timer timer = Timer();
-        //gap::Logger log;
+        gap::Logger log;
         timer.start();
 
         // primal solution (greedy construction + local search)
         gap::GapSolution primal_solution = initializePrimalSolution(instance);
 
         double primal_bound = setInitialPrimalBound(primal_solution, instance);
-
         double preprocessing_time = timer.getElapsed();
-
-        std::cout << " preprocessing time : " << preprocessing_time << " (s) \n ";
-
+        double preprocessing_obj_value = primal_bound;
 
         // initialization of the MILP solver
         std::unique_ptr<MilpSolver> solver = buildLinearModel(params, instance);
@@ -298,7 +287,8 @@
 
         // infeasibility test
         if(!solver->isOptimal()){
-            std::cout << " \n The Problem is infeasible ! \n ";
+            log.warning("the problem is infeasible.");
+            std::cout << " \n Processing time : " << timer.getElapsed() << " (s) \n\n" << std::endl;
             return;
 
         }
@@ -312,10 +302,10 @@
         // initialization of the root node
         open_nodes.add(BaBNode(dual_bound));
 
-        std::cout << "\n primal bound : " << primal_bound << " \n ";
-        std::cout << "\n dual bound   : " << dual_bound << " \n ";
-
         size_t processed_nodes = 0;
+        size_t nodes_fathomed_by_infeasibility = 0;
+        size_t nodes_fathomed_by_dominance = 0;
+        size_t nodes_fathomed_by_optimality = 0;
 
         printHeaderLineBaB();
 
@@ -323,71 +313,41 @@
         while(!open_nodes.isEmpty() && 
               !stoppingCriteriaDepthFirst(timer.getElapsed(), params)){
 
-
-                //std::cout << " \n iteration : " << iteration << " \n";
+                // undoing variables fixation
+                solver->resetLinearModel();
 
                 BaBNode current_node = open_nodes.pop();
 
                 processed_nodes += 1;
 
-                /*std::cout << " pop the node : " ;
-                current_node.print() ;
-                std::cout << " \n";*/
-
                 solver->addConstraints(current_node);
-
                 solver->solveContinuousModel();
 
-                if(solver->isInFeasible()){
-
-                    //std::cout << " problème infaisable \n ";
-                    solver->resetLinearModel();
-                    continue;
-                }
+                if(solver->isInFeasible()){nodes_fathomed_by_infeasibility += 1; continue;}
 
                 std::vector<double> relaxed_solution = solver->getSolution();
 
                 // dominance test
-                if(solver->getObjectiveValue() > primal_bound){
-
-                    //std::cout << " noeud sondé par dominance  z = " << solver->getObjectiveValue() << " \n";
-                    solver->resetLinearModel();
-                    continue;
-                }
+                if(solver->getObjectiveValue() > primal_bound){nodes_fathomed_by_dominance += 1; continue;}
 
                 // integrality test
                 if(isInteger(relaxed_solution)){
 
-                    /*std::cout << "noeud sondé par optimalité avec z = " 
-                            << solver->getObjectiveValue() << " \n";*/
+                    nodes_fathomed_by_optimality += 1;
                     
                     if(solver->getObjectiveValue() < primal_bound){
 
-                        //std::cout << " meilleure solution améliorée \n";
                         primal_bound = solver->getObjectiveValue();
                         updateSolution(relaxed_solution, primal_solution);
-                        solver->resetLinearModel();
-                        continue;
-                        // rajouter le test de l'arrêt de l'algorithme
-
+                        if(params.verbose){primal_solution.print(instance);} 
                     }
+
+                    continue;
                 }
 
                 // branching
 
                 int index = branchingVariableIndex(relaxed_solution, params);
-
-                /*if(index == -1){
-                    std::cout << " \n Pas de variable fractionaire \n ";
-
-                    // undoing variables fixations
-                    solver->resetLinearModel();
-                    continue;
-                }*/
-
-                /*std::cout << " \n branching index " << index 
-                        << " value " << relaxed_solution[index]
-                        << " \n ";*/
 
                 // x_ij = 0
                 BaBNode left_branch_node(solver->getObjectiveValue(), current_node);
@@ -401,22 +361,16 @@
                 open_nodes.add(left_branch_node);
                 open_nodes.add(right_branch_node);
 
-                // to remove
-                //open_nodes.print();
-
-                // undoing variables fixations
-                solver->resetLinearModel();
 
                 // upadting the global dual bound
                 if(!open_nodes.isEmpty()){
                 dual_bound = open_nodes.getLowestDualBound();
                 }
-                else{
-                dual_bound = primal_bound;
-                }
 
-                if(processed_nodes % 500 == 0 || processed_nodes < 10){
-                
+                else{dual_bound = primal_bound;}
+
+                 // runtime processing information
+                if(processed_nodes % 1000 == 0 || processed_nodes < 10){
                 printBaBIteration(timer.getElapsed(),
                                   processed_nodes,
                                   open_nodes.getSize(),
@@ -425,13 +379,30 @@
                 }
 
 
-                //std::cout << "\n \n ";
-
             }
+            std::cout << "\n";
+            log.info("Branch and Bound algorithm completed. Final best known solution :");
 
+            // update of solution status
+            if((std::abs(dual_bound - primal_bound) / primal_bound) <= tolerance 
+                || open_nodes.isEmpty()){
+                    primal_solution.setStatus(gap::Status::OPTIMAL);
+            }
             primal_solution.print(instance);
 
-    
+            finalStatisticsBaB(preprocessing_time,
+                           preprocessing_obj_value,
+                           dual_bound,
+                           primal_bound,
+                           timer.getElapsed(),
+                           primal_solution.getStatus(),
+                           processed_nodes,
+                           open_nodes.getSize(),
+                           nodes_fathomed_by_optimality,
+                           nodes_fathomed_by_dominance,
+                           nodes_fathomed_by_infeasibility,
+                           params);
+
 
     }
 
@@ -439,13 +410,12 @@
 
 
 
-    void test(gap::Params &params){
-
+    void RunBaB(gap::Params &params){
+        
+        printHeader();
         if(params.exploration_strategy == 'b'){branchAndBoundBestFirst(params);}
 
         else{branchAndBoundDepthFirst(params);}
-
-
 
     }
 

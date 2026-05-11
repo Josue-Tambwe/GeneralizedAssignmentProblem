@@ -39,12 +39,12 @@
 
       Params params = parseOptions(argc, argv);
 
-      GapInstance instance(params);
+      //GapInstance instance(params);
 
-      //std::unique_ptr<MilpSolver> solver = std::make_unique<GurobiBackend>();
-      //solver->buildIntegerModel(instance);
-      //solver->solveIntegerModel(20.0);
-      //std::cout << " \n Solution IP 1 : " << solver->getObjectiveValue() << "\n " << std::endl;
+      /*std::unique_ptr<MilpSolver> solver = std::make_unique<GurobiBackend>();
+      solver->buildIntegerModel(instance);
+      solver->solveIntegerModel(params.time_limit);
+      std::cout << " \n Solution IP  : " << solver->getObjectiveValue() << "\n " << std::endl;
 
    
 
@@ -82,11 +82,11 @@
 
       //std::cout << " lowest dual bound : " << list.getLowestDualBound() << " \n \n";
       
-      //std::cout << " size : " << list.getSize();
+      //std::cout << " size : " << list.getSize();*/
 
 
 
-      gap::BaB::test(params);
+      gap::BaB::RunBaB(params);
 
 
 

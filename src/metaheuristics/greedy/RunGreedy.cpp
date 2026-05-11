@@ -39,7 +39,7 @@
       if(construction_status != gap::Status::FEASIBLE && construction_status != gap::Status::OPTIMAL){
 
         log.warning("the greedy construction heuristic failed.");
-        std::cout << " Processing time : " << construction_time << " (s) \n" << std::endl;
+        std::cout << " \n Processing time : " << construction_time << " (s) \n \n" << std::endl;
         return;
 
       }else{
@@ -69,15 +69,15 @@
           log.info("the local search has been performed successfuly !");
           std::int64_t local_search_value = solution.objectiveValue(instance);
           std::cout << "\n" << std::endl;
-        log.info("Greedy algorithm completed. Final best known solution :");
+          log.info("Greedy algorithm completed. Final best known solution :");
           solution.print(instance);
           
           finalStatisticsGreedy(construction_time,
-                           construction_value,
-                           construction_status,
-                           local_search_time,
-                           local_search_value,
-                           local_search_status);
+                                construction_value,
+                                construction_status,
+                                local_search_time,
+                                local_search_value,
+                                local_search_status);
         }
         
       }

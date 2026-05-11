@@ -25,7 +25,7 @@
                 output_stream << GREEN << "Feasible" << RESET;
                 return output_stream;
             case OPTIMAL : 
-                output_stream << CYAN << "Optimal" << RESET ;
+                output_stream << BRIGHT_CYAN << "Optimal" << RESET ;
                 return output_stream;
             case INFEASIBLE : 
                 output_stream << RED << "Infeasible" << RESET ;

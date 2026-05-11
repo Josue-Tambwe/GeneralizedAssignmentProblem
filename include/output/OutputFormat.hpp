@@ -88,6 +88,11 @@
 
 
 
+    void printHeaderBaB(gap::Params& params,
+                        gap::GapInstance &instance);
+                        
+
+
   void printHeaderLineBaB();
 
 
@@ -97,6 +102,21 @@
                          size_t open_nodes,
                          double dual_bound,
                          double primal_bound);
+
+
+
+  void finalStatisticsBaB(double preprocessing_time,
+                                double preprocessing_obj_value,
+                                double dual_bound,
+                                double primal_bound,
+                                double total_time,
+                                gap::Status status,
+                                size_t processed_nodes,
+                                size_t open_nodes,
+                                size_t nodes_fathomed_by_optimality,
+                                size_t nodes_fathomed_by_dominance,
+                                size_t nodes_fathomed_by_infeasibility,
+                                gap::Params &params);
 
       
  }
