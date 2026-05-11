@@ -22,6 +22,7 @@
  #pragma once
 
  #include <unordered_set>
+ #include <iostream> // to remove
 
 
 
@@ -40,10 +41,7 @@
             // constructors
 
             BaBNode(double value);
-
-            BaBNode(double value, 
-                    std::unordered_set<int> ones,
-                    std::unordered_set<int> zeros);
+            BaBNode(double value, BaBNode &other);
 
 
             // getters
@@ -62,6 +60,9 @@
 
             // operator overloading
             bool operator<(const BaBNode &other) const;
+
+
+            void print() const;
 
 
     };

@@ -20,11 +20,26 @@
 
  #pragma once
 
+ #if USE_BRANCH_AND_BOUND
 
  #include "gap/GapInstance.hpp"
  #include "gap/GapSolution.hpp"
+ #include "input/Parameters.hpp"
+ #include "gap/Status.hpp"
+ #include "utils/Logger.hpp"
+ #include "utils/Timer.hpp"
+ #include "output/OutputFormat.hpp"
+ #include "configuration/Config.hpp"
+ #include "metaheuristics/greedy/GreedyConstruction.hpp"
+ #include "metaheuristics/greedy/GreedyLocalSearch.hpp"
  #include "branchAndBound/BaBUtils.hpp"
+ #include "branchAndBound/BestFirstStrategy.hpp"
+  #include "branchAndBound/DepthFirstStrategy.hpp"
+ #include "branchAndBound/BaBNodeList.hpp"
+ #include "milpSolver/GurobiBackend.hpp"
+ #include "milpSolver/MilpSolver.hpp"
  #include <vector>
+ #include <limits>
 
 
 
@@ -32,12 +47,85 @@
  namespace gap::BaB{
 
 
-    /**
-     * @brief converts a 1D solution vector into the standard data solution in the GAP solver
+
+   /**
+     * @brief initializes the primal solution for the Branch And Bound algorithm
      */
-    void setSolutionVector(std::vector<double> sol, gap::GapSolution solution);
+   gap::GapSolution initializePrimalSolution(gap::GapInstance &instance);
+
+
+
+
+
+   /**
+     * @brief initializes the primal bound
+     */
+   double setInitialPrimalBound(gap::GapSolution &primal_solution,
+                                gap::GapInstance &instance);
+
+
+
+    /**
+     * @brief set the MILP solver to use
+     */
+    std::unique_ptr<MilpSolver> setMilpSolver(gap::Params &params);
+
+
+
+
+
+    /**
+     * @brief initializes the dual bound
+     */
+    double setInitialDualBound(gap::Params &params, gap::GapInstance &instance);
+
+
+
+
+
+    /**
+     * @brief converts a 1D solution vector into the standard data solution for the GAP solver
+     */
+    void updateSolution(std::vector<double> &sol, gap::GapSolution &solution);
+
+
+
+
+
+    /**
+     * @brief builds the model for linear relaxation
+     */
+    std::unique_ptr<MilpSolver> buildLinearModel(gap::Params &params,
+                                                 gap::GapInstance &instance);
+
+
+
+
+
+    /**
+     * @brief runs the B&B algorithm with the best first node exploration strategy
+     */
+    void branchAndBoundBestFirst(gap::Params &params);
+
+
+
+
+
+     /**
+     * @brief runs the B&B algorithm with the depth first node exploration strategy
+     */
+
+    void branchAndBoundDepthFirst(gap::Params &params);
+
+
+
+    /**
+     * @brief defines the generic Branch And Bound Algorithm
+     */
+    void test(gap::Params &params);
 
 
  }
 
+ #endif
 

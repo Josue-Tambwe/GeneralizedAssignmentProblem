@@ -13,7 +13,7 @@
 
 /** 
  * @file BaBNodeList.hpp
- * @brief Defines the data structure of the list of opened nodes in the Branch and Bound algorithm
+ * @brief Defines the data structure of the list of open nodes in the Branch and Bound algorithm
  * @class BaBNodeList
  * @author Josué Tambwe
  * @date 4 May 2026
@@ -45,7 +45,11 @@
 
             bool isEmpty() const {return strategy.isEmpty();}
 
+            size_t getSize(){return strategy.getSize();}
+
             void add(gap::BaB::BaBNode node){strategy.add(node);}
+
+            void print() const{strategy.print();}
 
     };
 

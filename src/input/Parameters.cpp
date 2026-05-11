@@ -28,7 +28,7 @@
         algorithm = gap::Algorithm::Greedy;
         instance_path = "";
         nb_threads = NUMBER_PHYSICAL_CORES;
-        time_limit = 10.0;
+        time_limit = 20.0;
         verbose = false;
 
         // greedy
@@ -46,7 +46,11 @@
 
         // Branch and Bound
         milp_solver='g';
+        exploration_strategy='b';
+        warm_start = false;
         branching_value = 0.0;
+        optimality_gap = 0.0;
+
     }
 
  }

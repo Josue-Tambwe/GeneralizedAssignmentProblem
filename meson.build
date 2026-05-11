@@ -91,6 +91,17 @@ endif
 
 
 
+# Tthe usage of the Branch and Bound algorithm
+
+if has_gurobi or has_highs
+
+    add_project_arguments('-DUSE_BRANCH_AND_BOUND=true', language : 'cpp')
+
+endif
+
+
+
+
 
 # source files
 subdir('src')

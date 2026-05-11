@@ -63,7 +63,17 @@
          - 'x ': hexaly 
         */
 
+        char exploration_strategy;
+        /* Possible value
+         - 'b' : best first search
+         - 'd' : depth first search
+        */
+
+        bool warm_start;
+
         double branching_value;
+        double optimality_gap;
+
 
     };
 

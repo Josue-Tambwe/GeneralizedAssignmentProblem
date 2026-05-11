@@ -85,5 +85,18 @@
                             gap::Timer &timer,
                             gap::Params &params);
 
+
+
+
+  void printHeaderLineBaB();
+
+
+
+  void printBaBIteration(double time,
+                         size_t processed_nodes,
+                         size_t open_nodes,
+                         double dual_bound,
+                         double primal_bound);
+
       
  }

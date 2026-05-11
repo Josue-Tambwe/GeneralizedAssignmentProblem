@@ -19,6 +19,7 @@
         bool has_algorithm = false;
         bool has_instance = false;
         bool has_nb_ants = false;
+        bool use_milp_solver = false;
 
         for(int i = 1; i < argc; i++){
 
@@ -27,6 +28,7 @@
             if (arg.find("--instance=") == 0) {has_instance = true;}
             if (arg.find("--algorithm=") == 0) {has_algorithm = true;}
             if (arg.find("--nb-ants=") == 0) {has_nb_ants = true;}
+            if (arg.find("--solver=") == 0) {use_milp_solver = true;}
         }
 
         if(!has_algorithm){
@@ -44,6 +46,15 @@
 
             gap::Logger log;
             log.error(" Missing required option : --nb-ants=value");
+        }
+
+        if((params.algorithm == gap::Algorithm::BranchAndBound ||
+            params.algorithm == gap::Algorithm::Milp) &&
+            !use_milp_solver){
+
+            gap::Logger log;
+            log.error(" Missing required option : --solver=value");
+
         }
 
     }
@@ -75,6 +86,8 @@
 
                 if(arg == "--verbose"){params.verbose = true; continue;}
 
+                if(arg == "--warm-start"){params.warm_start = true; continue;}
+
                 else if(arg == "--low-cost-construction"){params.low_cost_construction = true; continue;}
 
                 else{gap::Logger log; log.error(" Unknown option: " + arg);}
@@ -88,6 +101,16 @@
 
                 if(name == "--algorithm"){
                     params.algorithm = parseAlgorithm(value);
+                    if((params.algorithm == gap::Algorithm::BranchAndBound ||
+                        params.algorithm == gap::Algorithm::Milp) &&
+                        !(USE_BRANCH_AND_BOUND)){
+                        
+                        gap::Logger log; 
+                        log.error(" The solver has not been built with any MILP solver "); 
+                        break;
+
+                    }
+
                     if(params.algorithm == gap::Algorithm::Unknown){
                         gap::Logger log; 
                         log.error(" Unknown algorithm: " + arg); 
@@ -172,6 +195,70 @@
                     break;
                     
                 }
+
+
+                if(name == "--solver"){
+
+                    if(value == "gurobi"){
+                        if(!HAS_GUROBI){gap::Logger log; log.error(" The solver has not been built with Gurobi");}
+                        params.milp_solver = 'g'; 
+                        continue;
+                    }
+
+
+                    if(value == "hexaly"){
+                        if(!HAS_HEXALY){gap::Logger log; log.error(" The solver has not been built with Hexaly");}
+                        params.milp_solver = 'x'; 
+                        continue;
+                    }
+
+
+                    if(value == "highs"){
+                        if(!HAS_HIGHS){gap::Logger log; log.error(" The solver has not been built with Highs");}
+                        params.milp_solver = 'h'; 
+                        continue;
+                    }
+
+                    gap::Logger log; 
+                    log.error(" Unsupported milp solver : " + value); 
+                    break;
+                    
+                }
+
+
+                if(name == "--exploration"){
+
+                    if(value == "bfs"){params.exploration_strategy = 'b'; continue;}
+                    if(value == "dfs"){params.exploration_strategy = 'd'; continue;}
+
+                    gap::Logger log; 
+                    log.error(" Unknown node exploration strategy : " + value); 
+                    break;
+                    
+                }
+
+
+                if(name == "--branching-rule"){
+
+                    if(value == "one"){params.branching_value = 1.0; continue;}
+                    if(value == "zero"){params.branching_value = 0.0; continue;}
+                    if(value == "fractional"){params.branching_value = 0.5; continue;}
+
+                    gap::Logger log; 
+                    log.error(" Unknown branching rule : " + value); 
+                    break;
+                    
+                }
+
+                if(name == "--gap"){
+                    params.optimality_gap = std::stod(value);
+                    if(params.optimality_gap < 0.0 || params.optimality_gap > 1.0){
+                        gap::Logger log; 
+                        log.error(" gap must be in the interval [0,1]");
+                    }
+                    continue;
+                }
+
 
 
                 // case of invalid option

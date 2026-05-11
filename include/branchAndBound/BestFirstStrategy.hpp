@@ -24,6 +24,7 @@
  #include "branchAndBound/BaBNode.hpp"
  #include <queue>
  #include <limits>
+ #include <iostream> // to remove
 
 
 
@@ -33,7 +34,7 @@
     class BestFirst{
 
         private:
-            std::priority_queue<gap::BaB::BaBNode> node_list; // list of opened nodes
+            std::priority_queue<gap::BaB::BaBNode> node_list; // list of open nodes
 
         public: 
 
@@ -42,9 +43,16 @@
 
 
             double getLowestDualBound() const;
+
             gap::BaB::BaBNode pop();
+
             bool isEmpty() const;
+
+            size_t getSize() const;
+            
             void add(gap::BaB::BaBNode node);
+
+            void print() const;
 
     };
 

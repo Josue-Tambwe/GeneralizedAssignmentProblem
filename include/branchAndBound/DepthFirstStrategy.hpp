@@ -25,6 +25,7 @@
  #include "branchAndBound/BaBNode.hpp"
  #include <stack>
  #include <limits>
+ #include <iostream> // to remove
 
 
  namespace gap::BaB{
@@ -32,7 +33,7 @@
     class DepthFirst{
 
         private:
-            std::stack<gap::BaB::BaBNode> node_list; // list of opened nodes
+            std::stack<gap::BaB::BaBNode> node_list; // list of open nodes
 
         public:
 
@@ -40,9 +41,17 @@
             DepthFirst() = default;
 
             double getLowestDualBound() const;
+
             gap::BaB::BaBNode pop();
+
             bool isEmpty() const;
+
+            size_t getSize() const;
+            
             void add(gap::BaB::BaBNode node);
+
+
+            void print() const;
     };
 
  }

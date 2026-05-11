@@ -42,7 +42,24 @@
 
     bool BestFirst::isEmpty() const{return node_list.empty();}
 
+    size_t BestFirst::getSize() const{return node_list.size();}
+
     void BestFirst::add(gap::BaB::BaBNode node){node_list.push(node);}
+
+
+    void BestFirst::print() const{
+
+        int counter = 0;
+        std::priority_queue<gap::BaB::BaBNode> copy = node_list;
+
+        while(!copy.empty()){
+            counter += 1;
+            std::cout << " node id : " << counter << " --- ";
+            BaBNode node = copy.top();
+            node.print();
+            copy.pop();
+        }
+    }
 
 
  }

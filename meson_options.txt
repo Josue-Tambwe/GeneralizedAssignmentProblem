@@ -25,7 +25,7 @@ option('NUMBER_PHYSICAL_CORES',
 option('HAS_GUROBI',
         type : 'boolean',
         value : false,
-        description : 'Build with GUROBI milp backend')
+        description : 'Build with GUROBI milp solver backend')
 
 option('GUROBI_HOME',
         type : 'string',
@@ -45,6 +45,14 @@ option('GUROBI_LIB_NAME',
 option('HAS_HIGHS',
         type : 'boolean',
         value : false,
-        description : 'Build with HiGHS milp backend')
+        description : 'Build with HiGHS milp solver backend')
+
+
+# BRANCH AND BOUND
+
+option('USE_BRANCH_AND_BOUND',
+        type : 'boolean',
+        value : false,
+        description : 'Allow the usage of the Branch and Bound algorithm')
 
 

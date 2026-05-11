@@ -22,14 +22,23 @@
 
  namespace gap::BaB{
 
+    // dual_bound = std::numeric_limits<double>::max();
 
     double DepthFirst::getLowestDualBound() const {
 
-        if(!node_list.empty()){
-            return node_list.top().getDualBound();
-        }
+        double dual_bound = node_list.top().getDualBound();
+        std::stack<gap::BaB::BaBNode> copy = node_list;
 
-        return std::numeric_limits<double>::max();
+        while(!copy.empty()){
+
+            BaBNode current_node = copy.top();
+            if(current_node.getDualBound() < dual_bound){
+                dual_bound = current_node.getDualBound();
+            }
+            copy.pop();
+
+        }
+        return dual_bound;
     }
 
 
@@ -43,5 +52,24 @@
 
     bool DepthFirst::isEmpty() const {return node_list.empty();}
 
+
+    size_t DepthFirst::getSize() const{return node_list.size();}
+    
+
     void DepthFirst::add(gap::BaB::BaBNode node){node_list.push(node);}
+
+
+    void DepthFirst::print() const{
+
+        int counter = 0;
+        std::stack<gap::BaB::BaBNode> copy = node_list;
+
+        while(!copy.empty()){
+            counter += 1;
+            std::cout << " node id : " << counter << " --- ";
+            BaBNode node = copy.top();
+            node.print();
+            copy.pop();
+        }
+    }
  }

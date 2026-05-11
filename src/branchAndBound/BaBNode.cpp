@@ -26,13 +26,11 @@
 
     BaBNode::BaBNode(double value): dual_bound(value){}
 
-    BaBNode::BaBNode(double value, 
-                    std::unordered_set<int> ones,
-                    std::unordered_set<int> zeros):
-        
-        dual_bound(value),
-        fixed_to_one(ones),
-        fixed_to_zero(zeros){}
+    BaBNode::BaBNode(double value, BaBNode &other):dual_bound(value)
+        {
+         this->fixed_to_one = other.getIndexesFixedToOne();
+         this->fixed_to_zero = other.getIndexesFixedToZero();
+        }
 
 
     // getters
@@ -52,6 +50,17 @@
 
     // operator overloading
     bool BaBNode::operator<(const BaBNode &other) const {return dual_bound > other.dual_bound;}
+
+
+    void BaBNode::print() const{
+
+        std::cout << " dual bound : " << dual_bound << "  ---  ones : [ ";
+
+        for(int index : fixed_to_one){std::cout << index << " ";}
+        std::cout << "] --- zeros : [ ";
+        for(int index : fixed_to_zero){std::cout << index << " ";}
+        std::cout << "] \n" << std::endl;
+    }
 
 
 

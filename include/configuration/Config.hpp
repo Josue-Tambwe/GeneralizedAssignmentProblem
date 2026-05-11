@@ -31,5 +31,13 @@
  #ifndef HAS_HIGHS
     #define HAS_HIGHS false
  #endif
+
+ #ifndef HAS_HEXALY
+   #define HAS_HEXALY false
+ #endif
+
+ #ifndef USE_BRANCH_AND_BOUND
+   #define USE_BRANCH_AND_BOUND false
+ #endif
  
 const float epsilon = 1e-5; // to avoid division by zero

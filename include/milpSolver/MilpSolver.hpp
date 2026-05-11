@@ -28,75 +28,37 @@
 
  namespace gap{
 
-    template <typename Backend>
 
     class MilpSolver{
 
-        private:
-
-            Backend backend;
-
         public:
 
-            // constructor
-            MilpSolver() = default;
+            // destructor
+            virtual ~MilpSolver() = default;
+
+            virtual void buildContinuousModel(gap::GapInstance &instance) = 0;
+            virtual void buildIntegerModel(gap::GapInstance &instance) = 0;
+            virtual void solveContinuousModel() = 0;
+            virtual void solveIntegerModel(double time_limit) = 0;
 
 
-
-            void buildContinuousModel(gap::GapInstance &instance){
-
-                backend.buildContinuousModel(instance);
-            }
+            virtual void addConstraints(gap::BaB::BaBNode &node) = 0;
+            virtual void resetLinearModel() = 0;
 
 
-            void buildIntegerModel(gap::GapInstance &instance){
-
-                backend.buildIntegerModel(instance);
-            } 
-
-
-            void solveContinuousModel(){backend.solveContinuousModel();}
+            virtual bool isInFeasible() = 0;
+            virtual bool isOptimal() = 0;
+            virtual bool isSubOptimal() = 0;
+            virtual bool isUnbounded() = 0;
 
 
-            void solveIntegerModel(double time_limit){
+            virtual std::vector<double> getSolution() = 0;
+            virtual double getObjectiveValue() = 0;
 
-                backend.solveIntegerModel(time_limit);
-            } 
-
-
-            void addConstraints(gap::BaB::BaBNode &node){
-
-                backend.addConstraints(node);
-            }
-
-
-            void setVariableToOne(int index){backend.setVariableToOne(index);}
-
-
-            void setVariableToZero(int index){backend.setVariableToZero(index);}
-
-
-            void clearModel(){backend.clearModel();}
-
-
-            bool isInFeasible(){return backend.isInFeasible();}
-
-
-            bool isOptimal(){return backend.isOptimal();}
-
-
-            bool isSubOptimal(){return backend.isSubOptimal();}
-
-
-            bool isUnbounded(){return backend.isUnbounded();}
-
-
-            std::vector<double> getSolution(){return backend.getSolution();}
-
-
-            double getObjectiveValue(){return backend.getObjectiveValue();}
 
     };
 
+
  }
+
 

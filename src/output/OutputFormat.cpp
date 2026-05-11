@@ -34,7 +34,7 @@
 
         std::cout << " Usage:\n";
         std::cout << " ------\n\n";
-        std::cout << "    gap_solver [OPTIONS]\n\n\n";
+        std::cout << "    gap_solver OPTIONS\n\n\n";
     }
 
 
@@ -684,6 +684,148 @@
                   
 
      }
+
+
+
+
+
+
+     void printHeaderLineBaB(){
+
+        const int init_sep = 2;
+
+
+        const int w_time   = 12;
+        const int time_sep = 9;
+
+        const int w_proc  = 14;
+        const int proc_sep = 15;
+
+        const int w_open    = 14;
+        const int av_open = 13;
+
+        const int w_dual  = 16;
+        const int dual_sep = 10;
+
+        const int w_primal  = 16;
+        const int primal_sep = 6;
+
+        const int w_gap = 16;
+
+        std::cout << "\n";
+
+        // line 1
+        std::cout << YELLOW;
+        std::cout << std::right << std::setw(init_sep)   << ""
+
+                  << std::left  << std::setw(w_time) << "Time (s)"
+                  << std::right << std::setw(time_sep)  << ""
+
+                  << std::left  << std::setw(w_proc) << "Processed nodes"
+                  << std::right << std::setw(proc_sep)  << ""
+
+                  << std::left  << std::setw(w_open) << "Open nodes"
+                  << std::right << std::setw(av_open)   << ""
+
+                  << std::left  << std::setw(w_dual) << "Dual bound"
+                  << std::right << std::setw(dual_sep)   << ""
+
+                  << std::left  << std::setw(w_primal) << "Primal bound"
+                  << std::right << std::setw(primal_sep)   << ""
+
+                  << std::left  << std::setw(w_gap) << "Current gap"
+                  << RESET
+                  << "\n";
+
+        // line 2
+        std::cout << std::right << std::setw(init_sep)   << ""
+
+                  << std::left  << std::setw(w_time)   << std::string(8, '-')
+                  << std::right << std::setw(time_sep)   << ""
+
+                  << std::left  << std::setw(w_proc)  << std::string(15, '-')
+                  << std::right << std::setw(proc_sep)   << ""
+
+                  << std::left  << std::setw(w_open)    << std::string(10, '-')
+                  << std::right << std::setw(av_open)   << ""
+
+                  << std::left  << std::setw(w_dual)  << std::string(10, '-')
+                  << std::right << std::setw(dual_sep)   << ""
+
+                  << std::left  << std::setw(w_primal) << std::string(12, '-')
+                  << std::right << std::setw(primal_sep)   << ""
+
+                  << std::left  << std::setw(w_gap) << std::string(11, '-')
+                  << "\n";
+
+     }
+
+
+
+
+
+     void printBaBIteration(double time,
+                         size_t processed_nodes,
+                         size_t open_nodes,
+                         double dual_bound,
+                         double primal_bound){
+
+
+
+        const int init_sep = 2;
+
+
+        const int w_time   = 8;
+        const int time_sep = 9;
+
+        const int w_proc  = 19;
+        const int proc_sep = 11;
+
+        const int w_open    = 14;
+        const int av_open = 11;
+
+        const int w_dual  = 16;
+        const int dual_sep = 10;
+
+        const int w_primal  = 18;
+        const int primal_sep = 4;
+
+        const int w_gap = 17;
+
+        // line 2
+        std::cout << std::right << std::setw(init_sep)   << ""
+
+                  << std::right  << std::setw(w_time) << std::fixed << std::setprecision(4)  << time
+                  << std::right << std::setw(time_sep)   << ""
+
+                  << std::right << std::setw(w_proc)  << processed_nodes
+                  << std::right << std::setw(proc_sep)   << ""
+
+                  << std::right  << std::setw(w_open)    << open_nodes
+                  << std::right << std::setw(av_open)   << ""
+
+                  << std::right  << std::setw(w_dual)  << std::setprecision(2)
+                  << dual_bound
+                  << std::right << std::setw(dual_sep)   << ""
+
+                  << std::right  << std::setw(w_primal) << std::setprecision(0)
+                  << primal_bound
+                  << std::right << std::setw(primal_sep)   << ""
+
+                  << std::right  << std::setw(w_gap) << std::fixed << std::setprecision(4)
+                  << ((primal_bound - dual_bound)/primal_bound)
+                  << "\n\n";
+
+        
+
+
+        
+
+
+
+
+
+      }
 
 
 
