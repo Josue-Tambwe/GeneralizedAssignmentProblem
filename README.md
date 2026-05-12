@@ -57,13 +57,29 @@ To accelerate computation, the solver integrates several HPC techniques:
 
 # Dependencies :
 
-- meson
-- ninja
-- doxygen
+
+**Note** : The solver is only designed for Linux and macOS operating systems.
+
+### Mandatory : 
+
+- meson (at least 1.5.1)
+- ninja (at least 1.11.1)
+- g++ (C++20)
+
+### Optional :
+- doxygen 
+
+### MILP SOLVER :
+
+To enable the Branch and Bound algorithm or Milp backends, you must have at least one of : 
+
+- Highs (open source)
+- Hexaly (commercial, licence required)
+- Gurobi (commercial, licence required)
+
+
 
 # Installation : 
-
-**Note** : The installation script works only on Linux and macOS operating systems.
 
 ## 1. Clone the repository
 
@@ -86,8 +102,23 @@ cd GeneralizedAssignmentProblem
 ```
 ## 4. Run the installation script
 
+Without MILP solvers : 
+
 ```bash
 ./install.sh
+```
+___
+
+If you have MILP solvers installed, define the environment variables pointing to their installation folders:: 
+
+- GUROBI_HOME -> for Gurobi
+- HX_HOME -> for Hexaly
+- Highs does not require an environment variable
+
+Then run the installer with the backends you want to enable : 
+
+```bash
+./install.sh HAS_GUROBI HAS_HEXALY HAS_HIGHS
 ```
 ___
 
@@ -101,11 +132,14 @@ It contains several categories of instances (A, B, C, D, E), ranging from small 
 In particular, instances from categories **D** and **E** are known to be difficult and are commonly used to stress‑test construction heuristics and local search procedures.
 
 
+**Note** : **All instances follow the same standardized GAP input format, and the GAP‑Solver is designed to read this format directly without any preprocessing**.
+
+
 # Usage / CLI examples
 
-The executable is located in the `bin/` directory after installation.
+The executable is located in the **bin/** directory after installation.
 
-## 1. Move into the `bin/` directory
+## 1. Move into the **bin/** directory
 
 ```bash
 cd bin
@@ -120,19 +154,41 @@ cd bin
 ## 3. Run the Greedy heuristic (construction + local search)
 
 ```bash
-./gap_solver --algorithm=greedy --instance=../benchmarks/gap_a/a05100 --nb-threads=4 --low-cost-construction
+./gap_solver --algorithm=greedy --instance=../benchmarks/gap_a/a05100 --nb-threads=4  --low-cost-construction
 ```
 
-- The `--nb-threads` option is optional.
+- The **--nb-threads** option is optional.
 If omitted, the solver automatically uses the **number of physical CPU cores**, which generally provides the best performance. You may specify any number of threads ≥ 1 depending on your hardware and preferences.
 
-- The `--low-cost-construction` option is also optional.  
+- The **--low-cost-construction** option is also optional.  
 When enabled, the solver uses the **cost‑and‑weight priority rule**, which typically produces **higher‑quality** initial solutions.  
 However, this strategy may fail to construct a feasible solution on a few difficult benchmark instances (notably three instances from benchmark category E).  
 For this reason, the default construction strategy is the **risky‑task‑based priority rule**, which always produces a feasible solution whenever one exists.
 
 ![](docs/img/run_greedy_full.png)
 
+
+## 4. Run the Ant Colony Optimizer 
+
+
+
+## 5. Run the Branch and Bound algorithm (with greedy primal solution)
+
+``` bash
+./gap_solver --algorithm=bab --instance=../benchmarks/gap_a/a05100  --time-limit=5 --solver=hexaly 
+--exploration=bfs  --branching-rule=fractional --gap=0.0
+```
+
+
+- **--solver**  is a required option for the linear relaxation in the B&B
+- **--exploration** is not a mandatory option. It defines the nodes exploration strategy (Best First or Depth First)
+- **--branching-rule** is also optional. It defines the criteria for the branching variable (zero, one or fractional)
+
+- **--time-limit** is not mandatory. The default value is 10 (seconds).
+
+- **--gap** is not required. It is the target optimality gap in \[0,1\]
+
+![](docs/img/run_bab.png)
 
 # References
 

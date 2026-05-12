@@ -51,12 +51,16 @@ esac
 
 
 HAS_GUROBI=false
+HAS_HEXALY=false
 HAS_HIGHS=false
 
 for arg in "$@"; do 
     case "$arg" in 
         HAS_GUROBI)
             HAS_GUROBI=true
+            ;;
+        HAS_HEXALY)
+            HAS_HEXALY=true
             ;;
         HAS_HIGHS)
             HAS_HIGHS=true
@@ -90,6 +94,33 @@ if [ "$HAS_GUROBI" = true ]; then
 fi
 
 
+
+
+# -------------------- HEXALY ----------------------
+
+# if HAS_HEXALY=true, HX_HOME must exist
+if [ "$HAS_HEXALY" = true ]; then
+
+    if [ -z "$HX_HOME" ]; then
+        echo "ERROR: HAS_HEXALY=true but HX_HOME is not set in your environment."
+        exit 1
+    fi
+
+    HEXALY_LIB_NAME=$(ls "$HX_HOME/bin" \
+        | grep -E '^libhexaly[0-9]+\.so$' \
+        | sed -E 's/^lib(.*)\.so/\1/' \
+        | head -n 1)
+
+    if [ -z "$HEXALY_LIB_NAME" ]; then
+        echo "ERROR: Could not detect Hexaly shared library in $HX_HOME/bin"
+        exit 1
+    fi
+
+fi
+
+
+
+
 # --------------------- HIGHS ----------------------
 
 if [ "$HAS_HIGHS" = true ]; then
@@ -116,6 +147,9 @@ then
                       -DHAS_GUROBI="$HAS_GUROBI" \
                       -DGUROBI_HOME="$GUROBI_HOME" \
                       -DGUROBI_LIB_NAME="$GUROBI_LIB_NAME" \
+                      -DHAS_HEXALY="$HAS_HEXALY" \
+                      -DHEXALY_HOME="$HX_HOME" \
+                      -DHEXALY_LIB_NAME="$HEXALY_LIB_NAME" \
                       -DHAS_HIGHS="$HAS_HIGHS" \
                       || exit 1
 else
@@ -127,6 +161,9 @@ else
                 -DHAS_GUROBI="$HAS_GUROBI" \
                 -DGUROBI_HOME="$GUROBI_HOME" \
                 -DGUROBI_LIB_NAME="$GUROBI_LIB_NAME" \
+                -DHAS_HEXALY="$HAS_HEXALY" \
+                -DHEXALY_HOME="$HX_HOME" \
+                -DHEXALY_LIB_NAME="$HEXALY_LIB_NAME" \
                 -DHAS_HIGHS="$HAS_HIGHS" \
                 || exit 1
 fi

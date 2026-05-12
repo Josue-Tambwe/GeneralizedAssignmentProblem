@@ -37,6 +37,16 @@ gurobi_lib = get_option('GUROBI_LIB_NAME')
 
 
 
+
+has_hexaly = get_option('HAS_HEXALY')
+
+hexaly_home = get_option('HEXALY_HOME')
+
+hexaly_lib = get_option('HEXALY_LIB_NAME')
+
+
+
+
 has_highs = get_option('HAS_HIGHS')
 
 
@@ -75,6 +85,32 @@ endif
 
 
 
+if has_hexaly
+
+    add_project_arguments('-DHAS_HEXALY=true', language : 'cpp')
+
+    hexaly_dep = declare_dependency(
+        include_directories : include_directories(hexaly_home + '/include'),
+        link_args : [
+            '-L' + hexaly_home + '/bin',
+            '-l' + hexaly_lib
+        ],
+        dependencies : [ dependency('threads') ]
+    )
+
+
+else
+
+    add_project_arguments('-DHAS_HEXALY=false', language : 'cpp')
+    hexaly_dep = dependency('', required : false)
+
+endif
+
+
+
+
+
+
 if has_highs
 
     add_project_arguments('-DHAS_HIGHS=true', language : 'cpp')
@@ -93,7 +129,7 @@ endif
 
 # Tthe usage of the Branch and Bound algorithm
 
-if has_gurobi or has_highs
+if has_gurobi or has_highs or has_hexaly
 
     add_project_arguments('-DUSE_BRANCH_AND_BOUND=true', language : 'cpp')
 

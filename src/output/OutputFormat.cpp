@@ -771,7 +771,7 @@
                 if(params.milp_solver == 'g'){std::cout << std::left << std::setw(w_set_value) << "Gurobi";}
                 if(params.milp_solver == 'h'){std::cout << std::left << std::setw(w_set_value) << "Highs";}
                 if(params.milp_solver == 'x'){std::cout << "Hexaly";}
-                std::cout << std::right << std::setw(w_set_value_sep)   << "" << RESET;
+                std::cout << std::right << std::setw(w_set_value_sep + 8)   << "" << RESET;
 
                 std::cout << std::left << std::setw(w_flag_label) << "verbose"
                           << std::right << " : ";

@@ -28,6 +28,6 @@ all_sources = gap_sources + utils_sources + metaheuristics_sources + input_sourc
 executable('gap_solver', 
             all_sources,
             include_directories : inc,
-            dependencies : [gurobi_dep, highs_dep],
+            dependencies : [gurobi_dep, highs_dep, hexaly_dep],
             install : true,
             install_dir : 'bin')

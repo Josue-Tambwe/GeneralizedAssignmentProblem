@@ -28,7 +28,7 @@
         algorithm = gap::Algorithm::Greedy;
         instance_path = "";
         nb_threads = NUMBER_PHYSICAL_CORES;
-        time_limit = 20.0;
+        time_limit = 10.0;
         verbose = false;
 
         // greedy

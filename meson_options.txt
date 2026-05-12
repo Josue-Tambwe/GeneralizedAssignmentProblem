@@ -40,6 +40,27 @@ option('GUROBI_LIB_NAME',
 
 
 
+# HEXALY
+
+option('HAS_HEXALY',
+        type : 'boolean',
+        value : false,
+        description : 'Build with HEXALY milp solver backend')
+
+option('HEXALY_HOME',
+        type : 'string',
+        value : '',
+        description : 'Path to Hexaly installation')
+
+
+option('HEXALY_LIB_NAME',
+        type : 'string',
+        value : '',
+        description : 'Name of the Hexaly shared library')
+
+
+
+
 # HIGHS
 
 option('HAS_HIGHS',
