@@ -194,12 +194,12 @@ Additionnal options are discribed in the help message, such as :
 ## 5. Run the Branch and Bound algorithm (with greedy primal solution)
 
 ``` bash
-./gap_solver --algorithm=bab --instance=../benchmarks/gap_a/a05100  --time-limit=5 --solver=hexaly 
+./gap_solver --algorithm=bab --instance=../benchmarks/gap_a/a05100  --time-limit=5 --solver=gurobi 
 --exploration=bfs  --branching-rule=fractional --gap=0.0
 ```
 
 
-- **--solver**  is a required option for the linear relaxation in the B&B
+- **--solver**  is a required option for the linear relaxation in the B&B. Only Gurobi and Highs are used for the linear relaxation within the B&B algorithm. **Hexaly** is used for MIP resolution approch potentially with an initial solution (warm start). 
 - **--exploration** is not a mandatory option. It defines the nodes exploration strategy (Best First or Depth First)
 - **--branching-rule** is also optional. It defines the criteria for the branching variable (zero, one or fractional)
 

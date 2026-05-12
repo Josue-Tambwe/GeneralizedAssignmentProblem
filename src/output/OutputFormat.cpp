@@ -54,7 +54,7 @@
                         << "Number of ants within a colony for the ACO algorithm \n\n";
 
                 std::cout << "    " << setw(22) << left << "--solver=value"
-                        << "MILP solver to use (gurobi, hexaly, highs) \n\n \n";
+                        << "LP solver to use (gurobi, highs, hexaly). Hexaly is only used for a MILP resolution approch! \n\n \n";
         }
 
 
