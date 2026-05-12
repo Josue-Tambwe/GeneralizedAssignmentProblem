@@ -45,13 +45,16 @@
                 std::cout << " -----------------\n\n";
 
                 std::cout << "    " << setw(22) << left << "--algorithm=value"
-                        << "Algorithm to use (greedy, aco, bab)\n \n";
+                        << "Algorithm to use (greedy, aco, bab, milp)\n \n";
 
                 std::cout << "    " << setw(22) << left << "--instance=path"
                         << "Path to the instance file\n\n";
 
                 std::cout << "    " << setw(22) << left << "--nb-ants=value"
-                        << "Number of ants within a colony for the ACO algorithm \n\n \n";
+                        << "Number of ants within a colony for the ACO algorithm \n\n";
+
+                std::cout << "    " << setw(22) << left << "--solver=value"
+                        << "MILP solver to use (gurobi, hexaly, highs) \n\n \n";
         }
 
 
@@ -85,7 +88,17 @@
                         << "Rate in [0,1] of pheromones evaporation for the ACO algorithm (default: 0.1)\n \n";
 
                 std::cout << "  " << setw(27) << left << "--gamma=value"
-                        << "Rate in [0,1] of randomization  for the assignment of the first task  for the ACO algorithm (default: 0.5)\n \n \n";
+                        << "Rate in [0,1] of randomization  for the assignment of the first task  for the ACO algorithm (default: 0.5)\n \n";
+
+                std::cout << "  " << setw(27) << left << "--gap=value"
+                        << "target optimality gap in [0,1] for exact algorithms (default: 0.0)\n \n";
+
+                std::cout << "  " << setw(27) << left << "--exploration=value"
+                        << "nodes exploration startegy for the B&B algorithm (values : bfs, dfs)\n \n";
+
+                std::cout << "  " << setw(27) << left << "--branching-rule=value"
+                        << "branching rule startegy for the B&B algorithm (values : one, zero, fractional)\n \n \n";
+
 
                 
         }

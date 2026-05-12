@@ -20,9 +20,15 @@
    #include "configuration/Config.hpp"
    #include "metaheuristics/greedy/RunGreedy.hpp"
    #include "metaheuristics/antColonyOptimizer/RunAntColonyOptimizer.hpp"
+
+   #if HAS_GUROBI
    #include "milpSolver/GurobiBackend.hpp"
+   #endif
+   
+   #if USE_BRANCH_AND_BOUND
    #include "milpSolver/MilpSolver.hpp"
    #include "branchAndBound/RunBranchAndBound.hpp"
+   #endif
 
 
    #include <iostream> // to remove
@@ -96,7 +102,11 @@
 
       else if(params.algorithm == Algorithm::AntColonyOptimizer){ACO::runACO(params);}
 
-      else if(params.algorithm == Algorithm::BranchAndBound){BaB::runBaB(params);}
+      else if(params.algorithm == Algorithm::BranchAndBound){
+         #if USE_BRANCH_AND_BOUND
+         BaB::runBaB(params);
+         #endif
+      }
 
       return 0;
    }
