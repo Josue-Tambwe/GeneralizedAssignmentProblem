@@ -169,6 +169,25 @@ For this reason, the default construction strategy is the **risky‑task‑based
 
 
 ## 4. Run the Ant Colony Optimizer 
+```bash
+./gap_solver --algorithm=aco --instance=../benchmarks/gap_a/a20100  --time-limit=2 --nb-ants=200 
+--influence=pheromone
+```
+
+- **--nb-ants** is a mandatory option. It defines the number of ants within the colony.
+- **--influence** is optional. It defines the major influence when an ant is building a solution (values of **alpha** and **beta** in the ACO formalism) : 
+    - balance   : equal influence of pheromones and heuristic (alpha = beta = 1)
+    - heuristic : the heuristic is most influencial (alpha = 1 and beta = 2)
+    - pheromone : pheromones are most influencial (alpha = 2 and beta = 1)
+
+Additionnal options are discribed in the help message, such as : 
+- **--rho** the rate of pheromones evaporation in the pheromone matrix after an iteration
+- **--gamma** the rate of randomization when considering the assignment of the first task. It enables diverfied ants (solutions)
+- **--iterations** defines the number of iterations to perform. An iteration consists in treating each ant within the colony (construction + local search).
+- **--verbose** is a flag that enables the display of a solution when a better solution than the current best known solution is found.
+
+![](docs/img/run_aco.png)
+
 
 
 
