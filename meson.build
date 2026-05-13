@@ -127,7 +127,7 @@ endif
 
 
 
-# Tthe usage of the Branch and Bound algorithm
+# Enable the usage of the Branch and Bound algorithm
 
 if has_gurobi or has_highs
 
