@@ -19,7 +19,6 @@ option('NUMBER_PHYSICAL_CORES',
 
 # MILP Solvers flags
 
-
 # GUROBI
 
 option('HAS_GUROBI',
