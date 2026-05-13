@@ -129,7 +129,7 @@ endif
 
 # Tthe usage of the Branch and Bound algorithm
 
-if has_gurobi or has_highs or has_hexaly
+if has_gurobi or has_highs
 
     add_project_arguments('-DUSE_BRANCH_AND_BOUND=true', language : 'cpp')
 
