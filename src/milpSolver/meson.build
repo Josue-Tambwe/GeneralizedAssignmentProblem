@@ -10,5 +10,5 @@
 #------------------------------------------------------------------------------
 
 
-# all source file of the branch and bound subdirectory
+# all source file of the milpSolver subdirectory
 milp_solver_sources = files('GurobiBackend.cpp')
