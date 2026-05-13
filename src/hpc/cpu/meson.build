@@ -11,5 +11,4 @@
 
 
 # All source files of the cpu subdirectory
-cpu_sources = files('Thread.cpp'
-                    )
+cpu_sources = files('Thread.cpp')

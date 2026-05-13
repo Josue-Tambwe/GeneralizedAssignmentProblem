@@ -10,7 +10,7 @@
 #------------------------------------------------------------------------------
 
 
-# all source file of the branch and bound subdirectory
+# all source file of the branchAndBound subdirectory
 branch_and_bound_sources = files('BaBNode.cpp',
                                  'BestFirstStrategy.cpp',
                                  'DepthFirstStrategy.cpp',
