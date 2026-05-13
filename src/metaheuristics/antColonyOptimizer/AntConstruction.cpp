@@ -523,7 +523,6 @@
                                 instance);
             
             // when no suitable tak has been found  
-            
             if(task == -1){return false;}
 
             auto& rng = getThreadLocalRng();

@@ -48,8 +48,6 @@ esac
 
 # MILP solvers flags
 
-
-
 HAS_GUROBI=false
 HAS_HEXALY=false
 HAS_HIGHS=false
