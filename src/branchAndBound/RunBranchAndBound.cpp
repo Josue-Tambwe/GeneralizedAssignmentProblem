@@ -167,8 +167,8 @@
         while(!open_nodes.isEmpty() &&
               !stoppingCriteriaBestFirst(primal_bound, dual_bound, timer.getElapsed(), params)){
 
-            // undoing variables fixation
-            solver->resetLinearModel();
+            /*// undoing variables fixation
+            solver->resetLinearModel();*/
 
             BaBNode current_node = open_nodes.pop();
 
@@ -177,12 +177,24 @@
             solver->addConstraints(current_node);
             solver->solveContinuousModel();
 
-            if(solver->isInFeasible()){nodes_fathomed_by_infeasibility += 1; continue;}
+            if(solver->isInFeasible()){
+
+                nodes_fathomed_by_infeasibility += 1;
+                // undoing variables fixation
+                solver->resetLinearModel(current_node);
+                continue;
+            }
 
             std::vector<double> relaxed_solution = solver->getSolution();
 
             // dominance test
-            if(solver->getObjectiveValue() > primal_bound){nodes_fathomed_by_dominance += 1; continue;}
+            if(solver->getObjectiveValue() > primal_bound){
+
+                nodes_fathomed_by_dominance += 1;
+                // undoing variables fixation
+                solver->resetLinearModel(current_node); 
+                continue;
+            }
 
             // integrality test
             if(isInteger(relaxed_solution)){
@@ -194,6 +206,9 @@
                     primal_bound = solver->getObjectiveValue();
                     updateSolution(relaxed_solution, primal_solution);
                 }
+
+                // undoing variables fixation
+                solver->resetLinearModel(current_node);
 
                 continue;
             }
@@ -228,6 +243,9 @@
                                   dual_bound,
                                   primal_bound);
             }
+
+            // undoing variables fixation
+            solver->resetLinearModel(current_node);
             
         }
         std::cout << "\n";
@@ -313,8 +331,8 @@
         while(!open_nodes.isEmpty() && 
               !stoppingCriteriaDepthFirst(timer.getElapsed(), params)){
 
-                // undoing variables fixation
-                solver->resetLinearModel();
+                /*// undoing variables fixation
+                solver->resetLinearModel();*/
 
                 BaBNode current_node = open_nodes.pop();
 
@@ -323,12 +341,24 @@
                 solver->addConstraints(current_node);
                 solver->solveContinuousModel();
 
-                if(solver->isInFeasible()){nodes_fathomed_by_infeasibility += 1; continue;}
+                if(solver->isInFeasible()){
+                    
+                    nodes_fathomed_by_infeasibility += 1;
+                    // undoing variables fixation
+                    solver->resetLinearModel(current_node); 
+                    continue;
+                }
 
                 std::vector<double> relaxed_solution = solver->getSolution();
 
                 // dominance test
-                if(solver->getObjectiveValue() > primal_bound){nodes_fathomed_by_dominance += 1; continue;}
+                if(solver->getObjectiveValue() > primal_bound){
+
+                    nodes_fathomed_by_dominance += 1;
+                    // undoing variables fixation
+                    solver->resetLinearModel(current_node); 
+                    continue;
+                }
 
                 // integrality test
                 if(isInteger(relaxed_solution)){
@@ -341,6 +371,9 @@
                         updateSolution(relaxed_solution, primal_solution);
                         if(params.verbose){primal_solution.print(instance);} 
                     }
+
+                    // undoing variables fixation
+                    solver->resetLinearModel(current_node);
 
                     continue;
                 }
@@ -377,6 +410,9 @@
                                   open_nodes.getLowestDualBound(),
                                   primal_bound);
                 }
+
+                // undoing variables fixation
+                solver->resetLinearModel(current_node);
 
 
             }

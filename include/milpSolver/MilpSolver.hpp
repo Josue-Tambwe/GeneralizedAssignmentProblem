@@ -43,7 +43,7 @@
 
 
             virtual void addConstraints(gap::BaB::BaBNode &node) = 0;
-            virtual void resetLinearModel() = 0;
+            virtual void resetLinearModel(gap::BaB::BaBNode &node) = 0;
 
 
             virtual bool isInFeasible() = 0;

@@ -12,45 +12,40 @@
 
 
 /** 
- * @file GurobiBackend.hpp
- * @brief Defines an API for the Gurobi backend
- * @class GurobiBackend
+ * @file HexalyBackend.hpp
+ * @brief Defines an API for the Hexaly backend
+ * @class HexalyBackend
  * @author Josué Tambwe
- * @date 4 May 2026
+ * @date 12 May 2026
  */
 
 
  #pragma once
 
- #if HAS_GUROBI
+ #if HAS_HEXALY
 
- #include "gurobi_c++.h"
+ #include "optimizer/hexalyoptimizer.h"
  #include "gap/GapInstance.hpp"
  #include "branchAndBound/BaBNode.hpp"
  #include "milpSolver/MilpSolver.hpp"
  #include <vector>
- #include <memory>
+
 
  namespace gap{
 
-    class GurobiBackend : public MilpSolver{
+    class HexalyBackend : public MilpSolver{
 
-        private:
+        private : 
+            hexaly::HexalyOptimizer optimizer;
+            hexaly::HxModel model;
+            std::vector<hexaly::HxExpression> variables;
 
-            std::unique_ptr<GRBEnv> env;
-            std::unique_ptr<GRBModel> model;
-            std::vector<GRBVar> variables;
-            
-
-        public:
-
+        public :
             // constructor
-            GurobiBackend();
+            HexalyBackend();
 
-            // destruction
-             ~GurobiBackend() = default;
-            
-
+            // destructor
+            ~HexalyBackend() = default;
 
             void buildIntegerModel(gap::GapInstance &instance) override; 
             void buildContinuousModel(gap::GapInstance &instance) override;
@@ -61,7 +56,7 @@
 
 
             void addConstraints(gap::BaB::BaBNode &node) override;
-            void resetLinearModel(gap::BaB::BaBNode &node) override;
+            void resetLinearModel() override;
 
 
             bool isInFeasible() override;
@@ -72,10 +67,12 @@
             std::vector<double> getSolution() override;
             double getObjectiveValue() override;
 
+
+
+
     };
-    
 
 
  }
-#endif
- 
+
+ #endif

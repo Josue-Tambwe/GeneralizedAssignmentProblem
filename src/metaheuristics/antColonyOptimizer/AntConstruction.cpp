@@ -483,6 +483,9 @@
         int selected_agent = findAgentStochastic(agent_indexes,
                                                  agent_scores,
                                                  cumulative_score);
+
+        if(selected_agent < 0 || 
+           selected_agent >= static_cast<int>(instance.getNbAgent())){return false;}
         
         std::vector<int>& ant_solution =  ant.getSolutionVector();
 

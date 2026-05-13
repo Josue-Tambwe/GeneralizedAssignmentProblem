@@ -270,12 +270,18 @@
             
         }
 
-
-
         if(params.algorithm == gap::Algorithm::AntColonyOptimizer &&
            !params.use_time_limit && !params.use_max_iterations){
 
                 params.use_time_limit = true;
+
+        }
+
+        if(params.algorithm == gap::Algorithm::BranchAndBound &&
+           params.milp_solver == 'x'){
+
+            gap::Logger log; 
+            log.error(" Hexaly is not used for linear relaxation in the Branch And Bound algorithm! "); 
 
         }
         

@@ -24,7 +24,7 @@
  namespace gap{
 
 
-    // constructors
+    // constructor
 
     GurobiBackend::GurobiBackend(){
 
@@ -50,7 +50,7 @@
 
     void GurobiBackend::buildIntegerModel(gap::GapInstance &instance){
 
-        // initialization of variables vector
+        // initialization of decision variables vector
         variables.resize(instance.getNbAgent() * instance.getNbTask());
 
         // decision variables
@@ -226,9 +226,15 @@
 
 
 
-    void GurobiBackend::resetLinearModel(){
+    void GurobiBackend::resetLinearModel(gap::BaB::BaBNode &node){
 
-        for(size_t index = 0; index < variables.size(); index++){
+        for(int index : node.getIndexesFixedToOne()){
+
+            variables[index].set(GRB_DoubleAttr_LB, 0.0);
+            variables[index].set(GRB_DoubleAttr_UB, 1.0);
+        }
+
+        for(int index : node.getIndexesFixedToZero()){
 
             variables[index].set(GRB_DoubleAttr_LB, 0.0);
             variables[index].set(GRB_DoubleAttr_UB, 1.0);

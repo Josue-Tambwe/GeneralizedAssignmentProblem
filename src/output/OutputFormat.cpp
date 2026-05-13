@@ -152,14 +152,14 @@
                 std::cout << YELLOW;
                 std::cout << std::left << std::setw(w_inst_label + w_inst_sep + w_inst_value) << " Instance statistics";
                 std::cout << std::left << std::setw(w_algo)    << " Algorithm";
-                std::cout << std::left << std::setw(w_set_label + w_set_sep + w_set_value) << " Setting";
-                std::cout << std::left << std::setw(w_flags)   << "  Flags";
+                std::cout << std::left << std::setw(w_set_label + w_set_sep + w_set_value) << " Settings";
+                std::cout << std::left << std::setw(w_flags - 1)   << "  Flags";
                 std::cout << RESET << "\n";
 
                 std::cout << std::left << std::setw(w_inst_label + w_inst_sep + w_inst_value) << " -------------------"
                         << std::left << std::setw(w_algo)    << " ---------"
-                        << std::left << std::setw(w_set_label + w_set_sep + w_set_value) << " -------"
-                        << std::left << std::setw(w_flags)   << "  -----"
+                        << std::left << std::setw(w_set_label + w_set_sep + w_set_value) << " --------"
+                        << std::left << std::setw(w_flags - 1)   << "  -----"
                         << "\n";
 
                 std::cout << std::left  << std::setw(w_inst_label) << " number of agents"
@@ -326,14 +326,14 @@
                 std::cout << YELLOW;
                 std::cout << std::left << std::setw(w_inst_label + w_inst_sep + w_inst_value + 5) << " Instance statistics";
                 std::cout << std::left << std::setw(w_algo - 5)    << " Algorithm";
-                std::cout << std::left << std::setw(w_set_label + w_set_sep + w_set_value) << " Setting";
-                std::cout << std::left << std::setw(w_flags)   << "  Flags";
+                std::cout << std::left << std::setw(w_set_label + w_set_sep + w_set_value) << " Settings";
+                std::cout << std::left << std::setw(w_flags - 1)   << "  Flags";
                 std::cout << RESET << "\n";
 
                 std::cout << std::left << std::setw(w_inst_label + w_inst_sep + w_inst_value + 5) << " -------------------"
                         << std::left << std::setw(w_algo - 5)    << " ---------"
-                        << std::left << std::setw(w_set_label + w_set_sep + w_set_value) << " -------"
-                        << std::left << std::setw(w_flags)   << "  -----"
+                        << std::left << std::setw(w_set_label + w_set_sep + w_set_value) << " --------"
+                        << std::left << std::setw(w_flags - 1)   << "  -----"
                         << "\n";
 
                 // line 1
@@ -729,7 +729,6 @@
                 const int set_sep = 25;
 
                 const int w_flag  = 16;
-                const int w_flag_label  = 8;
                 
 
                 std::cout << "\n";
@@ -784,9 +783,9 @@
                 if(params.milp_solver == 'g'){std::cout << std::left << std::setw(w_set_value) << "Gurobi";}
                 if(params.milp_solver == 'h'){std::cout << std::left << std::setw(w_set_value) << "Highs";}
                 if(params.milp_solver == 'x'){std::cout << "Hexaly";}
-                std::cout << std::right << std::setw(w_set_value_sep + 8)   << "" << RESET;
+                std::cout << std::right << std::setw(w_set_value_sep)   << "" << RESET;
 
-                std::cout << std::left << std::setw(w_flag_label) << "verbose"
+                std::cout << std::left << std::setw(3) << "verbose"
                           << std::right << " : ";
                 
                 if(params.verbose){std::cout << GREEN << "Enabled" << RESET;}
@@ -1096,6 +1095,17 @@
                         if(params.exploration_strategy == 'b'){std::cout << std::left << "Best First Search";} 
                         else{std::cout << std::left << "Depth First Search";}
                         std::cout << "\n"
+
+
+                        << std::string(init_sep, ' ')
+                        << std::left << std::setw(w_nodes)   << "branching rule"
+                        << std::right  << " :  ";
+                        if(params.branching_value == 0.0){std::cout << std::left << "near zero";}
+                        else if(params.branching_value == 0.5){std::cout << std::left << "most fractional";} 
+                        else{std::cout << std::left << "near one";}
+                        std::cout << "\n\n"
+
+
 
                         << std::string(init_sep, ' ')
                         << std::left << std::setw(w_nodes)   << "generated nodes"
