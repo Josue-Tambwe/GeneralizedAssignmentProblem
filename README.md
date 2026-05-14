@@ -109,7 +109,7 @@ Without MILP solvers :
 ```
 ___
 
-If you have MILP solvers installed, define the environment variables pointing to their installation folders:: 
+If you have MILP solvers installed, define the environment variables pointing to their installation folders : 
 
 - GUROBI_HOME -> for Gurobi
 - HX_HOME -> for Hexaly
