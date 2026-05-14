@@ -50,9 +50,7 @@ This approach guarantees optimality but may become expensive for large instances
 
 ## 5. High‑Performance Computing (HPC) Enhancements
 
-To accelerate computation, the solver integrates several HPC techniques:
-
-- **CPU multi‑threading** : parallel evaluation of neighborhoods, construction heuristics and pheromone updates. Multi‑threading provides a substantial speed‑up, especially on large instances where independent evaluations can be processed concurrently.
+To accelerate computation, the solver integrates **CPU multi‑threading** with parallel evaluation of neighborhoods, construction heuristics and pheromone updates. Multi‑threading provides a substantial speed‑up, especially on large instances where independent evaluations can be processed concurrently.
 
 
 # Dependencies :
