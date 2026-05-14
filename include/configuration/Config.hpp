@@ -39,5 +39,9 @@
  #ifndef USE_BRANCH_AND_BOUND
    #define USE_BRANCH_AND_BOUND false
  #endif
+
+ #ifndef USE_MILP
+   #define USE_MILP false
+ #endif
  
 const float epsilon = 1e-5; // to avoid division by zero

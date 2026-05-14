@@ -45,7 +45,7 @@
  #include "milpSolver/HighsBackend.hpp"
  #endif
 
- #include "milpSolver/MilpSolver.hpp"
+ #include "milpSolver/LPSolver.hpp"
  #include <vector>
  #include <limits>
 
@@ -76,7 +76,7 @@
     /**
      * @brief set the LP solver to use (Gurobi or Highs)
      */
-    std::unique_ptr<MilpSolver> setLPSolver(gap::Params &params);
+    std::unique_ptr<LPSolver> setLPSolver(gap::Params &params);
 
 
 
@@ -95,7 +95,7 @@
     /**
      * @brief builds the model for linear relaxation
      */
-    std::unique_ptr<MilpSolver> buildLinearModel(gap::Params &params,
+    std::unique_ptr<LPSolver> buildLinearModel(gap::Params &params,
                                                  gap::GapInstance &instance);
 
 

@@ -136,7 +136,13 @@ if has_gurobi or has_highs
 endif
 
 
+# Enable the usage of MILP solvers
 
+if has_gurobi or has_highs or has_hexaly
+
+    add_project_arguments('-DUSE_MILP=true', language : 'cpp')
+
+endif
 
 
 

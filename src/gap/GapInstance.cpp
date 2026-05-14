@@ -95,6 +95,7 @@ void GapInstance::print()const{
         log.error("Incomplete data!");
         std::cout << "\n";
     }else{
+
         std::cout << std::string(100, '=') << std::endl;
         std::cout << " file name          : " << this-> file_name << std::endl;
         std::cout << " number of agents   : " << this-> nb_agent << std::endl;
@@ -104,6 +105,7 @@ void GapInstance::print()const{
         std::cout << "\n";
 
         std::cout << " Cost matrix : \n" << std::endl;
+
         for (size_t i = 0; i < nb_agent; i++) {
             for (size_t j = 0; j < nb_task; j++) {
                 std::cout << cost[i][j] << " ";
@@ -115,20 +117,25 @@ void GapInstance::print()const{
         std::cout << "\n";
 
         std::cout << " Weight matrix : \n" << std::endl;
+
         for (size_t i = 0; i < nb_agent; i++) {
             for (size_t j = 0; j < nb_task; j++) {
                 std::cout << weight[i][j] << " ";
             }
+
             std::cout << "\n";
             std::cout << std::endl;
         }
+
         std::cout << std::string(100, '-') << std::endl;
         std::cout << "\n";
 
         std::cout << " Capacity vector : \n" << std::endl;
+
         for(int cap : capacity){
             std::cout << cap << " ";
         }
+        
         std::cout << "\n \n";
         std::cout << std::string(100, '=') << std::endl;
     }

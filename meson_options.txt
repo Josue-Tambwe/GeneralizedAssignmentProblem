@@ -76,3 +76,10 @@ option('USE_BRANCH_AND_BOUND',
         description : 'Allow the usage of the Branch and Bound algorithm')
 
 
+# MILP
+
+option('USE_MILP',
+        type : 'boolean',
+        value : false,
+        description : 'Allow the usage of MILP solvers')
+

@@ -31,6 +31,7 @@
 
         // construction
         gap::GapSolution primal_solution = gap::greedy::constructionRiskyTasks(instance);
+        
         // local search
         gap::greedy::balanceMove(primal_solution, instance);
         gap::greedy::cheapMove(NUMBER_PHYSICAL_CORES, primal_solution, instance);
@@ -60,7 +61,7 @@
 
 
 
-    std::unique_ptr<MilpSolver> setLPSolver(gap::Params &params){
+    std::unique_ptr<LPSolver> setLPSolver(gap::Params &params){
 
         #if HAS_HIGHS
         if(params.milp_solver == 'h'){return std::make_unique<HighsBackend>();}
@@ -99,11 +100,11 @@
 
 
 
-    std::unique_ptr<MilpSolver> buildLinearModel(gap::Params &params,
-                                                 gap::GapInstance &instance){
+    std::unique_ptr<LPSolver> buildLinearModel(gap::Params &params,
+                                               gap::GapInstance &instance){
 
 
-        std::unique_ptr<MilpSolver> solver = setLPSolver(params);
+        std::unique_ptr<LPSolver> solver = setLPSolver(params);
         solver->buildContinuousModel(instance);
         return solver;
 
@@ -131,7 +132,7 @@
         double preprocessing_obj_value = primal_bound;
 
         // initialization of the LP solver
-        std::unique_ptr<MilpSolver> solver = buildLinearModel(params, instance);
+        std::unique_ptr<LPSolver> solver = buildLinearModel(params, instance);
         solver->solveContinuousModel();
 
         // infeasibility test
@@ -159,9 +160,6 @@
 
         while(!open_nodes.isEmpty() &&
               !stoppingCriteriaBestFirst(primal_bound, dual_bound, timer.getElapsed(), params)){
-
-            /*// undoing variables fixation
-            solver->resetLinearModel();*/
 
             BaBNode current_node = open_nodes.pop();
 
@@ -293,7 +291,7 @@
         double preprocessing_obj_value = primal_bound;
 
         // initialization of the MILP solver
-        std::unique_ptr<MilpSolver> solver = buildLinearModel(params, instance);
+        std::unique_ptr<LPSolver> solver = buildLinearModel(params, instance);
         solver->solveContinuousModel();
 
         // infeasibility test
@@ -323,9 +321,6 @@
 
         while(!open_nodes.isEmpty() && 
               !stoppingCriteriaDepthFirst(timer.getElapsed(), params)){
-
-                /*// undoing variables fixation
-                solver->resetLinearModel();*/
 
                 BaBNode current_node = open_nodes.pop();
 

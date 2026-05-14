@@ -27,7 +27,6 @@
  #include "optimizer/hexalyoptimizer.h"
  #include "gap/GapInstance.hpp"
  #include "branchAndBound/BaBNode.hpp"
- #include "milpSolver/MilpSolver.hpp"
  #include <vector>
 
 
@@ -48,7 +47,8 @@
             ~HexalyBackend() = default;
 
             void buildIntegerModel(gap::GapInstance &instance); 
-            void solveIntegerModel(double time_limit); 
+            void solveIntegerModel(double time_limit);
+            void setWarmStart(std::vector<double> &warm_start); 
 
 
             bool isInFeasible();

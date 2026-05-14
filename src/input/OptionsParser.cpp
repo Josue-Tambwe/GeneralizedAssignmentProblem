@@ -284,6 +284,14 @@
             log.error(" Hexaly must not be used for linear relaxation in the Branch And Bound algorithm! "); 
 
         }
+
+        if(params.warm_start && 
+           params.algorithm != gap::Algorithm::Milp){
+
+            gap::Logger log; 
+            log.error(" --warm-start must only be used for  milp algorithm! "); 
+
+        }
         
         checkRequiredOptions(argc, argv, params);
         return params;

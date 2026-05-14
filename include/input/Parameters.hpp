@@ -55,7 +55,7 @@
          - 'h ': heuristic -> alpha = 1 and beta = 2
         */
 
-        // Branch and Bound
+        // Branch and Bound & Milp solver
         char milp_solver;
         /* Possible value for the attribute "milp_solver"
          - 'g' : gurobi

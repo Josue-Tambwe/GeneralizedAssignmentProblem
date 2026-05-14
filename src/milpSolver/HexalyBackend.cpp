@@ -26,7 +26,11 @@
     // constructor
     HexalyBackend::HexalyBackend():
         optimizer(),
-        model(optimizer.getModel()){}
+        model(optimizer.getModel())
+    {
+            // disable verbose mode
+            optimizer.getParam().setVerbosity(0);
+    }
 
 
 
@@ -34,13 +38,12 @@
 
     void HexalyBackend::solveIntegerModel(double time_limit){
 
-        model.close();
+        /*if( optimizer.getState() != hexaly::HxState::Ready){
+            model.close();
+        }*/
 
         // setting the time limit
         optimizer.getParam().setTimeLimit(time_limit);
-
-        // disable verbose mode
-        optimizer.getParam().setVerbosity(0);
 
         // solving the model
         optimizer.solve();
@@ -113,6 +116,25 @@
 
         }
 
+        model.close();
+
+
+    }
+
+
+
+    void HexalyBackend::setWarmStart(std::vector<double> &warm_start){
+
+        for(size_t index = 0; index < warm_start.size(); index++){
+
+            hexaly::hxint value;
+            
+            if(warm_start[index] > 0.5){value = 1;}
+            else{value = 0;}
+
+            variables[index].setValue(value);
+
+        }
 
     }
 

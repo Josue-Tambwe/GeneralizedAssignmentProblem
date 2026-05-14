@@ -12,9 +12,9 @@
 
 
 /** 
- * @file GurobiBackend.hpp
- * @brief Defines a generic class for MILP solvers backend
- * @class MilpSolver
+ * @file LPSolver.hpp
+ * @brief Defines a generic class for LP solvers backend
+ * @class LPSolver
  * @author Josué Tambwe
  * @date 5 May 2026
  */
@@ -29,12 +29,12 @@
  namespace gap{
 
 
-    class MilpSolver{
+    class LPSolver{
 
         public:
 
             // destructor
-            virtual ~MilpSolver() = default;
+            virtual ~LPSolver() = default;
 
             virtual void buildContinuousModel(gap::GapInstance &instance) = 0;
             virtual void buildIntegerModel(gap::GapInstance &instance) = 0;

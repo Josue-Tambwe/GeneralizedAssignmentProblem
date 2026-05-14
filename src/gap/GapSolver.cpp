@@ -34,8 +34,12 @@
    #endif
    
    #if USE_BRANCH_AND_BOUND
-   #include "milpSolver/MilpSolver.hpp"
+   #include "milpSolver/LPSolver.hpp"
    #include "branchAndBound/RunBranchAndBound.hpp"
+   #endif
+
+   #if USE_MILP
+   #include "milpSolver/RunMilpSolver.hpp"
    #endif
 
 
@@ -55,7 +59,7 @@
 
       GapInstance instance(params);
 
-      /*std::unique_ptr<MilpSolver> solver = std::make_unique<GurobiBackend>();
+      /*std::unique_ptr<LPSolver> solver = std::make_unique<GurobiBackend>();
       solver->buildIntegerModel(instance);
       solver->solveIntegerModel(params.time_limit);
       std::cout << " \n Solution IP Gurobi  : " << solver->getObjectiveValue() << "\n " << std::endl;
@@ -121,20 +125,23 @@
 
 
 
-
-
-
-
-
       if(params.algorithm == Algorithm::Greedy){runGreedy(params);}
 
       else if(params.algorithm == Algorithm::AntColonyOptimizer){ACO::runACO(params);}
 
       else if(params.algorithm == Algorithm::BranchAndBound){
+
          #if USE_BRANCH_AND_BOUND
          BaB::runBaB(params);
          #endif
       }
+
+      else if(params.algorithm == Algorithm::Milp){
+         #if USE_MILP
+         runGurobi(params);
+         #endif
+      }
+
 
       return 0;
    }

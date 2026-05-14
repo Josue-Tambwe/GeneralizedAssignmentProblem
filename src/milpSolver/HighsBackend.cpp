@@ -245,6 +245,27 @@
 
 
 
+    void HighsBackend::setWarmStart(std::vector<double> &warm_start){
+
+        HighsSolution initial_solution;
+
+        // indicates that the initial solution will be feasible
+        initial_solution.value_valid = true;
+
+        initial_solution.col_value.resize(optimizer.getNumCol());
+
+        // injecting the warm start values into the initial solution 
+        for(size_t index = 0; index < variables.size(); index++){
+
+            initial_solution.col_value[variables[index]] = warm_start[index];
+        }
+
+        // injecting the initial solution into the optimizer 
+        optimizer.setSolution(initial_solution);
+    }
+
+
+
 
 
     bool HighsBackend::isOptimal(){

@@ -27,13 +27,13 @@
  #include "gurobi_c++.h"
  #include "gap/GapInstance.hpp"
  #include "branchAndBound/BaBNode.hpp"
- #include "milpSolver/MilpSolver.hpp"
+ #include "milpSolver/LPSolver.hpp"
  #include <vector>
  #include <memory>
 
  namespace gap{
 
-    class GurobiBackend : public MilpSolver{
+    class GurobiBackend : public LPSolver{
 
         private:
 
@@ -62,6 +62,7 @@
 
             void addConstraints(gap::BaB::BaBNode &node) override;
             void resetLinearModel(gap::BaB::BaBNode &node) override;
+            void setWarmStart(std::vector<double> &warm_start);
 
 
             bool isInFeasible() override;

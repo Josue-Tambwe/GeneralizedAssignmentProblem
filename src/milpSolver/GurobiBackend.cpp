@@ -247,6 +247,19 @@
 
 
 
+    void GurobiBackend::setWarmStart(std::vector<double> &warm_start){
+
+        for(size_t index = 0; index < warm_start.size(); index++){
+
+            variables[index].set(GRB_DoubleAttr_Start, warm_start[index]);
+        }
+
+        model->update();
+    }
+
+
+
+
     bool GurobiBackend::isInFeasible(){return model->get(GRB_IntAttr_Status) == GRB_INFEASIBLE;}
     bool GurobiBackend::isOptimal(){return model->get(GRB_IntAttr_Status) == GRB_OPTIMAL;}
 
