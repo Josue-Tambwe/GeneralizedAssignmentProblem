@@ -60,11 +60,12 @@
 
 
 
-    std::unique_ptr<MilpSolver> setMilpSolver(gap::Params &params){
+    std::unique_ptr<MilpSolver> setLPSolver(gap::Params &params){
 
-        //if(params.milp_solver == 'g'){return std::make_unique<GurobiBackend>();}
-        //if(params.milp_solver == 'h'){return std::make_unique<HighsBackend>();}
-        //return return std::make_unique<HexalyBackend>();
+        #if HAS_HIGHS
+        if(params.milp_solver == 'h'){return std::make_unique<HighsBackend>();}
+        #endif
+        
         #if HAS_GUROBI
             return std::make_unique<GurobiBackend>();
         #endif
@@ -73,16 +74,6 @@
 
 
 
-
-
-    double setInitialDualBound(gap::Params &params, gap::GapInstance &instance){
-
-        std::unique_ptr<MilpSolver> solver = setMilpSolver(params);
-        solver->buildContinuousModel(instance);
-        solver->solveContinuousModel();
-        return solver->getObjectiveValue();
-
-    }
 
 
 
@@ -112,7 +103,7 @@
                                                  gap::GapInstance &instance){
 
 
-        std::unique_ptr<MilpSolver> solver = setMilpSolver(params);
+        std::unique_ptr<MilpSolver> solver = setLPSolver(params);
         solver->buildContinuousModel(instance);
         return solver;
 
@@ -139,7 +130,7 @@
         double preprocessing_time = timer.getElapsed();
         double preprocessing_obj_value = primal_bound;
 
-        // initialization of the MILP solver
+        // initialization of the LP solver
         std::unique_ptr<MilpSolver> solver = buildLinearModel(params, instance);
         solver->solveContinuousModel();
 

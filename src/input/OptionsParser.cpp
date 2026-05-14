@@ -281,7 +281,7 @@
            params.milp_solver == 'x'){
 
             gap::Logger log; 
-            log.error(" Hexaly is not used for linear relaxation in the Branch And Bound algorithm! "); 
+            log.error(" Hexaly must not be used for linear relaxation in the Branch And Bound algorithm! "); 
 
         }
         

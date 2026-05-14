@@ -41,6 +41,10 @@
  #include "milpSolver/GurobiBackend.hpp"
  #endif
  
+ #if HAS_HIGHS
+ #include "milpSolver/HighsBackend.hpp"
+ #endif
+
  #include "milpSolver/MilpSolver.hpp"
  #include <vector>
  #include <limits>
@@ -70,18 +74,10 @@
 
 
     /**
-     * @brief set the MILP solver to use
+     * @brief set the LP solver to use (Gurobi or Highs)
      */
-    std::unique_ptr<MilpSolver> setMilpSolver(gap::Params &params);
+    std::unique_ptr<MilpSolver> setLPSolver(gap::Params &params);
 
-
-
-
-
-    /**
-     * @brief initializes the dual bound
-     */
-    double setInitialDualBound(gap::Params &params, gap::GapInstance &instance);
 
 
 

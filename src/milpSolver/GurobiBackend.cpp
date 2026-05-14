@@ -225,7 +225,6 @@
 
 
 
-
     void GurobiBackend::resetLinearModel(gap::BaB::BaBNode &node){
 
         for(int index : node.getIndexesFixedToOne()){

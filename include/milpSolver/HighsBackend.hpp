@@ -29,17 +29,15 @@
  #include "branchAndBound/BaBNode.hpp"
  #include "milpSolver/MilpSolver.hpp"
  #include <vector>
- #include <memory>
 
 
  namespace gap{
 
-    class HighsBackend{
+    class HighsBackend : public MilpSolver{
 
         private : 
 
             Highs optimizer;
-            //HighsModel model;
             std::vector<HighsInt> variables;
 
 
@@ -51,15 +49,24 @@
             // destructor 
             ~HighsBackend() = default;
 
+            void solveContinuousModel() override;
+            void solveIntegerModel(double time_limit) override; 
 
-            void solveIntegerModel(double time_limit); 
-            void buildIntegerModel(gap::GapInstance &instance);
+
+            void buildContinuousModel(gap::GapInstance &instance) override;
+            void buildIntegerModel(gap::GapInstance &instance) override;
+
+
+
+            void addConstraints(gap::BaB::BaBNode &node) override;
+            void resetLinearModel(gap::BaB::BaBNode &node) override;
+
             
-            bool isInFeasible();
-            bool isOptimal();
+            bool isInFeasible() override;
+            bool isOptimal() override;
 
-            std::vector<double> getSolution();
-            double getObjectiveValue();
+            std::vector<double> getSolution() override;
+            double getObjectiveValue() override;
 
 
 

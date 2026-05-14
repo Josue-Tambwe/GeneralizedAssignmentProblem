@@ -53,9 +53,9 @@
 
       Params params = parseOptions(argc, argv);
 
-      /*GapInstance instance(params);
+      GapInstance instance(params);
 
-      std::unique_ptr<MilpSolver> solver = std::make_unique<GurobiBackend>();
+      /*std::unique_ptr<MilpSolver> solver = std::make_unique<GurobiBackend>();
       solver->buildIntegerModel(instance);
       solver->solveIntegerModel(params.time_limit);
       std::cout << " \n Solution IP Gurobi  : " << solver->getObjectiveValue() << "\n " << std::endl;
@@ -65,15 +65,20 @@
       hex.solveIntegerModel(params.time_limit);
 
 
-      std::cout << " \n Solution IP Hexaly  : " << hex.getObjectiveValue() << "\n " << std::endl;
+      std::cout << " \n Solution IP Hexaly  : " << hex.getObjectiveValue() << "\n " << std::endl;*/
 
 
-      HighsBackend hi;
+      /*HighsBackend hi;
       hi.buildIntegerModel(instance);
       hi.solveIntegerModel(params.time_limit);
-
-
       std::cout << " \n Solution IP Highs  : " << hi.getObjectiveValue() << "\n " << std::endl;
+
+      HighsBackend hlp;
+      hlp.buildContinuousModel(instance);
+      hlp.solveContinuousModel();
+
+
+      std::cout << " \n Solution LP Highs  : " << hlp.getObjectiveValue() << "\n " << std::endl;*/
 
    
 

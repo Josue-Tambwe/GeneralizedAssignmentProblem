@@ -58,7 +58,7 @@ To accelerate computation, the solver integrates several HPC techniques:
 # Dependencies :
 
 
-**Note** : The solver is only designed for Linux and macOS operating systems.
+>**Note** : The solver is only designed for Linux and macOS operating systems.
 
 ### Mandatory : 
 
@@ -115,6 +115,42 @@ If you have MILP solvers installed, define the environment variables pointing to
 - HX_HOME -> for Hexaly
 - Highs does not require an environment variable
 
+### Example on Linux
+```bash
+# Gurobi
+export GUROBI_HOME=/home/<user>/gurobi1300/linux64
+export PATH="$PATH:$GUROBI_HOME/bin"
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$GUROBI_HOME/lib"
+
+# Hexaly
+export HX_HOME=/home/<user>/hexaly_14_5
+export PATH="$PATH:$HX_HOME/bin"
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$HX_HOME/bin"
+```
+
+
+### Example on MacOS
+
+```bash
+# Gurobi
+export GUROBI_HOME=/Library/gurobi1300/macos_universal2
+export PATH="$PATH:$GUROBI_HOME/bin"
+export DYLD_LIBRARY_PATH="$DYLD_LIBRARY_PATH:$GUROBI_HOME/lib"
+
+# Hexaly
+export HX_HOME=/Users/<user>/hexaly_14_5
+export PATH="$PATH:$HX_HOME/bin"
+export DYLD_LIBRARY_PATH="$DYLD_LIBRARY_PATH:$HX_HOME/bin"
+```
+
+You can add these lines to your `~/.bashrc` or `~/.zshrc` (depending on your shell) to make them persistent.
+
+> **Note:** Adapt those lines to your versions installed of **Gurobi** and **Hexaly**. In addition, once the project is compiled, you can choose the MILP solver at runtime.  GAP‑Solver does not hard‑code a specific backend: the solver is selected dynamically based on the command‑line options you provide when running the executable.
+
+
+
+
+
 Then run the installer with the backends you want to enable : 
 
 ```bash
@@ -132,7 +168,7 @@ It contains several categories of instances (A, B, C, D, E), ranging from small 
 In particular, instances from categories **D** and **E** are known to be difficult and are commonly used to stress‑test construction heuristics and local search procedures.
 
 
-**Note** : **All instances follow the same standardized GAP input format, and the GAP‑Solver is designed to read this format directly without any preprocessing**.
+>**Note** : **All instances follow the same standardized GAP input format, and the GAP‑Solver is designed to read this format directly without any preprocessing**.
 
 
 # Usage / CLI examples

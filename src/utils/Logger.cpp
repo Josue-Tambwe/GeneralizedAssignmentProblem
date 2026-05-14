@@ -39,6 +39,7 @@ void Logger::warning(const std::string &message){
  */
 
 void Logger::error(const std::string &message){
+    std::cout << "\n";
     std::cerr << RED << "   [ERROR]" << RESET << " : " << message << "\n" << std::endl;
     std::exit(1);
 }
