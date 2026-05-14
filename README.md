@@ -23,13 +23,13 @@ However, this technique may fail to construct a feasible solution on some instan
 - **risky-task based** (default construction method) : always produces a feasible solution in a blink of an eye.It **prioritizes tasks that are difficult to assign**, based on their weight relative to agent capacities.This method is **robust and fast**, but the resulting solution is typically of **lower quality** compared to the **cost-and-weight based heuristic**.
 
 
-## 2. Local Search with Two Neighborhood Moves
+## 2. Local Search (VND-like) using two neighborhoods (moves)
 
 A local improvement procedure exploring two types of moves:
 
-- **Balance** move: redistributes tasks between agents to reduce overload or improve cost.
+- **Balance move**: redistributes tasks from the most individually expensive agents to cheaper ones in order to reduce the global assignment cost.
 
-- **Cheap** move: reassigns a task to a cheaper agent when feasible.
+- **Cheap move**: reassigns a task to a cheaper agent when feasible.
 
 These neighborhoods yield significant improvements over the greedy constructions.
 They are particularly **effective** when applied to the **risky‑task‑based** initialization : the local search **dramatically boosts the quality of these initially weaker solutions**, often bringing them on par with, or **even surpassing**, the solutions obtained from the cost‑and‑weight construction.
