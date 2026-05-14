@@ -53,7 +53,7 @@
 
       Params params = parseOptions(argc, argv);
 
-      GapInstance instance(params);
+      /*GapInstance instance(params);
 
       std::unique_ptr<MilpSolver> solver = std::make_unique<GurobiBackend>();
       solver->buildIntegerModel(instance);
@@ -121,7 +121,7 @@
 
 
 
-      /*if(params.algorithm == Algorithm::Greedy){runGreedy(params);}
+      if(params.algorithm == Algorithm::Greedy){runGreedy(params);}
 
       else if(params.algorithm == Algorithm::AntColonyOptimizer){ACO::runACO(params);}
 
@@ -129,7 +129,7 @@
          #if USE_BRANCH_AND_BOUND
          BaB::runBaB(params);
          #endif
-      }*/
+      }
 
       return 0;
    }
