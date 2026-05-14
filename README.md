@@ -193,10 +193,10 @@ cd bin
 ./gap_solver --algorithm=greedy --instance=../benchmarks/gap_a/a05100 --nb-threads=4  --low-cost-construction
 ```
 
-- The **--nb-threads** option is optional.
+- **--nb-threads** option is optional.
 If omitted, the solver automatically uses the **number of physical CPU cores**, which generally provides the best performance. You may specify any number of threads ≥ 1 depending on your hardware and preferences.
 
-- The **--low-cost-construction** option is also optional.  
+- **--low-cost-construction** option is also optional.  
 When enabled, the solver uses the **cost‑and‑weight priority rule**, which typically produces **higher‑quality** initial solutions.  
 However, this strategy may fail to construct a feasible solution on a few difficult benchmark instances (notably three instances from benchmark category E).  
 For this reason, the default construction strategy is the **risky‑task‑based priority rule**, which always produces a feasible solution whenever one exists.
