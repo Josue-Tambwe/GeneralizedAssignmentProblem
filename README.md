@@ -69,7 +69,7 @@ To accelerate computation, the solver integrates several HPC techniques:
 ### Optional :
 - doxygen 
 
-### MILP SOLVER :
+### MILP SOLVERS :
 
 To enable the Branch and Bound algorithm or Milp backends, you must have at least one of : 
 
