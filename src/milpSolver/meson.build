@@ -11,4 +11,6 @@
 
 
 # all source file of the milpSolver subdirectory
-milp_solver_sources = files('GurobiBackend.cpp')
+milp_solver_sources = files('GurobiBackend.cpp',
+                            'HexalyBackend.cpp',
+                            'HighsBackend.cpp')

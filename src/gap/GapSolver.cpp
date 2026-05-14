@@ -24,6 +24,14 @@
    #if HAS_GUROBI
    #include "milpSolver/GurobiBackend.hpp"
    #endif
+
+   #if HAS_HEXALY
+   #include "milpSolver/HexalyBackend.hpp"
+   #endif
+
+   #if HAS_HIGHS
+   #include "milpSolver/HighsBackend.hpp"
+   #endif
    
    #if USE_BRANCH_AND_BOUND
    #include "milpSolver/MilpSolver.hpp"
@@ -45,12 +53,27 @@
 
       Params params = parseOptions(argc, argv);
 
-      /*GapInstance instance(params);
+      GapInstance instance(params);
 
       std::unique_ptr<MilpSolver> solver = std::make_unique<GurobiBackend>();
       solver->buildIntegerModel(instance);
       solver->solveIntegerModel(params.time_limit);
-      std::cout << " \n Solution IP  : " << solver->getObjectiveValue() << "\n " << std::endl;*/
+      std::cout << " \n Solution IP Gurobi  : " << solver->getObjectiveValue() << "\n " << std::endl;
+
+      HexalyBackend hex;
+      hex.buildIntegerModel(instance);
+      hex.solveIntegerModel(params.time_limit);
+
+
+      std::cout << " \n Solution IP Hexaly  : " << hex.getObjectiveValue() << "\n " << std::endl;
+
+
+      HighsBackend hi;
+      hi.buildIntegerModel(instance);
+      hi.solveIntegerModel(params.time_limit);
+
+
+      std::cout << " \n Solution IP Highs  : " << hi.getObjectiveValue() << "\n " << std::endl;
 
    
 
@@ -98,7 +121,7 @@
 
 
 
-      if(params.algorithm == Algorithm::Greedy){runGreedy(params);}
+      /*if(params.algorithm == Algorithm::Greedy){runGreedy(params);}
 
       else if(params.algorithm == Algorithm::AntColonyOptimizer){ACO::runACO(params);}
 
@@ -106,7 +129,7 @@
          #if USE_BRANCH_AND_BOUND
          BaB::runBaB(params);
          #endif
-      }
+      }*/
 
       return 0;
    }

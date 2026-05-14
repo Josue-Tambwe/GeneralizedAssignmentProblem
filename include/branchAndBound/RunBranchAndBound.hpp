@@ -36,7 +36,11 @@
  #include "branchAndBound/BestFirstStrategy.hpp"
   #include "branchAndBound/DepthFirstStrategy.hpp"
  #include "branchAndBound/BaBNodeList.hpp"
+
+ #if HAS_GUROBI
  #include "milpSolver/GurobiBackend.hpp"
+ #endif
+ 
  #include "milpSolver/MilpSolver.hpp"
  #include <vector>
  #include <limits>

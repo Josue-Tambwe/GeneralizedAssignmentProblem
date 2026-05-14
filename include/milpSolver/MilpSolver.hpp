@@ -48,9 +48,7 @@
 
             virtual bool isInFeasible() = 0;
             virtual bool isOptimal() = 0;
-            virtual bool isSubOptimal() = 0;
-            virtual bool isUnbounded() = 0;
-
+            
 
             virtual std::vector<double> getSolution() = 0;
             virtual double getObjectiveValue() = 0;

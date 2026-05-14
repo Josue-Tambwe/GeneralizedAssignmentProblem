@@ -65,7 +65,9 @@
         //if(params.milp_solver == 'g'){return std::make_unique<GurobiBackend>();}
         //if(params.milp_solver == 'h'){return std::make_unique<HighsBackend>();}
         //return return std::make_unique<HexalyBackend>();
-        return std::make_unique<GurobiBackend>();
+        #if HAS_GUROBI
+            return std::make_unique<GurobiBackend>();
+        #endif
 
     }
 

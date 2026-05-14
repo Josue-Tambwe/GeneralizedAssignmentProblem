@@ -12,52 +12,54 @@
 
 
 /** 
- * @file HexalyBackend.hpp
- * @brief Defines an API for the Hexaly backend
- * @class HexalyBackend
+ * @file HighsBackend.hpp
+ * @brief Defines an API for the Highs backend
+ * @class HighsBackend
  * @author Josué Tambwe
- * @date 12 May 2026
+ * @date 14 May 2026
  */
 
 
  #pragma once
 
- #if HAS_HEXALY
+ #if HAS_HIGHS
 
- #include "optimizer/hexalyoptimizer.h"
+ #include "Highs.h"
  #include "gap/GapInstance.hpp"
  #include "branchAndBound/BaBNode.hpp"
  #include "milpSolver/MilpSolver.hpp"
  #include <vector>
+ #include <memory>
 
 
  namespace gap{
 
-    class HexalyBackend{
+    class HighsBackend{
 
         private : 
-            hexaly::HexalyOptimizer optimizer;
-            hexaly::HxModel model;
-            std::vector<hexaly::HxExpression> variables;
 
-        public :
+            Highs optimizer;
+            //HighsModel model;
+            std::vector<HighsInt> variables;
+
+
+        public : 
+
             // constructor
-            HexalyBackend();
+            HighsBackend(){optimizer.setOptionValue("log_to_console", false);};
 
-            // destructor
-            ~HexalyBackend() = default;
+            // destructor 
+            ~HighsBackend() = default;
 
-            void buildIntegerModel(gap::GapInstance &instance); 
+
             void solveIntegerModel(double time_limit); 
-
-
+            void buildIntegerModel(gap::GapInstance &instance);
+            
             bool isInFeasible();
             bool isOptimal();
 
-
             std::vector<double> getSolution();
             double getObjectiveValue();
-
 
 
 

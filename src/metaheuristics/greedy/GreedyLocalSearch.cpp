@@ -42,6 +42,23 @@
    
 
    // -------------------------------  BALANCE MOVE (NEIGHBORHOOD) ----------------------------
+
+   std::vector<int> computeIndividualCostAgent(gap::GapSolution &solution,
+                                              gap::GapInstance &instance){
+
+      std::vector<int> individual_cost_agents(instance.getNbAgent(), 0);
+      std::vector<int>& solution_vector =  solution.getSolutionVector();
+      const std::vector<std::vector<int>> & cost_matrix = instance.getCost();
+
+      for(size_t task = 0; task < instance.getNbTask(); task++){
+         int agent = solution_vector[task];
+         individual_cost_agents[agent] += cost_matrix[agent][task];
+      }
+      return individual_cost_agents;
+   }
+
+
+
    
    void findMostAndLeastExpensiveAgents(int &most_expensive_agent,
                                       int &least_expensive_agent,
@@ -338,19 +355,6 @@
 
    }
 
-   std::vector<int> computeIndividualCostAgent(gap::GapSolution &solution,
-                                              gap::GapInstance &instance){
-
-      std::vector<int> individual_cost_agents(instance.getNbAgent(), 0);
-      std::vector<int>& solution_vector =  solution.getSolutionVector();
-      const std::vector<std::vector<int>> & cost_matrix = instance.getCost();
-
-      for(size_t task = 0; task < instance.getNbTask(); task++){
-         int agent = solution_vector[task];
-         individual_cost_agents[agent] += cost_matrix[agent][task];
-      }
-      return individual_cost_agents;
-   }
 
 // -------------------------------  END CHEAP MOVE (NEIGHBORHOOD) ---------------------------- 
 

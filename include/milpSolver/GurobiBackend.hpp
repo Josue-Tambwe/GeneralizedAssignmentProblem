@@ -66,8 +66,6 @@
 
             bool isInFeasible() override;
             bool isOptimal() override;
-            bool isSubOptimal() override;
-            bool isUnbounded() override;
 
             std::vector<double> getSolution() override;
             double getObjectiveValue() override;

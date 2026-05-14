@@ -250,8 +250,6 @@
 
     bool GurobiBackend::isInFeasible(){return model->get(GRB_IntAttr_Status) == GRB_INFEASIBLE;}
     bool GurobiBackend::isOptimal(){return model->get(GRB_IntAttr_Status) == GRB_OPTIMAL;}
-    bool GurobiBackend::isSubOptimal(){return model->get(GRB_IntAttr_Status) == GRB_SUBOPTIMAL;}
-    bool GurobiBackend::isUnbounded(){return model->get(GRB_IntAttr_Status) == GRB_UNBOUNDED;}
 
 
 

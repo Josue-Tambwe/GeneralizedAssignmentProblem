@@ -114,8 +114,8 @@ endif
 if has_highs
 
     add_project_arguments('-DHAS_HIGHS=true', language : 'cpp')
+    highs_dep = dependency('highs', required : true, include_type : 'system')
 
-    highs_dep = dependency('highs', required : true)
 
 else
 
@@ -134,6 +134,10 @@ if has_gurobi or has_highs
     add_project_arguments('-DUSE_BRANCH_AND_BOUND=true', language : 'cpp')
 
 endif
+
+
+
+
 
 
 
