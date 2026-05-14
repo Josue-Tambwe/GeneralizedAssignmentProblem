@@ -37,7 +37,7 @@ They are particularly **effective** when applied to the **risky‑task‑based**
 
 On the more challenging instances of **categories D and E** (benchmarks), the improvement is even more pronounced: the risky‑task‑based construction, once refined by local search, produces solutions that clearly outperform those derived from the cost‑and‑weight heuristic.
 
-## 3. Ant Colony System (ACS) elitist strategy  with Local Search — Dorigo et al.
+## 3. Ant Colony System (ACS) using elitist strategy  with Local Search — Dorigo et al.
 
 A metaheuristic inspired by the behavior of ants.
 Artificial ants construct solutions using pheromone trails and heuristic information, enabling a balance between exploration and exploitation.
