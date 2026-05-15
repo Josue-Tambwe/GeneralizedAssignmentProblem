@@ -211,8 +211,8 @@ For this reason, the default construction strategy is the **risky‑task‑based
 - **--nb-ants** is a mandatory option. It defines the number of ants within the colony.
 - **--influence** is optional. It defines the major influence when an ant is building a solution (values of **alpha** and **beta** in the ACO formalism) : 
     - balance   : equal influence of pheromones and heuristic (alpha = beta = 1)
-    - heuristic : the heuristic is most influencial (alpha = 1 and beta = 2)
-    - pheromone : pheromones are most influencial (alpha = 2 and beta = 1)
+    - heuristic : the heuristic dominates the decision process (alpha = 1 and beta = 2)
+    - pheromone : pheromones have stronger influence (alpha = 2 and beta = 1)
 
 Additionnal options are discribed in the help message, such as : 
 - **--rho** the rate of pheromones evaporation in the pheromone matrix after an iteration
