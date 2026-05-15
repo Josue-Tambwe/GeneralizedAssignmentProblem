@@ -322,44 +322,44 @@
 
                 const gap::InstanceStatistics& stats = instance.getStatistics();
 
-                const int w_inst_label = 26;
-                const int w_inst_sep   = 2;
-                const int w_inst_value = 14;
+                const int w_inst_label_aco = 26;
+                const int w_inst_sep_aco   = 2;
+                const int w_inst_value_aco = 14;
 
-                const int w_algo       = 25;
-                const int w_set_label  = 20;
-                const int w_set_sep    = 2;
-                const int w_set_value  = 18;
-                const int w_flags      = 26;
+                const int w_algo_aco       = 25;
+                const int w_set_label_aco  = 20;
+                const int w_set_sep_aco    = 2;
+                const int w_set_value_aco  = 18;
+                const int w_flags_aco      = 26;
 
                 // Headers
                 std::cout << YELLOW;
-                std::cout << std::left << std::setw(w_inst_label + w_inst_sep + w_inst_value + 5) << " Instance statistics";
-                std::cout << std::left << std::setw(w_algo - 5)    << " Algorithm";
-                std::cout << std::left << std::setw(w_set_label + w_set_sep + w_set_value) << " Settings";
-                std::cout << std::left << std::setw(w_flags - 1)   << "  Flags";
+                std::cout << std::left << std::setw(w_inst_label_aco + w_inst_sep_aco + w_inst_value_aco + 5) << " Instance statistics";
+                std::cout << std::left << std::setw(w_algo_aco - 5)    << " Algorithm";
+                std::cout << std::left << std::setw(w_set_label_aco + w_set_sep_aco + w_set_value_aco) << " Settings";
+                std::cout << std::left << std::setw(w_flags_aco - 1)   << "  Flags";
                 std::cout << RESET << "\n";
 
-                std::cout << std::left << std::setw(w_inst_label + w_inst_sep + w_inst_value + 5) << " -------------------"
-                        << std::left << std::setw(w_algo - 5)    << " ---------"
-                        << std::left << std::setw(w_set_label + w_set_sep + w_set_value) << " --------"
-                        << std::left << std::setw(w_flags - 1)   << "  -----"
+                std::cout << std::left << std::setw(w_inst_label_aco + w_inst_sep_aco + w_inst_value_aco + 5) << " -------------------"
+                        << std::left << std::setw(w_algo_aco - 5)    << " ---------"
+                        << std::left << std::setw(w_set_label_aco + w_set_sep_aco + w_set_value_aco) << " --------"
+                        << std::left << std::setw(w_flags_aco - 1)   << "  -----"
                         << "\n";
 
                 // line 1
-                std::cout << std::left  << std::setw(w_inst_label) << " number of agents"
-                        << std::right << std::setw(w_inst_sep)   << " : "
-                        << std::left  << std::setw(w_inst_value) << stats.nb_agent;
+                std::cout << std::left  << std::setw(w_inst_label_aco) << " number of agents"
+                        << std::right << std::setw(w_inst_sep_aco)   << " : "
+                        << std::left  << std::setw(w_inst_value_aco) << stats.nb_agent;
 
                 std::cout << MAGENTA;
-                std::cout << std::left  << std::setw(w_algo)       << "Ant Colony Optimizer";
+                std::cout << std::left  << std::setw(w_algo_aco)       << "Ant Colony Optimizer";
                 std::cout << RESET;
 
-                std::cout << std::left  << std::setw(w_set_label)  << "nb threads used"
-                        << std::right << std::setw(w_set_sep)    << " : "
-                        << std::left  << std::setw(w_set_value)  << params.nb_threads;
+                std::cout << std::left  << std::setw(w_set_label_aco)  << "nb threads used"
+                        << std::right << std::setw(w_set_sep_aco)    << " : "
+                        << std::left  << std::setw(w_set_value_aco)  << params.nb_threads;
 
-                std::cout << std::left << std::setw(w_flags - 19) << "verbose";
+                std::cout << std::left << std::setw(w_flags_aco - 19) << "verbose";
                 std::cout << std::right << std::setw(3) << " : ";
 
                 if(params.verbose)
@@ -376,56 +376,56 @@
 
 
                 // line 2
-                std::cout << std::left  << std::setw(w_inst_label) << " number of tasks"
-                        << std::right << std::setw(w_inst_sep)   << " : "
-                        << std::left  << std::setw(w_inst_value) << stats.nb_task
-                        << std::left  << std::setw(w_algo)       << ""
-                        << std::left  << std::setw(w_set_label)  << "nb physical cores"
-                        << std::right << std::setw(w_set_sep)    << " : "
-                        << std::left  << std::setw(w_set_value)  << NUMBER_PHYSICAL_CORES;
+                std::cout << std::left  << std::setw(w_inst_label_aco) << " number of tasks"
+                        << std::right << std::setw(w_inst_sep_aco)   << " : "
+                        << std::left  << std::setw(w_inst_value_aco) << stats.nb_task
+                        << std::left  << std::setw(w_algo_aco)       << ""
+                        << std::left  << std::setw(w_set_label_aco)  << "nb physical cores"
+                        << std::right << std::setw(w_set_sep_aco)    << " : "
+                        << std::left  << std::setw(w_set_value_aco)  << NUMBER_PHYSICAL_CORES;
 
 
                 // line 3 
-                std::cout << std::left  << std::setw(w_inst_label) << ""
-                        << std::right << std::setw(w_inst_sep)   << ""
+                std::cout << std::left  << std::setw(w_inst_label_aco) << ""
+                        << std::right << std::setw(w_inst_sep_aco)   << ""
                         << std::right << std::setw(73)   << ""
-                        << std::left << std::setw(w_set_label) << "nb ants"
-                        << std::right << std::setw(w_set_sep)    << " : "
-                        << std::left << std::setw(w_set_value) << params.nb_ants;
+                        << std::left << std::setw(w_set_label_aco) << "nb ants"
+                        << std::right << std::setw(w_set_sep_aco)    << " : "
+                        << std::left << std::setw(w_set_value_aco) << params.nb_ants;
 
                 std::cout << "\n";
 
 
                 // line 4
-                std::cout << std::left  << std::setw(w_inst_label) << " task cost range"
-                        << std::right << std::setw(w_inst_sep)   << " : "
-                        << std::left  << std::setw(w_inst_value)
+                std::cout << std::left  << std::setw(w_inst_label_aco) << " task cost range"
+                        << std::right << std::setw(w_inst_sep_aco)   << " : "
+                        << std::left  << std::setw(w_inst_value_aco)
                         << (std::to_string(stats.min_cost_task) + " - " + std::to_string(stats.max_cost_task))
-                        << std::left  << std::setw(w_algo) << ""
-                        << std::left << std::setw(w_set_label) << "rho"
-                        << std::right << std::setw(w_set_sep) << " : "
-                        << std::left << std::setw(w_set_value) << params.rho
+                        << std::left  << std::setw(w_algo_aco) << ""
+                        << std::left << std::setw(w_set_label_aco) << "rho"
+                        << std::right << std::setw(w_set_sep_aco) << " : "
+                        << std::left << std::setw(w_set_value_aco) << params.rho
                         << "\n";
                 
                 // line 5
-                std::cout << std::left  << std::setw(w_inst_label) << " task weight range"
-                        << std::right << std::setw(w_inst_sep)   << " : "
-                        << std::left  << std::setw(w_inst_value)
+                std::cout << std::left  << std::setw(w_inst_label_aco) << " task weight range"
+                        << std::right << std::setw(w_inst_sep_aco)   << " : "
+                        << std::left  << std::setw(w_inst_value_aco)
                         << (std::to_string(stats.min_weight_task) + " - " + std::to_string(stats.max_weight_task))
-                        << std::left  << std::setw(w_algo) << ""
-                        << std::left << std::setw(w_set_label) << "gamma"
-                        << std::right << std::setw(w_set_sep) << " : "
-                        << std::left << std::setw(w_set_value) << params.gamma
+                        << std::left  << std::setw(w_algo_aco) << ""
+                        << std::left << std::setw(w_set_label_aco) << "gamma"
+                        << std::right << std::setw(w_set_sep_aco) << " : "
+                        << std::left << std::setw(w_set_value_aco) << params.gamma
                         << "\n";
 
                 // line 6
-                std::cout << std::left  << std::setw(w_inst_label) << " agent capacity range"
-                        << std::right << std::setw(w_inst_sep)   << " : "
-                        << std::left  << std::setw(w_inst_value)
+                std::cout << std::left  << std::setw(w_inst_label_aco) << " agent capacity range"
+                        << std::right << std::setw(w_inst_sep_aco)   << " : "
+                        << std::left  << std::setw(w_inst_value_aco)
                         << (std::to_string(stats.min_capacity_agent) + " - " + std::to_string(stats.max_capacity_agent))
-                        << std::left  << std::setw(w_algo) << ""
-                        << std::left << std::setw(w_set_label) << "influence"
-                        << std::right << std::setw(w_set_sep) << " : ";
+                        << std::left  << std::setw(w_algo_aco) << ""
+                        << std::left << std::setw(w_set_label_aco) << "influence"
+                        << std::right << std::setw(w_set_sep_aco) << " : ";
 
                         if(params.influence == 'b'){std::cout << std::left << "balance";}
 
@@ -438,26 +438,26 @@
 
                         // line 7
                         if(params.use_time_limit){
-                                std::cout << std::left  << std::setw(w_flags) << "";
-                                std::cout << std::left  << std::setw(w_inst_label) << ""
-                                        << std::right << std::setw(w_inst_sep)   << ""
-                                        << std::left  << std::setw(w_inst_value) << ""
-                                        << std::left << std::setw(w_set_label) << "time limit (sec)"
-                                        << std::right << std::setw(w_set_sep)    << " : "
-                                        << std::left << std::setw(w_set_value) << params.time_limit;
+                                std::cout << std::left  << std::setw(w_flags_aco) << "";
+                                std::cout << std::left  << std::setw(w_inst_label_aco) << ""
+                                        << std::right << std::setw(w_inst_sep_aco)   << ""
+                                        << std::left  << std::setw(w_inst_value_aco) << ""
+                                        << std::left << std::setw(w_set_label_aco) << "time limit (sec)"
+                                        << std::right << std::setw(w_set_sep_aco)    << " : "
+                                        << std::left << std::setw(w_set_value_aco) << params.time_limit;
 
                                 std::cout << "\n";
                         }
 
                         // line 8
                         if(params.use_max_iterations){
-                                std::cout << std::left  << std::setw(w_flags) << "";
-                                std::cout << std::left  << std::setw(w_inst_label) << ""
-                                        << std::right << std::setw(w_inst_sep)   << ""
-                                        << std::left  << std::setw(w_inst_value) << ""
-                                        << std::left << std::setw(w_set_label) << "max iterations"
-                                        << std::right << std::setw(w_set_sep)    << " : "
-                                        << std::left << std::setw(w_set_value) << params.nb_max_iterations;
+                                std::cout << std::left  << std::setw(w_flags_aco) << "";
+                                std::cout << std::left  << std::setw(w_inst_label_aco) << ""
+                                        << std::right << std::setw(w_inst_sep_aco)   << ""
+                                        << std::left  << std::setw(w_inst_value_aco) << ""
+                                        << std::left << std::setw(w_set_label_aco) << "max iterations"
+                                        << std::right << std::setw(w_set_sep_aco)    << " : "
+                                        << std::left << std::setw(w_set_value_aco) << params.nb_max_iterations;
 
                                 std::cout << "\n";
                         }
