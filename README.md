@@ -243,6 +243,19 @@ Additionnal options are discribed in the help message, such as :
 
 ![](docs/img/run_bab.png)
 
+## 6. Run Milp backend Solvers
+```bash
+./bin/gap_solver --algorithm=milp --time-limit=60 --instance=benchmarks/gap_a/a05100 --solver=hexaly  
+--warm-start
+```
+
+- **--warm-start** is not mandatory. It provides an initial solution (starting point) to the MILP solver.
+
+>**Note** :  **MILP solvers do not require an initial feasible solution to start the optimization process**.
+>This feature was implemented to evaluate whether providing a warm start could help the solver prune suboptimal branches earlier and accelerate the search.
+
+![](docs/img/run_milp.png)
+
 # References
 
 The theoretical foundations and algorithmic components implemented in this solver are based on well‑established works in Operations Research and combinatorial optimization. Key references include:

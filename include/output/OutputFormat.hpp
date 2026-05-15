@@ -118,5 +118,17 @@
                                 size_t nodes_fathomed_by_infeasibility,
                                 gap::Params &params);
 
+
+
+  void printHeaderMilp(gap::Params &params,
+                       gap::GapInstance &instance);
+
+
+  
+  void finalStatisticsMilp(double preprocessing_time,
+                           double total_time,
+                           std::int64_t obj_value,
+                           gap::Status status);
+
       
  }

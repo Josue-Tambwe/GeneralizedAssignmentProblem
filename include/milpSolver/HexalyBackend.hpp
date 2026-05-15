@@ -59,8 +59,6 @@
             double getObjectiveValue();
 
 
-
-
     };
 
 

@@ -39,6 +39,37 @@
    
 
    /**
+    * @brief checks that unsupported options for the greedy algorithm are not given
+    */
+   void unsupportedOptionsGreedy(int argc, char** argv);
+
+
+
+   /**
+    * @brief checks that unsupported options for the Ant Colony Optimizer algorithm are not given
+    */
+   void unsupportedOptionsACO(int argc, char** argv);
+
+
+
+
+   /**
+    * @brief checks that unsupported options for the Branch And Bound algorithm are not given
+    */
+   void unsupportedOptionsBaB(int argc, char** argv);
+
+
+
+
+
+   /**
+    * @brief checks that unsupported options for the Milp algorithm are not given
+    */
+   void unsupportedOptionsMilp(int argc, char** argv);
+
+
+
+   /**
     * @brief performs the parsing of all options given by the user
     */
    gap::Params parseOptions(int argc, char** argv);

@@ -68,7 +68,6 @@
 
           log.info("the local search has been performed successfuly !");
           std::int64_t local_search_value = solution.objectiveValue(instance);
-          std::cout << "\n" << std::endl;
           log.info("Greedy algorithm completed. Final best known solution :");
           solution.print(instance);
           

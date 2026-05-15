@@ -54,7 +54,7 @@
                         << "Number of ants within a colony for the ACO algorithm \n\n";
 
                 std::cout << "    " << setw(22) << left << "--solver=value"
-                        << "LP solver to use (gurobi, highs, hexaly). Hexaly is only used for a MILP resolution approch! \n\n \n";
+                        << "solver backend to use (gurobi, highs, hexaly). Hexaly is only used for a MILP resolution approch! \n\n \n";
         }
 
 
@@ -69,6 +69,10 @@
 
                 std::cout << "  " << setw(27) << left << "--verbose"
                         << "Enable verbose mode \n \n";
+
+
+                std::cout << "  " << setw(27) << left << "--warm-start"
+                        << "Provides a feasible starting point for the MILP resolution  \n \n";
 
 
                 std::cout << "  " << setw(27) << left << "--low-cost-construction" 
@@ -114,8 +118,14 @@
                 std::cout << "    gap_solver --algorithm=greedy "
                         << "--instance=../benchmarks/gap_a/a05100 --verbose\n\n";
 
-                std::cout << "    gap_solver --algorithm=antColony "
-                        << "--instance=../benchmarks/gap_a/a05100 --time-limit=30  --nb-ants=100  --influence=pheromone --rho=0.15 \n\n \n";
+                std::cout << "    gap_solver --algorithm=aco "
+                        << "--instance=../benchmarks/gap_a/a05100 --time-limit=30  --nb-ants=100  --influence=pheromone --rho=0.15 \n \n";
+
+                std::cout << "    gap_solver --algorithm=bab "
+                        << "--instance=../benchmarks/gap_a/a05100  --time-limit=5 --solver=highs --exploration=dfs --gap=0.0 \n \n";
+
+                std::cout << "    gap_solver --algorithm=milp "
+                        << "--instance=../benchmarks/gap_a/a05100 --solver=hexaly --time-limit=5 --warm-start\n\n\n";
         }
 
 
@@ -167,7 +177,7 @@
                         << std::left  << std::setw(w_inst_value) << stats.nb_agent;
 
                 std::cout << MAGENTA;
-                std::cout << std::left  << std::setw(w_algo)       << " Greedy";
+                std::cout << std::left  << std::setw(w_algo)       << "  Greedy";
                 std::cout << RESET;
 
                 std::cout << std::left  << std::setw(w_set_label)  << "nb threads used"
@@ -565,7 +575,7 @@
                         << std::right  << std::setw(w_iter)     << iteration
                         << std::right << std::setw(iter_sep)   << ""
 
-                        << std::right << std::setw(w_time)      << std::fixed << std::setprecision(4) << time
+                        << std::right << std::setw(w_time)      << std::fixed << std::setprecision(2) << time
                         << std::right << std::setw(time_sep)    << ""
 
                         << std::right << std::setw(w_worst)     << worst
@@ -973,7 +983,7 @@
                 // line 2
                 std::cout << std::right << std::setw(init_sep)   << ""
 
-                        << std::right  << std::setw(w_time) << std::fixed << std::setprecision(4)  << time
+                        << std::right  << std::setw(w_time) << std::fixed << std::setprecision(2)  << time
                         << std::right << std::setw(time_sep)   << ""
 
                         << std::right << std::setw(w_proc)  << processed_nodes
@@ -1136,6 +1146,187 @@
                         << std::right  << " :  " 
                         << std::left << nodes_fathomed_by_optimality
                         << "\n\n";
+
+        }
+
+
+
+
+
+        void printHeaderMilp(gap::Params &params,
+                             gap::GapInstance &instance){
+
+                const gap::InstanceStatistics& stats = instance.getStatistics();
+
+                const int init_sep_milp = 2;
+
+
+                const int w_inst_milp   = 12;
+                const int w_inst_label_milp = 12;
+                const int w_inst_value_milp = 20;
+                const int w_inst_value_sep_milp = 5;
+                const int inst_sep_milp = 29;
+
+                const int w_algo_milp  = 14;
+                const int w_algo_value_milp  = 13;
+                const int w_algo_value_sep_milp  = 12;
+                const int algo_sep_milp = 11;
+
+                const int w_set_milp = 14;
+                const int w_set_label_milp = 13;
+                const int w_set_value_milp = 14;
+                const int w_set_value_sep_milp = 13;
+                const int set_sep_milp = 30;
+
+                const int w_flag_milp  = 16;
+                
+
+                std::cout << "\n";
+
+                // headers
+                std::cout << YELLOW;
+                std::cout << std::right << std::setw(init_sep_milp)   << ""
+
+                        << std::left  << std::setw(w_inst_milp) << "Instance statistics"
+                        << std::right << std::setw(inst_sep_milp)  << ""
+
+                        << std::left  << std::setw(w_algo_milp) << "Algorithm"
+                        << std::right << std::setw(algo_sep_milp)  << ""
+
+                        << std::left  << std::setw(w_set_milp) << "Settings"
+                        << std::right << std::setw(set_sep_milp)   << ""
+
+                        << std::left  << std::setw(w_flag_milp) << "Flags"
+                        << RESET
+                        << "\n";
+
+                
+                std::cout << std::right << std::setw(init_sep_milp)   << ""
+
+                        << std::left  << std::setw(w_inst_milp)   << std::string(19, '-')
+                        << std::right << std::setw(inst_sep_milp)   << ""
+
+                        << std::left  << std::setw(w_algo_milp)  << std::string(9, '-')
+                        << std::right << std::setw(algo_sep_milp)   << ""
+
+                        << std::left  << std::setw(w_set_milp)    << std::string(8, '-')
+                        << std::right << std::setw(set_sep_milp)   << ""
+
+                        << std::left  << std::setw(w_flag_milp)  << std::string(5, '-')
+                        << "\n";
+
+                // line 1
+                std::cout << std::right << std::setw(init_sep_milp)   << ""
+                          << std::left << std::setw(w_inst_label_milp) << "number of agents"
+                          << std::right << std::setw(6) << "" << " : "
+                          << std::left  << std::setw(w_inst_value_milp) << stats.nb_agent
+                          << std::right << std::setw(w_inst_value_sep_milp - 2)   << "";
+
+                std::cout << MAGENTA
+                          << std::left << std::setw(w_algo_value_milp) << "   MILP"
+                          << std::right << std::setw(w_algo_value_sep_milp)   << ""
+                          << RESET;
+
+                std::cout << std::left << std::setw(w_set_label_milp) << "solver"
+                          << std::right << std::setw(4) << " : "
+                          <<  BRIGHT_CYAN;
+                if(params.milp_solver == 'g'){std::cout << std::left << std::setw(w_set_value_milp) << "Gurobi";}
+                if(params.milp_solver == 'h'){std::cout << std::left << std::setw(w_set_value_milp) << "Highs";}
+                if(params.milp_solver == 'x'){std::cout << "Hexaly";}
+                std::cout << std::right << std::setw(w_set_value_sep_milp)   << "" << RESET;
+
+                std::cout << std::left << std::setw(3) << "warm start"
+                          << std::right << " : ";
+                
+                if(params.warm_start){std::cout << GREEN << "Enabled" << RESET;}
+                else{std::cout << RED << "Disabled" << RESET;}
+                std::cout << "\n";
+
+                // line 2
+                std::cout << std::right << std::setw(init_sep_milp)   << ""
+                          << std::left << std::setw(w_inst_label_milp) << "number of tasks"
+                          << std::right  << std::setw(7) << "" << " : "
+                          << std::left  << std::setw(w_inst_value_milp) << stats.nb_task
+                          << std::right << std::setw(w_inst_value_sep_milp)   << ""
+
+                          << std::left << std::setw(w_algo_value_milp) << ""
+                          << std::right << std::setw(w_algo_value_sep_milp - 2)   << "";
+
+                std::cout << std::left << std::setw(w_set_label_milp) << "time limit (s)"
+                          << std::right  << " : "
+                          << std::left << std::setw(w_set_value_milp) << std::fixed << std::setprecision(2)
+                          << params.time_limit << "\n \n";
+
+
+                // line 4
+                std::cout << std::right << std::setw(init_sep_milp)   << ""
+                          << std::left << std::setw(w_inst_label_milp) << "task cost range"
+                          << std::right  << std::setw(7) << "" << " : "
+                          << (std::to_string(stats.min_cost_task) + 
+                          " - " + std::to_string(stats.max_cost_task)) << "\n";
+
+
+
+                // line 5
+                std::cout << std::right << std::setw(init_sep_milp)   << ""
+                          << std::left << std::setw(w_inst_label_milp) << "task weight range"
+                          << std::right  << std::setw(5) << "" << " : "
+                          << std::left  << std::setw(w_inst_value_milp)
+                          << (std::to_string(stats.min_weight_task) + " - " 
+                          + std::to_string(stats.max_weight_task))
+                           << std::setprecision(3) << "\n";
+
+                // line 6
+                std::cout << std::right << std::setw(init_sep_milp)   << ""
+                          << std::left << std::setw(w_inst_label_milp) << "agent capacity range"
+                          << std::right  << std::setw(2) << "" << " : "
+                          << std::left  << std::setw(w_inst_value_milp) 
+                          << (std::to_string(stats.min_capacity_agent) 
+                          + " - " + std::to_string(stats.max_capacity_agent)) << "\n \n";
+        }
+
+
+
+
+        void finalStatisticsMilp(double preprocessing_time,
+                                 double total_time,
+                                 std::int64_t obj_value,
+                                 gap::Status status){
+
+                const int init_sep_milp = 2;
+                const int w_item_milp   = 19;
+
+
+                std::cout << std::right << std::setw(init_sep_milp)   << ""
+                        << std::right  << YELLOW << "Summary" << RESET << "\n"
+                        << std::string(init_sep_milp, ' ')
+                        << std::string(7, '-')
+                        << "\n";
+
+                std::cout << std::string(init_sep_milp, ' ')
+                        << std::right << std::setw(init_sep_milp) 
+                        << std::left << std::setw(w_item_milp)  << "preprocessing time"
+                        << std::right  << " :  " 
+                        << std::left << preprocessing_time << std::setprecision(3) << " (s)"
+                        << "\n"
+
+                        << std::string(init_sep_milp, ' ')
+                        << std::left << std::setw(w_item_milp)  << "total elapsed time"
+                        << std::right  << " :  " 
+                        << std::left << total_time << std::setprecision(3) << " (s)"
+                        << "\n"
+
+                        << std::string(init_sep_milp, ' ')
+                        << std::left << std::setw(w_item_milp)   << "objective value"
+                        << std::right  << " :  "
+                        << std::setprecision(0) << BRIGHT_YELLOW
+                        << std::left << obj_value << RESET
+                        << "\n"
+
+                        << std::string(init_sep_milp, ' ')
+                        << std::left << std::setw(w_item_milp)   << "status"
+                        << std::right  << " :  "
+                        << std::left << status << "\n\n";
 
         }
 

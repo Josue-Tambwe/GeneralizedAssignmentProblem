@@ -62,6 +62,116 @@
 
 
 
+
+
+    void unsupportedOptionsGreedy(int argc, char** argv){
+        
+        gap::Logger log; 
+
+        for(int i = 1; i < argc; i++){
+
+            std::string arg = argv[i];
+
+            if (arg.find("--time-limit=") == 0) {log.error(" --time-limit option is not supported for the greedy algorithm! ");}
+            if (arg.find("--nb-ants=") == 0) {log.error(" --nb-ants option is not supported for the greedy algorithm! ");}
+            if (arg.find("--warm-start") == 0) {log.error(" --warm-start flag is not supported for the greedy algorithm! ");}
+            if (arg.find("--solver=") == 0) {log.error(" --solver option is not supported for the greedy algorithm! ");}
+            if (arg.find("--gamma=") == 0) {log.error(" --gamma option is not supported for the greedy algorithm! ");}
+            if (arg.find("--gap=") == 0) {log.error(" --gap option is not supported for the greedy algorithm! ");}
+            if (arg.find("--branching-rule=") == 0) {log.error(" --branching-rule option is not supported for the greedy algorithm! ");}
+            if (arg.find("--influence=") == 0) {log.error(" --influence option is not supported for the greedy algorithm! ");}
+            if (arg.find("--iterations=") == 0) {log.error(" --iterations option is not supported for the greedy algorithm! ");}
+            if (arg.find("--exploration=") == 0) {log.error(" --exploration option is not supported for the greedy algorithm! ");}
+            if (arg.find("--rho=") == 0) {log.error(" --rho option is not supported for the greedy algorithm! ");}
+            
+            
+        }
+
+
+    }
+
+
+
+
+
+    void unsupportedOptionsACO(int argc, char** argv){
+        
+        gap::Logger log; 
+
+        for(int i = 1; i < argc; i++){
+
+            std::string arg = argv[i];
+
+            if (arg.find("--warm-start") == 0) {log.error(" --warm-start flag is not supported for the aco algorithm! ");}
+            if (arg.find("--solver=") == 0) {log.error(" --solver option is not supported for the aco algorithm! ");}
+            if (arg.find("--low-cost-construction") == 0) {log.error(" --low-cost-construction flag is not supported for the aco algorithm! ");}
+            if (arg.find("--gap=") == 0) {log.error(" --gap option is not supported for the aco algorithm! ");}
+            if (arg.find("--branching-rule=") == 0) {log.error(" --branching-rule option is not supported for the aco algorithm! ");}
+            if (arg.find("--exploration=") == 0) {log.error(" --exploration option is not supported for the aco algorithm! ");}
+            
+        }
+
+
+    }
+
+
+
+
+
+
+    void unsupportedOptionsBaB(int argc, char** argv){
+        
+        gap::Logger log; 
+
+        for(int i = 1; i < argc; i++){
+
+            std::string arg = argv[i];
+
+            if (arg.find("--nb-ants=") == 0) {log.error(" --nb-ants option is not supported for the bab algorithm! ");}
+            if (arg.find("--warm-start") == 0) {log.error(" --warm-start flag is not supported for the bab algorithm! ");}
+            if (arg.find("--low-cost-construction") == 0) {log.error(" --low-cost-construction flag is not supported for the bab algorithm! ");}
+            if (arg.find("--gamma=") == 0) {log.error(" --gamma option is not supported for the bab algorithm! ");}
+            if (arg.find("--influence=") == 0) {log.error(" --influence option is not supported for the bab algorithm! ");}
+            if (arg.find("--iterations=") == 0) {log.error(" --iterations option is not supported for the bab algorithm! ");}
+            if (arg.find("--rho=") == 0) {log.error(" --rho option is not supported for the bab algorithm! ");}
+            
+            
+        }
+
+
+    }
+
+
+
+
+
+    void unsupportedOptionsMilp(int argc, char** argv){
+        
+        gap::Logger log; 
+
+        for(int i = 1; i < argc; i++){
+
+            std::string arg = argv[i];
+
+            if (arg.find("--nb-ants=") == 0) {log.error(" --nb-ants option is not supported for the milp algorithm! ");}
+            if (arg.find("--low-cost-construction") == 0) {log.error(" --low-cost-construction flag is not supported for the milp algorithm! ");}
+            if (arg.find("--gamma=") == 0) {log.error(" --gamma option is not supported for the milp algorithm! ");}
+            if (arg.find("--influence=") == 0) {log.error(" --influence option is not supported for the milp algorithm! ");}
+            if (arg.find("--iterations=") == 0) {log.error(" --iterations option is not supported for the milp algorithm! ");}
+            if (arg.find("--gap=") == 0) {log.error(" --gap option is not supported for the milp algorithm! ");}
+            if (arg.find("--branching-rule=") == 0) {log.error(" --branching-rule option is not supported for the milp algorithm! ");}
+            if (arg.find("--exploration=") == 0) {log.error(" --exploration option is not supported for the milp algorithm! ");}
+            if (arg.find("--rho=") == 0) {log.error(" --rho option is not supported for the milp algorithm! ");}            
+            
+        }
+
+
+    }
+
+
+
+
+
     gap::Params parseOptions(int argc, char** argv){
 
         gap::Params params;
@@ -90,7 +200,7 @@
 
                 else if(arg == "--low-cost-construction"){params.low_cost_construction = true; continue;}
 
-                else{gap::Logger log; log.error(" Unknown option: " + arg);}
+                else{gap::Logger log; log.error(" Unknown flag: " + arg);}
             }
 
             // case of an option with argument
@@ -232,7 +342,7 @@
                     if(value == "dfs"){params.exploration_strategy = 'd'; continue;}
 
                     gap::Logger log; 
-                    log.error(" Unknown node exploration strategy : " + value); 
+                    log.error(" Unknown nodes exploration strategy : " + value); 
                     break;
                     
                 }
@@ -270,6 +380,17 @@
             
         }
 
+
+        if(params.algorithm == gap::Algorithm::AntColonyOptimizer){unsupportedOptionsACO(argc, argv);}
+
+        if(params.algorithm == gap::Algorithm::BranchAndBound){unsupportedOptionsBaB(argc, argv);}
+
+        if(params.algorithm == gap::Algorithm::Greedy){unsupportedOptionsGreedy(argc, argv);}
+
+        if(params.algorithm == gap::Algorithm::Milp){unsupportedOptionsMilp(argc, argv);}
+
+        
+
         if(params.algorithm == gap::Algorithm::AntColonyOptimizer &&
            !params.use_time_limit && !params.use_max_iterations){
 
@@ -285,16 +406,10 @@
 
         }
 
-        if(params.warm_start && 
-           params.algorithm != gap::Algorithm::Milp){
-
-            gap::Logger log; 
-            log.error(" --warm-start must only be used for  milp algorithm! "); 
-
-        }
         
         checkRequiredOptions(argc, argv, params);
         return params;
+
     }
 
 

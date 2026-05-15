@@ -39,6 +39,8 @@
     }
 
 
+
+
     std::vector<double> computeWarmStart(gap::GapSolution &solution){
 
         std::vector<double> warm_start(solution.getNbAgent() * solution.getNbTask(), 0.0);
@@ -56,47 +58,55 @@
     }
 
 
-    void runGurobi(gap::Params &params){
 
-        GapInstance instance(params);
-        HighsBackend gurobi;
-        gurobi.buildIntegerModel(instance);
-        Timer timer;
+    void updateMilpSolution(std::vector<double> &sol, gap::GapSolution &solution){
 
-        // without warm start
-        if(!params.warm_start){
+        std::vector<int>& solution_vector =  solution.getSolutionVector();
 
-            timer.start();
-            gurobi.solveIntegerModel(params.time_limit);
-            timer.stop();
+        for(size_t k = 0; k < sol.size(); k++){
 
-            std::cout << "\n z = " << gurobi.getObjectiveValue() 
-                      << " time : " << timer.getElapsed() << " (s) \n \n";
+            if(std::abs(1.0 - sol[k]) < tolerance){
 
+                int agent = gap::BaB::convertTo2DAgentIndex(k, solution_vector.size());
+                int task = gap::BaB::convertTo2DTaskIndex(k, solution_vector.size());
+
+                solution_vector[task] = agent;
+
+            }
+        }
+
+    }
+
+
+
+
+
+    void runMilpSolver(gap::Params &params){
+
+        printHeader();
+
+        if(params.milp_solver == 'g'){
+            GurobiBackend gurobi;
+            if(params.warm_start){genericMilpWithWarmStart(params, gurobi);}
+            else{genericMilpWithoutWarmStart(params, gurobi);}
             
         }
-        else{
 
-            timer.start();
-            GapSolution solution = generateInitialSolution(instance);
-            timer.stop();
-
-            double preprocessing_time = timer.getElapsed();
-            timer.reset();
-
-            std::vector<double> warm_start = computeWarmStart(solution);
-            gurobi.setWarmStart(warm_start);
-
-            timer.start();
-            gurobi.solveIntegerModel(params.time_limit);
-            timer.stop();
-
-            std::cout << "\n  preprocessing time " << preprocessing_time  << " (s) \n \n";
-            std::cout << " z = " << gurobi.getObjectiveValue() 
-                      << " time : " << timer.getElapsed() << " (s) \n \n";
-
+        else if(params.milp_solver == 'h'){
+            HighsBackend highs;
+            if(params.warm_start){genericMilpWithWarmStart(params, highs);}
+            else{genericMilpWithoutWarmStart(params, highs);}
+        
         }
+
+        else{
+            HexalyBackend hexaly;
+            if(params.warm_start){genericMilpWithWarmStart(params, hexaly);}
+            else{genericMilpWithoutWarmStart(params, hexaly);}
+        }
+
     }
+
 
 
  }

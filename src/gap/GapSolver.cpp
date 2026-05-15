@@ -43,87 +43,11 @@
    #endif
 
 
-   #include <iostream> // to remove
-
-   #include "branchAndBound/BaBNodeList.hpp" // to remove
-   #include "branchAndBound/DepthFirstStrategy.hpp" // to remove
-   #include "branchAndBound/BestFirstStrategy.hpp" // to remove
-   #include "branchAndBound/BaBNode.hpp" // to remove
-
-
    using namespace gap; 
 
    int main(int argc, char** argv){
 
       Params params = parseOptions(argc, argv);
-
-      GapInstance instance(params);
-
-      /*std::unique_ptr<LPSolver> solver = std::make_unique<GurobiBackend>();
-      solver->buildIntegerModel(instance);
-      solver->solveIntegerModel(params.time_limit);
-      std::cout << " \n Solution IP Gurobi  : " << solver->getObjectiveValue() << "\n " << std::endl;
-
-      HexalyBackend hex;
-      hex.buildIntegerModel(instance);
-      hex.solveIntegerModel(params.time_limit);
-
-
-      std::cout << " \n Solution IP Hexaly  : " << hex.getObjectiveValue() << "\n " << std::endl;*/
-
-
-      /*HighsBackend hi;
-      hi.buildIntegerModel(instance);
-      hi.solveIntegerModel(params.time_limit);
-      std::cout << " \n Solution IP Highs  : " << hi.getObjectiveValue() << "\n " << std::endl;
-
-      HighsBackend hlp;
-      hlp.buildContinuousModel(instance);
-      hlp.solveContinuousModel();
-
-
-      std::cout << " \n Solution LP Highs  : " << hlp.getObjectiveValue() << "\n " << std::endl;*/
-
-   
-
-      /*gap::BaB::BaBNode n1(3.0);
-      for(int i = 0; i < 9; i++){
-         if(i % 2 == 0){n1.fixToOne(i);}
-         else{n1.fixToZero(i);}
-      }
-
-      gap::BaB::BaBNode n2(12.0);
-      for(int i = 10; i < 19; i++){
-         if(i % 2 == 0){n2.fixToOne(i);}
-         else{n2.fixToZero(i);}
-      }
-
-      gap::BaB::BaBNode n3(10.0);
-      for(int i = 20; i < 29; i++){
-         if(i % 2 == 0){n3.fixToOne(i);}
-         else{n3.fixToZero(i);}
-      }
-
-      gap::BaB::BaBNode n4(16.0);
-      for(int i = 30; i < 39; i++){
-         if(i % 2 == 0){n4.fixToOne(i);}
-         else{n4.fixToZero(i);}
-      }
-
-      gap::BaB::BaBNodeList<gap::BaB::BestFirst> list;
-      list.add(n1);
-      list.add(n2);
-      list.add(n3);
-      list.add(n4);
-
-      //list.print();
-
-      //std::cout << " lowest dual bound : " << list.getLowestDualBound() << " \n \n";
-      
-      //std::cout << " size : " << list.getSize();*/
-
-
-
 
       if(params.algorithm == Algorithm::Greedy){runGreedy(params);}
 
@@ -138,7 +62,8 @@
 
       else if(params.algorithm == Algorithm::Milp){
          #if USE_MILP
-         runGurobi(params);
+         //runGurobi(params);
+         runMilpSolver(params);
          #endif
       }
 
