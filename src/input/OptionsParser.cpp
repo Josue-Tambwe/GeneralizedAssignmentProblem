@@ -72,17 +72,17 @@
 
             std::string arg = argv[i];
 
-            if (arg.find("--time-limit=") == 0) {log.error(" --time-limit option is not supported for the greedy algorithm! ");}
-            if (arg.find("--nb-ants=") == 0) {log.error(" --nb-ants option is not supported for the greedy algorithm! ");}
-            if (arg.find("--warm-start") == 0) {log.error(" --warm-start flag is not supported for the greedy algorithm! ");}
-            if (arg.find("--solver=") == 0) {log.error(" --solver option is not supported for the greedy algorithm! ");}
-            if (arg.find("--gamma=") == 0) {log.error(" --gamma option is not supported for the greedy algorithm! ");}
-            if (arg.find("--gap=") == 0) {log.error(" --gap option is not supported for the greedy algorithm! ");}
-            if (arg.find("--branching-rule=") == 0) {log.error(" --branching-rule option is not supported for the greedy algorithm! ");}
-            if (arg.find("--influence=") == 0) {log.error(" --influence option is not supported for the greedy algorithm! ");}
-            if (arg.find("--iterations=") == 0) {log.error(" --iterations option is not supported for the greedy algorithm! ");}
-            if (arg.find("--exploration=") == 0) {log.error(" --exploration option is not supported for the greedy algorithm! ");}
-            if (arg.find("--rho=") == 0) {log.error(" --rho option is not supported for the greedy algorithm! ");}
+            if (arg.find("--time-limit=") == 0) {log.error(" --time-limit option is not supported by the greedy algorithm! ");}
+            if (arg.find("--nb-ants=") == 0) {log.error(" --nb-ants option is not supported by the greedy algorithm! ");}
+            if (arg.find("--warm-start") == 0) {log.error(" --warm-start flag is not supported by the greedy algorithm! ");}
+            if (arg.find("--solver=") == 0) {log.error(" --solver option is not supported by the greedy algorithm! ");}
+            if (arg.find("--gamma=") == 0) {log.error(" --gamma option is not supported by the greedy algorithm! ");}
+            if (arg.find("--gap=") == 0) {log.error(" --gap option is not supported by the greedy algorithm! ");}
+            if (arg.find("--branching-rule=") == 0) {log.error(" --branching-rule option is not supported by the greedy algorithm! ");}
+            if (arg.find("--influence=") == 0) {log.error(" --influence option is not supported by the greedy algorithm! ");}
+            if (arg.find("--iterations=") == 0) {log.error(" --iterations option is not supported by the greedy algorithm! ");}
+            if (arg.find("--exploration=") == 0) {log.error(" --exploration option is not supported by the greedy algorithm! ");}
+            if (arg.find("--rho=") == 0) {log.error(" --rho option is not supported by the greedy algorithm! ");}
             
             
         }
@@ -102,12 +102,12 @@
 
             std::string arg = argv[i];
 
-            if (arg.find("--warm-start") == 0) {log.error(" --warm-start flag is not supported for the aco algorithm! ");}
-            if (arg.find("--solver=") == 0) {log.error(" --solver option is not supported for the aco algorithm! ");}
-            if (arg.find("--low-cost-construction") == 0) {log.error(" --low-cost-construction flag is not supported for the aco algorithm! ");}
-            if (arg.find("--gap=") == 0) {log.error(" --gap option is not supported for the aco algorithm! ");}
-            if (arg.find("--branching-rule=") == 0) {log.error(" --branching-rule option is not supported for the aco algorithm! ");}
-            if (arg.find("--exploration=") == 0) {log.error(" --exploration option is not supported for the aco algorithm! ");}
+            if (arg.find("--warm-start") == 0) {log.error(" --warm-start flag is not supported by the aco algorithm! ");}
+            if (arg.find("--solver=") == 0) {log.error(" --solver option is not supported by the aco algorithm! ");}
+            if (arg.find("--low-cost-construction") == 0) {log.error(" --low-cost-construction flag is not supported by the aco algorithm! ");}
+            if (arg.find("--gap=") == 0) {log.error(" --gap option is not supported by the aco algorithm! ");}
+            if (arg.find("--branching-rule=") == 0) {log.error(" --branching-rule option is not supported by the aco algorithm! ");}
+            if (arg.find("--exploration=") == 0) {log.error(" --exploration option is not supported by the aco algorithm! ");}
             
         }
 
@@ -127,14 +127,14 @@
 
             std::string arg = argv[i];
 
-            if (arg.find("--nb-ants=") == 0) {log.error(" --nb-ants option is not supported for the bab algorithm! ");}
-            if (arg.find("--nb-threads=") == 0) {log.error(" --nb-threads option is not supported for the bab algorithm! ");}
-            if (arg.find("--warm-start") == 0) {log.error(" --warm-start flag is not supported for the bab algorithm! ");}
-            if (arg.find("--low-cost-construction") == 0) {log.error(" --low-cost-construction flag is not supported for the bab algorithm! ");}
-            if (arg.find("--gamma=") == 0) {log.error(" --gamma option is not supported for the bab algorithm! ");}
-            if (arg.find("--influence=") == 0) {log.error(" --influence option is not supported for the bab algorithm! ");}
-            if (arg.find("--iterations=") == 0) {log.error(" --iterations option is not supported for the bab algorithm! ");}
-            if (arg.find("--rho=") == 0) {log.error(" --rho option is not supported for the bab algorithm! ");}
+            if (arg.find("--nb-ants=") == 0) {log.error(" --nb-ants option is not supported by the bab algorithm! ");}
+            if (arg.find("--nb-threads=") == 0) {log.error(" --nb-threads option is not supported by the bab algorithm! ");}
+            if (arg.find("--warm-start") == 0) {log.error(" --warm-start flag is not supported by the bab algorithm! ");}
+            if (arg.find("--low-cost-construction") == 0) {log.error(" --low-cost-construction flag is not supported by the bab algorithm! ");}
+            if (arg.find("--gamma=") == 0) {log.error(" --gamma option is not supported by the bab algorithm! ");}
+            if (arg.find("--influence=") == 0) {log.error(" --influence option is not supported by the bab algorithm! ");}
+            if (arg.find("--iterations=") == 0) {log.error(" --iterations option is not supported by the bab algorithm! ");}
+            if (arg.find("--rho=") == 0) {log.error(" --rho option is not supported by the bab algorithm! ");}
             
             
         }
@@ -154,16 +154,16 @@
 
             std::string arg = argv[i];
 
-            if (arg.find("--nb-ants=") == 0) {log.error(" --nb-ants option is not supported for the milp algorithm! ");}
-            if (arg.find("--nb-threads=") == 0) {log.error(" --nb-threads option is not supported for the milp algorithm! ");}
-            if (arg.find("--low-cost-construction") == 0) {log.error(" --low-cost-construction flag is not supported for the milp algorithm! ");}
-            if (arg.find("--gamma=") == 0) {log.error(" --gamma option is not supported for the milp algorithm! ");}
-            if (arg.find("--influence=") == 0) {log.error(" --influence option is not supported for the milp algorithm! ");}
-            if (arg.find("--iterations=") == 0) {log.error(" --iterations option is not supported for the milp algorithm! ");}
-            if (arg.find("--gap=") == 0) {log.error(" --gap option is not supported for the milp algorithm! ");}
-            if (arg.find("--branching-rule=") == 0) {log.error(" --branching-rule option is not supported for the milp algorithm! ");}
-            if (arg.find("--exploration=") == 0) {log.error(" --exploration option is not supported for the milp algorithm! ");}
-            if (arg.find("--rho=") == 0) {log.error(" --rho option is not supported for the milp algorithm! ");}            
+            if (arg.find("--nb-ants=") == 0) {log.error(" --nb-ants option is not supported by the milp algorithm! ");}
+            if (arg.find("--nb-threads=") == 0) {log.error(" --nb-threads option is not supported by the milp algorithm! ");}
+            if (arg.find("--low-cost-construction") == 0) {log.error(" --low-cost-construction flag is not supported by the milp algorithm! ");}
+            if (arg.find("--gamma=") == 0) {log.error(" --gamma option is not supported by the milp algorithm! ");}
+            if (arg.find("--influence=") == 0) {log.error(" --influence option is not supported by the milp algorithm! ");}
+            if (arg.find("--iterations=") == 0) {log.error(" --iterations option is not supported by the milp algorithm! ");}
+            if (arg.find("--gap=") == 0) {log.error(" --gap option is not supported by the milp algorithm! ");}
+            if (arg.find("--branching-rule=") == 0) {log.error(" --branching-rule option is not supported by the milp algorithm! ");}
+            if (arg.find("--exploration=") == 0) {log.error(" --exploration option is not supported by the milp algorithm! ");}
+            if (arg.find("--rho=") == 0) {log.error(" --rho option is not supported by the milp algorithm! ");}            
             
         }
 
