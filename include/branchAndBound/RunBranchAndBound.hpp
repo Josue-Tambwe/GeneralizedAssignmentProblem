@@ -48,6 +48,8 @@
  #include "milpSolver/LPSolver.hpp"
  #include <vector>
  #include <limits>
+ #include <stdexcept>
+
 
 
 

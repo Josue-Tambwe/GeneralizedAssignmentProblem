@@ -71,6 +71,8 @@
             return std::make_unique<GurobiBackend>();
         #endif
 
+        throw std::runtime_error("No LP solver enabled");
+
     }
 
 
