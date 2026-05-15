@@ -382,15 +382,15 @@
                         << std::left  << std::setw(w_algo_aco)       << ""
                         << std::left  << std::setw(w_set_label_aco)  << "nb physical cores"
                         << std::right << std::setw(w_set_sep_aco)    << " : "
-                        << std::left  << std::setw(w_set_value_aco)  << NUMBER_PHYSICAL_CORES;
+                        << std::left  << std::setw(w_set_value_aco)  << NUMBER_PHYSICAL_CORES << "\n";
 
 
                 // line 3 
                 std::cout << std::left  << std::setw(w_inst_label_aco) << ""
                         << std::right << std::setw(w_inst_sep_aco)   << ""
-                        << std::right << std::setw(73)   << ""
+                        << std::left << std::setw(w_algo_aco + 15) << ""
                         << std::left << std::setw(w_set_label_aco) << "nb ants"
-                        << std::right << std::setw(w_set_sep_aco)    << " : "
+                        << std::right << std::setw(w_set_sep_aco)   << " : "
                         << std::left << std::setw(w_set_value_aco) << params.nb_ants;
 
                 std::cout << "\n";
