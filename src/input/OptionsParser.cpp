@@ -128,6 +128,7 @@
             std::string arg = argv[i];
 
             if (arg.find("--nb-ants=") == 0) {log.error(" --nb-ants option is not supported for the bab algorithm! ");}
+            if (arg.find("--nb-threads=") == 0) {log.error(" --nb-threads option is not supported for the bab algorithm! ");}
             if (arg.find("--warm-start") == 0) {log.error(" --warm-start flag is not supported for the bab algorithm! ");}
             if (arg.find("--low-cost-construction") == 0) {log.error(" --low-cost-construction flag is not supported for the bab algorithm! ");}
             if (arg.find("--gamma=") == 0) {log.error(" --gamma option is not supported for the bab algorithm! ");}
@@ -154,6 +155,7 @@
             std::string arg = argv[i];
 
             if (arg.find("--nb-ants=") == 0) {log.error(" --nb-ants option is not supported for the milp algorithm! ");}
+            if (arg.find("--nb-threads=") == 0) {log.error(" --nb-threads option is not supported for the milp algorithm! ");}
             if (arg.find("--low-cost-construction") == 0) {log.error(" --low-cost-construction flag is not supported for the milp algorithm! ");}
             if (arg.find("--gamma=") == 0) {log.error(" --gamma option is not supported for the milp algorithm! ");}
             if (arg.find("--influence=") == 0) {log.error(" --influence option is not supported for the milp algorithm! ");}

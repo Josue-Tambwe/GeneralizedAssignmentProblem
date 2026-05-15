@@ -86,23 +86,29 @@
         printHeader();
 
         if(params.milp_solver == 'g'){
+            #if HAS_GUROBI
             GurobiBackend gurobi;
             if(params.warm_start){genericMilpWithWarmStart(params, gurobi);}
             else{genericMilpWithoutWarmStart(params, gurobi);}
+            #endif
             
         }
 
         else if(params.milp_solver == 'h'){
+            #if HAS_HIGHS
             HighsBackend highs;
             if(params.warm_start){genericMilpWithWarmStart(params, highs);}
             else{genericMilpWithoutWarmStart(params, highs);}
+            #endif
         
         }
 
         else{
+            #if HAS_HEXALY
             HexalyBackend hexaly;
             if(params.warm_start){genericMilpWithWarmStart(params, hexaly);}
             else{genericMilpWithoutWarmStart(params, hexaly);}
+            #endif
         }
 
     }
