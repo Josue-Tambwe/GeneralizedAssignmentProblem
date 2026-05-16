@@ -95,13 +95,13 @@
                         << "Rate in [0,1] of randomization  for the assignment of the first task  for the ACO algorithm (default: 0.5)\n \n";
 
                 std::cout << "  " << setw(27) << left << "--gap=value"
-                        << "target optimality gap in [0,1] for exact algorithms (default: 0.0)\n \n";
+                        << "target optimality gap in [0,1] for the Branch And Bound algorithm (default: 0.0)\n \n";
 
                 std::cout << "  " << setw(27) << left << "--exploration=value"
-                        << "nodes exploration startegy for the B&B algorithm (values : bfs, dfs)\n \n";
+                        << "nodes exploration startegy for the Branch And Bound algorithm (values : bfs, dfs)\n \n";
 
                 std::cout << "  " << setw(27) << left << "--branching-rule=value"
-                        << "branching rule startegy for the B&B algorithm (values : one, zero, fractional)\n \n \n";
+                        << "branching rule startegy for the Branch And Bound algorithm (values : one, zero, fractional)\n \n \n";
 
 
                 
@@ -172,6 +172,7 @@
                         << std::left << std::setw(w_flags - 1)   << "  -----"
                         << "\n";
 
+                // line 1
                 std::cout << std::left  << std::setw(w_inst_label) << " number of agents"
                         << std::right << std::setw(w_inst_sep)   << " : "
                         << std::left  << std::setw(w_inst_value) << stats.nb_agent;
@@ -187,18 +188,11 @@
                 std::cout << std::left << std::setw(w_flags - 16) << "verbose";
                 std::cout << std::right << std::setw(14) << " : ";
 
-                if(params.verbose)
-                {
-                std::cout << GREEN << "Enabled" << RESET;
-                }
-
-                else
-                {
-                std::cout << RED << "Disabled" << RESET;
-                }
-
+                if(params.verbose){std::cout << GREEN << "Enabled" << RESET;}
+                else{std::cout << RED << "Disabled" << RESET;}
                 std::cout << "\n";
 
+                // line 2
                 std::cout << std::left  << std::setw(w_inst_label) << " number of tasks"
                         << std::right << std::setw(w_inst_sep)   << " : "
                         << std::left  << std::setw(w_inst_value) << stats.nb_task
@@ -209,32 +203,26 @@
                 std::cout << std::left << std::setw(w_flags - 16) << "low cost construction";
                 std::cout << std::right << std::setw(3) << " : ";
 
-                if(params.low_cost_construction)
-                {
-                std::cout << GREEN << "Enabled" << RESET;
-                }
-
-                else
-                {
-                std::cout << RED << "Disabled" << RESET;
-                }
-
+                if(params.low_cost_construction){std::cout << GREEN << "Enabled" << RESET;}
+                else{std::cout << RED << "Disabled" << RESET;}
                 std::cout << std::left  << std::setw(w_flags) << "";
-
                 std::cout << "\n";
 
+                // line 3
                 std::cout << std::left  << std::setw(w_inst_label) << " task cost range"
                         << std::right << std::setw(w_inst_sep)   << " : "
                         << std::left  << std::setw(w_inst_value)
                         << (std::to_string(stats.min_cost_task) + " - " + std::to_string(stats.max_cost_task))
                         << "\n";
 
+                // line 4
                 std::cout << std::left  << std::setw(w_inst_label) << " task weight range"
                         << std::right << std::setw(w_inst_sep)   << " : "
                         << std::left  << std::setw(w_inst_value)
                         << (std::to_string(stats.min_weight_task) + " - " + std::to_string(stats.max_weight_task))
                         << "\n";
 
+                // line 5
                 std::cout << std::left  << std::setw(w_inst_label) << " agent capacity range"
                         << std::right << std::setw(w_inst_sep)   << " : "
                         << std::left  << std::setw(w_inst_value)
@@ -362,16 +350,8 @@
                 std::cout << std::left << std::setw(w_flags_aco - 19) << "verbose";
                 std::cout << std::right << std::setw(3) << " : ";
 
-                if(params.verbose)
-                {
-                std::cout << GREEN << "Enabled" << RESET;
-                }
-
-                else
-                {
-                std::cout << RED << "Disabled" << RESET;
-                }
-
+                if(params.verbose){std::cout << GREEN << "Enabled" << RESET;}
+                else{std::cout << RED << "Disabled" << RESET;}
                 std::cout << "\n";
 
 
@@ -391,9 +371,7 @@
                         << std::left << std::setw(w_algo_aco + 15) << ""
                         << std::left << std::setw(w_set_label_aco) << "nb ants"
                         << std::right << std::setw(w_set_sep_aco)   << " : "
-                        << std::left << std::setw(w_set_value_aco) << params.nb_ants;
-
-                std::cout << "\n";
+                        << std::left << std::setw(w_set_value_aco) << params.nb_ants << "\n";
 
 
                 // line 4
@@ -404,8 +382,9 @@
                         << std::left  << std::setw(w_algo_aco) << ""
                         << std::left << std::setw(w_set_label_aco) << "rho"
                         << std::right << std::setw(w_set_sep_aco) << " : "
-                        << std::left << std::setw(w_set_value_aco) << params.rho
-                        << "\n";
+                        << std::setprecision(3)
+                        << std::left << std::setw(w_set_value_aco) 
+                        << std::setprecision(3) << params.rho << "\n";
                 
                 // line 5
                 std::cout << std::left  << std::setw(w_inst_label_aco) << " task weight range"
@@ -415,8 +394,8 @@
                         << std::left  << std::setw(w_algo_aco) << ""
                         << std::left << std::setw(w_set_label_aco) << "gamma"
                         << std::right << std::setw(w_set_sep_aco) << " : "
-                        << std::left << std::setw(w_set_value_aco) << params.gamma
-                        << "\n";
+                        << std::left << std::setw(w_set_value_aco) 
+                        << std::setprecision(3) << params.gamma << "\n";
 
                 // line 6
                 std::cout << std::left  << std::setw(w_inst_label_aco) << " agent capacity range"
@@ -634,19 +613,22 @@
                         << std::right << std::setw(init_sep) 
                         << std::left << std::setw(w_item)  << "Preprocessing time"
                         << std::right  << " :  " 
-                        << std::left << preprocessing_time << " seconds"
+                        << std::fixed << std::setprecision(4)
+                        << std::left << preprocessing_time << " (s)"
                         << "\n"
 
                         << std::string(init_sep, ' ')
                         << std::left << std::setw(w_item)   << "Average time per iteration"
-                        << std::right  << " :  " 
-                        << std::left << average_time  << " seconds"
+                        << std::right  << " :  "
+                        << std::fixed << std::setprecision(4) 
+                        << std::left << average_time  << " (s)"
                         << "\n"
 
                         << std::string(init_sep, ' ')
                         << std::left << std::setw(w_item)   << "Total elapsed time"
-                        << std::right  << " :  " 
-                        << std::left << timer.getElapsed() << " seconds"
+                        << std::right  << " :  "
+                        << std::fixed << std::setprecision(4) 
+                        << std::left << timer.getElapsed() << " (s)"
                         << "\n"
 
                         << std::string(init_sep, ' ')
@@ -663,13 +645,15 @@
 
                         << std::string(init_sep, ' ')
                         << std::left << std::setw(w_item)   << "Rho"
-                        << std::right  << " :  " 
+                        << std::right  << " :  "
+                        << std::setprecision(3) 
                         << std::left << params.rho
                         << "\n"
 
                         << std::string(init_sep, ' ')
                         << std::left << std::setw(w_item)   << "Gamma"
-                        << std::right  << " :  " 
+                        << std::right  << " :  "
+                        << std::setprecision(3) 
                         << std::left << params.gamma
                         << "\n"
 
@@ -822,13 +806,14 @@
                 std::cout << std::right << std::setw(init_sep)   << ""
                           << std::left << std::setw(w_inst_label) << ""
                           << std::left  << std::setw(w_inst_value) << ""
-                          << std::right << std::setw(w_inst_value_sep + 8)   << ""
+                          << std::right << std::setw(w_inst_value_sep + 8) << ""
 
                           << std::left << std::setw(w_algo_value) << ""
-                          << std::right << std::setw(w_algo_value_sep + 3)   << "";
+                          << std::right << std::setw(w_algo_value_sep + 3) << "";
 
                 std::cout << std::left << std::setw(w_set_label) << "branching rule"
                           << std::right <<  " : ";
+
                 if(params.branching_value == 1.0){std::cout << std::left << std::setw(w_set_value) << "near one";}
                 else if(params.branching_value == 0.0){std::cout << std::left << std::setw(w_set_value) << "near zero";}
                 else{std::cout << std::left << std::setw(w_set_value) << "most fractional";}
@@ -840,8 +825,6 @@
                           << std::right  << std::setw(7) << "" << " : "
                           << (std::to_string(stats.min_cost_task) + 
                           " - " + std::to_string(stats.max_cost_task)) << "\n";
-
-
 
                 // line 5
                 std::cout << std::right << std::setw(init_sep)   << ""
@@ -1068,7 +1051,7 @@
                         << std::string(init_sep, ' ')
                         << std::left << std::setw(w_item)   << "dual bound"
                         << std::right  << " :  " 
-                        << std::left << dual_bound << std::setprecision(3)
+                        << std::left << std::setprecision(2) << dual_bound 
                         << "\n"
 
                         << std::string(init_sep, ' ')
@@ -1314,7 +1297,7 @@
                         << std::left << std::setw(w_item_milp)  << "total elapsed time"
                         << std::right  << " :  " 
                         << std::left << total_time << std::setprecision(3) << " (s)"
-                        << "\n"
+                        << "\n\n"
 
                         << std::string(init_sep_milp, ' ')
                         << std::left << std::setw(w_item_milp)   << "objective value"
