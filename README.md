@@ -245,7 +245,7 @@ Additionnal options are discribed in the help message, such as :
 
 ## 6. Run Milp backend Solvers
 ```bash
-./bin/gap_solver --algorithm=milp --time-limit=60 --instance=benchmarks/gap_a/a05100 --solver=hexaly  
+./gap_solver --algorithm=milp --time-limit=60 --instance=../benchmarks/gap_a/a05100 --solver=hexaly  
 --warm-start
 ```
 
