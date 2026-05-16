@@ -25,6 +25,7 @@
     double BestFirst::getLowestDualBound() const {
 
         if(!node_list.empty()){
+            
             return node_list.top().getDualBound();
         }
 
@@ -53,6 +54,7 @@
         std::priority_queue<gap::BaB::BaBNode> copy = node_list;
 
         while(!copy.empty()){
+
             counter += 1;
             std::cout << " node id : " << counter << " --- ";
             BaBNode node = copy.top();

@@ -58,6 +58,7 @@
             if(weight_matrix[agent][task] >= max_weight){max_weight = weight_matrix[agent][task];}
 
         }
+
         max_cost_vector[agent] = max_cost;
         inverse_range_cost_vector[agent] = 1.0f / (max_cost - min_cost + epsilon);
         max_weight_vector[agent] = max_weight;
@@ -77,13 +78,14 @@
                                             gap::GapInstance &instance){
 
         for(size_t i = 0; i < instance.getNbAgent(); i++){
+
             findPartialMinMaxCostWeightAgent(i, 
-                                                tasks_available, 
-                                                max_cost_vector, 
-                                                inverse_range_cost_vector, 
-                                                max_weight_vector, 
-                                                inverse_range_weight_vector, 
-                                                instance);
+                                            tasks_available, 
+                                            max_cost_vector, 
+                                            inverse_range_cost_vector, 
+                                            max_weight_vector, 
+                                            inverse_range_weight_vector, 
+                                            instance);
         }
     }
 
@@ -150,6 +152,7 @@
                                                         instance);
 
                 if(score >= 0.0f && score > tasks_scores[task]){
+
                     tasks_scores[task] = score;
                     tasks_best_agent[task] = agent;
                 }                                           
@@ -172,7 +175,10 @@
         std::vector<float> alpha_vector(instance.getNbAgent());
         const std::vector<int>& capacity_vector = instance.getCapacity();
 
-        for(size_t i = 0; i < instance.getNbAgent(); i++){alpha_vector[i] = static_cast<float>(residual_capacity[i]) / (capacity_vector[i] + epsilon);}
+        for(size_t i = 0; i < instance.getNbAgent(); i++){
+
+            alpha_vector[i] = static_cast<float>(residual_capacity[i]) / (capacity_vector[i] + epsilon);
+        }
                 
         std::vector<int> max_cost_vector(instance.getNbAgent(), 0);
         std::vector<float> inverse_range_cost_vector(instance.getNbAgent(), 0.0f);
@@ -230,6 +236,7 @@
         float best_task_score = -1.0f;
 
         for (const auto& [task_id, score] : tasks_scores) {
+
             if (score > best_task_score) {
                 best_task_score = score;
                 best_task = task_id;
@@ -306,6 +313,7 @@
                                                          instance);
 
             if(!assignment_performed){
+
                 solution.setStatus(gap::Status::INFEASIBLE);
                 return solution;
             }
@@ -353,6 +361,7 @@
         float max_pressure = 0.0f;
 
         for(int agent = 0; agent < static_cast<int>(instance.getNbAgent()); agent++){
+
             float pressure = weight_matrix[agent][task] * inverse_residual_capacity[agent] ;
             if(pressure > max_pressure){max_pressure = pressure;}
         }
@@ -460,20 +469,23 @@
         gap::GapSolution solution = gap::GapSolution(instance);
         std::vector<int> residual_capacity(instance.getCapacity());
         std::unordered_set<int> tasks;
+
         for(size_t task = 0; task < instance.getNbTask(); task++){tasks.insert(task);}
 
-
         while(!tasks.empty()){
+
             bool assignment_performed = assignRiskyTaskToAgent(tasks,
                                                                residual_capacity,
                                                                solution,
                                                                instance);
             // when a task is not assigned to an agent
             if(!assignment_performed){
+
                 solution.setStatus(gap::Status::INFEASIBLE);
                 return solution;
             }
         }
+        
         // when the construction is completed!
         if(solution.isFeasible(instance)){solution.setStatus(gap::Status::FEASIBLE);}
 

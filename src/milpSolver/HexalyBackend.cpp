@@ -49,6 +49,7 @@
         optimizer.solve();
     }
 
+    
 
 
 
@@ -123,6 +124,7 @@
 
 
 
+
     void HexalyBackend::setWarmStart(std::vector<double> &warm_start){
 
         for(size_t index = 0; index < warm_start.size(); index++){
@@ -147,6 +149,7 @@
     }
 
     
+
 
     bool HexalyBackend::isOptimal(){
 

@@ -20,18 +20,26 @@
 
  namespace gap{
     GapSolution::GapSolution(gap::GapInstance &instance){
+
         this-> nb_agent = instance.getNbAgent();
         this-> status = gap::Status::UNKNOWN;
         this-> solution = std::vector<int>(instance.getNbTask(), -1);
     }
 
 
+    
+
     bool GapSolution::assignmentChecker(){
+
         for(int &element : solution){
+
             if(element == -1){return false;} // when a task is not assigned to an agent
         }
+
         return true; // when all tasks are assigned
     }
+
+
 
 
     bool GapSolution::capacityChecker(gap::GapInstance &instance){
@@ -43,37 +51,52 @@
 
         // computation of the capacity used by each agent
         for(size_t task = 0; task < solution.size(); task++){
+
             agent = solution[task];
             capacity_used[agent] += weight_matrix[agent][task];
         }
+
         // checking that an agent is not overloaded
         for(size_t i = 0; i < nb_agent; i++){
+
             if(capacity_used[i] > capacity_vector[i]){
                return false; 
             }
         }
+
         return true;
     }
 
 
+
+
     bool GapSolution::isFeasible(gap::GapInstance &instance){
+
         bool checker = assignmentChecker();
-        if(!checker){
-            return false;
-        }else{
-            return capacityChecker(instance);
-        }
+
+        if(!checker){return false;}
+            
+        else{return capacityChecker(instance);}
     }
 
+
+
+
     std::int64_t GapSolution::objectiveValue(gap::GapInstance &instance){
+
         std::int64_t obj = 0;
         const std::vector<std::vector<int>> & cost_matrix = instance.getCost();
+
         for(size_t j = 0; j < solution.size(); j++){
+
             int agent = solution[j];
             obj += cost_matrix[agent][j];
         }
+
         return obj;
     }
+
+
 
 
     void GapSolution::computeIndividualWeight(std::vector<int> &weight_agent,
@@ -84,7 +107,9 @@
 
         const std::vector<std::vector<int>>& weight_matrix = instance.getWeight();
         const std::vector<std::vector<int>> & cost_matrix = instance.getCost();
+
         for(size_t j = 0; j < solution.size(); j++){
+
             int agent = solution[j];
             weight_agent[agent] += weight_matrix[agent][j];
             individual_cost[agent] += cost_matrix[agent][j];
@@ -93,6 +118,8 @@
         }
 
     }
+
+
 
 
     void GapSolution::print(gap::GapInstance &instance) const{
@@ -145,6 +172,8 @@
         }
     }
     
+
+
     // getters
 
     size_t GapSolution::getNbAgent(){return nb_agent;}

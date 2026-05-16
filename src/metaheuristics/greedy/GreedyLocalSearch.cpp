@@ -30,6 +30,7 @@
       std::vector<int> residual_capacity(capacity_vector);
 
       for(size_t task = 0; task < instance.getNbTask(); task++){
+         
          int agent = solution_vector[task];
          residual_capacity[agent] -= weight_matrix[agent][task];
       }
@@ -51,9 +52,11 @@
       const std::vector<std::vector<int>> & cost_matrix = instance.getCost();
 
       for(size_t task = 0; task < instance.getNbTask(); task++){
+
          int agent = solution_vector[task];
          individual_cost_agents[agent] += cost_matrix[agent][task];
       }
+
       return individual_cost_agents;
    }
 
@@ -61,13 +64,14 @@
 
    
    void findMostAndLeastExpensiveAgents(int &most_expensive_agent,
-                                      int &least_expensive_agent,
-                                      std::vector<int> &individual_cost_agents){
+                                        int &least_expensive_agent,
+                                        std::vector<int> &individual_cost_agents){
 
       int max_cost = individual_cost_agents[0];
       int min_cost = individual_cost_agents[0];
 
       for(size_t agent = 1; agent < individual_cost_agents.size(); agent++){
+
          if(individual_cost_agents[agent] >= max_cost){max_cost = individual_cost_agents[agent]; most_expensive_agent = agent;}
          if(individual_cost_agents[agent] <= min_cost){min_cost = individual_cost_agents[agent]; least_expensive_agent = agent;}
       }
@@ -87,7 +91,9 @@
       const std::vector<std::vector<int>>& weight_matrix = instance.getWeight();
 
       for(int task = 0; task < static_cast<int>(instance.getNbTask()); task++){
+
          if(solution_vector[task] == most_expensive_agent){
+
             float score_task = static_cast<float>(cost_matrix[least_expensive_agent][task]) /
                                (weight_matrix[least_expensive_agent][task] + epsilon);
 
@@ -117,6 +123,7 @@
 
       // sorting tasks in order to transfer from the most expensive agent to the least expensive one
       std::priority_queue<gap::greedy::Element> tasks;
+
       sortTaskFromMostToLeastExpensive(most_expensive_agent,
                                        least_expensive_agent,
                                        tasks,
@@ -128,15 +135,20 @@
       const std::vector<std::vector<int>>& weight_matrix = instance.getWeight();
 
       while(!tasks.empty()){
+
          gap::greedy::Element current = tasks.top();
          int task = current.getId();
          tasks.pop();
+
          // case of a promissing transfer
          if(cost_matrix[most_expensive_agent][task] > cost_matrix[least_expensive_agent][task]){
+
             // checking for the capacity constraint
             if(weight_matrix[least_expensive_agent][task] <= residual_capacity[least_expensive_agent]){
+
                // performing the transfer
                solution_vector[task] = least_expensive_agent;
+
                // updating residual capacities
                residual_capacity[least_expensive_agent] -= weight_matrix[least_expensive_agent][task];
                residual_capacity[most_expensive_agent] += weight_matrix[most_expensive_agent][task];
@@ -157,7 +169,8 @@
                     gap::GapInstance &instance){
 
       std::vector<int> residual_capacity = computeResidualCapacity(solution, instance);
-      int re_assignment_performed;   
+      int re_assignment_performed;
+
       do{
          re_assignment_performed = assignTaskFromMostToLeastExpensive(residual_capacity,
                                                                      solution,
@@ -183,7 +196,9 @@
       const std::vector<std::vector<int>> & cost_matrix = instance.getCost();
 
       for(int agent = 0; agent < static_cast<int>(instance.getNbAgent()); agent++){
+
          if(agent != current_agent){
+
             float score_agent = 1.0f / (cost_matrix[agent][task] + epsilon);
             agents.push(gap::greedy::Element(agent, score_agent));
 
@@ -221,8 +236,10 @@
 
          // case of a promissing agent
          if(cost_matrix[current_agent][task] > cost_matrix[agent][task]){
+
             // checking for the capacity constraint
             if(residual_capacity[agent] > weight_matrix[agent][task]){
+
                tasks_scores[task] = cost_matrix[current_agent][task] - cost_matrix[agent][task];
                tasks_best_agent[task] = agent;
                return;
@@ -281,6 +298,7 @@
                                     std::ref(solution),
                                     std::ref(instance));
       }
+
       // waiting for all threads to finish
       for(int id = 0; id < nb_threads; id++){
          workers[id].join();
@@ -290,6 +308,7 @@
       int best_score = 0;
 
       for(int task = 0; task < work_size; task++){
+
          if(tasks_scores[task] > best_score){
             best_task = task;
             best_score = tasks_scores[task];
@@ -308,6 +327,7 @@
       
       std::vector<int> tasks_best_agent(instance.getNbTask(), -1);
       int best_task;
+
       do{
          best_task = findBestTask(nb_threads,
                                     residual_capacity,
@@ -318,10 +338,12 @@
             
             std::vector<int>& solution_vector =  solution.getSolutionVector();
             const std::vector<std::vector<int>>& weight_matrix = instance.getWeight();
+
             // re-assginment of the task
             int old_agent = solution_vector[best_task];
             int cheapest_agent = tasks_best_agent[best_task];
             solution_vector[best_task] = cheapest_agent;
+
             // update of residual capacities
             residual_capacity[old_agent] += weight_matrix[old_agent][best_task];
             residual_capacity[cheapest_agent] -= weight_matrix[cheapest_agent][best_task];
@@ -369,6 +391,7 @@
 
       balanceMove(solution, instance);
       cheapMove(params.nb_threads, solution, instance);
+
       // feasibility certification
       if(solution.isFeasible(instance)){solution.setStatus(gap::Status::FEASIBLE);}
       else{solution.setStatus(gap::Status::INFEASIBLE);}

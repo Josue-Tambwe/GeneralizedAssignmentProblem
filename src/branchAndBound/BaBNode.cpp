@@ -55,7 +55,6 @@
     void BaBNode::print() const{
 
         std::cout << " dual bound : " << dual_bound << "  ---  ones : [ ";
-
         for(int index : fixed_to_one){std::cout << index << " ";}
         std::cout << "] --- zeros : [ ";
         for(int index : fixed_to_zero){std::cout << index << " ";}

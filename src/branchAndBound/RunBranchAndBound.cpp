@@ -105,7 +105,6 @@
     std::unique_ptr<LPSolver> buildLinearModel(gap::Params &params,
                                                gap::GapInstance &instance){
 
-
         std::unique_ptr<LPSolver> solver = setLPSolver(params);
         solver->buildContinuousModel(instance);
         return solver;
@@ -139,6 +138,7 @@
 
         // infeasibility test
         if(!solver->isOptimal()){
+
             log.warning("the problem is infeasible.");
             std::cout << " \n Processing time : " << timer.getElapsed() << " (s) \n\n" << std::endl;
             return;
@@ -173,6 +173,7 @@
             if(solver->isInFeasible()){
 
                 nodes_fathomed_by_infeasibility += 1;
+
                 // undoing variables fixation
                 solver->resetLinearModel(current_node);
                 continue;
@@ -184,6 +185,7 @@
             if(solver->getObjectiveValue() > primal_bound){
 
                 nodes_fathomed_by_dominance += 1;
+
                 // undoing variables fixation
                 solver->resetLinearModel(current_node); 
                 continue;
@@ -224,6 +226,7 @@
 
             // upadting the global dual bound
             if(!open_nodes.isEmpty()){
+
                dual_bound = open_nodes.getLowestDualBound();
             }
             else{dual_bound = primal_bound;}
@@ -238,15 +241,16 @@
             }
 
             // undoing variables fixation
-            solver->resetLinearModel(current_node);
-            
+            solver->resetLinearModel(current_node);  
         }
+
         std::cout << "\n";
         log.info("Branch and Bound algorithm completed. Final best known solution :");
 
         // update of solution status
         if((std::abs(dual_bound - primal_bound) / primal_bound) <= tolerance 
             || open_nodes.isEmpty()){
+
                 primal_solution.setStatus(gap::Status::OPTIMAL);
         }
 
@@ -298,6 +302,7 @@
 
         // infeasibility test
         if(!solver->isOptimal()){
+
             log.warning("the problem is infeasible.");
             std::cout << " \n Processing time : " << timer.getElapsed() << " (s) \n\n" << std::endl;
             return;
@@ -334,6 +339,7 @@
                 if(solver->isInFeasible()){
                     
                     nodes_fathomed_by_infeasibility += 1;
+
                     // undoing variables fixation
                     solver->resetLinearModel(current_node); 
                     continue;
@@ -345,6 +351,7 @@
                 if(solver->getObjectiveValue() > primal_bound){
 
                     nodes_fathomed_by_dominance += 1;
+
                     // undoing variables fixation
                     solver->resetLinearModel(current_node); 
                     continue;
@@ -359,6 +366,7 @@
 
                         primal_bound = solver->getObjectiveValue();
                         updateSolution(relaxed_solution, primal_solution);
+
                         if(params.verbose){primal_solution.print(instance);} 
                     }
 
@@ -387,6 +395,7 @@
 
                 // upadting the global dual bound
                 if(!open_nodes.isEmpty()){
+
                 dual_bound = open_nodes.getLowestDualBound();
                 }
 
@@ -403,9 +412,8 @@
 
                 // undoing variables fixation
                 solver->resetLinearModel(current_node);
-
-
             }
+
             std::cout << "\n";
             log.info("Branch and Bound algorithm completed. Final best known solution :");
 
@@ -414,6 +422,7 @@
                 || open_nodes.isEmpty()){
                     primal_solution.setStatus(gap::Status::OPTIMAL);
             }
+
             primal_solution.print(instance);
 
             finalStatisticsBaB(preprocessing_time,
@@ -441,8 +450,10 @@
         printHeader();
 
         if(params.exploration_strategy == 'b'){
+
             branchAndBoundBestFirst(params);
         }
+
         else{branchAndBoundDepthFirst(params);}
 
     }

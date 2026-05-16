@@ -24,7 +24,6 @@
 
  #include "branchAndBound/BaBNode.hpp"
  #include <stack>
- #include <limits>
  #include <iostream>
 
 

@@ -26,10 +26,11 @@ GapInstance::GapInstance(gap::Params params){
     std::ifstream file(params.instance_path);
     
     if (!file.is_open()) {
-        Logger log;
-        log.error("Error in opening the file");
 
-    }else{
+        Logger log;
+        log.error("Error in opening the file");}
+        
+    else{
 
         this-> file_name = params.instance_path;
         file >> nb_agent;
@@ -53,7 +54,9 @@ GapInstance::GapInstance(gap::Params params){
 
         // loading the cost matrix 
         for (size_t i = 0; i < nb_agent; i++) {
+
             for (size_t j = 0; j < nb_task; j++) {
+
                 file >> cost[i][j];
                 if(cost[i][j] >= max_cost_task){max_cost_task = cost[i][j];}
                 if(cost[i][j] <= min_cost_task){min_cost_task = cost[i][j];}
@@ -63,6 +66,7 @@ GapInstance::GapInstance(gap::Params params){
         // loading the weight matrix
         for (size_t i = 0; i < nb_agent; i++) {
             for (size_t j = 0; j < nb_task; j++) {
+
                 file >> weight[i][j];
                 if(weight[i][j] >= max_weight_task){max_weight_task = weight[i][j];}
                 if(weight[i][j] <= min_weight_task){min_weight_task = weight[i][j];}
@@ -71,6 +75,7 @@ GapInstance::GapInstance(gap::Params params){
 
         // loading the agent capacity vector
         for(size_t i = 0; i < nb_agent; i++){
+
             file >> capacity[i];
             if(capacity[i] >= max_capacity_agent){max_capacity_agent = capacity[i];}
             if(capacity[i] <= min_capacity_agent){min_capacity_agent = capacity[i];}
@@ -91,10 +96,12 @@ GapInstance::GapInstance(gap::Params params){
 void GapInstance::print()const{
 
     if(cost.size() == 0 || weight.size() == 0 || capacity.size() == 0){
+
         Logger log;
         log.error("Incomplete data!");
         std::cout << "\n";
-    }else{
+    }
+    else{
 
         std::cout << std::string(100, '=') << std::endl;
         std::cout << " file name          : " << this-> file_name << std::endl;
@@ -107,19 +114,24 @@ void GapInstance::print()const{
         std::cout << " Cost matrix : \n" << std::endl;
 
         for (size_t i = 0; i < nb_agent; i++) {
+
             for (size_t j = 0; j < nb_task; j++) {
                 std::cout << cost[i][j] << " ";
             }
+
             std::cout << "\n";
             std::cout << std::endl;
         }
+
         std::cout << std::string(100, '-') << std::endl;
         std::cout << "\n";
 
         std::cout << " Weight matrix : \n" << std::endl;
 
         for (size_t i = 0; i < nb_agent; i++) {
+
             for (size_t j = 0; j < nb_task; j++) {
+
                 std::cout << weight[i][j] << " ";
             }
 

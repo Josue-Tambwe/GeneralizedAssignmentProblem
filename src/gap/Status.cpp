@@ -20,16 +20,21 @@
  namespace gap{
     
     std::ostream& operator<<(std::ostream &output_stream, const gap::Status &status){
+
         switch(status){
+
             case FEASIBLE : 
                 output_stream << GREEN << "Feasible" << RESET;
                 return output_stream;
+
             case OPTIMAL : 
                 output_stream << BRIGHT_CYAN << "Optimal" << RESET ;
                 return output_stream;
+
             case INFEASIBLE : 
                 output_stream << RED << "Infeasible" << RESET ;
                 return output_stream;
+                
             default : 
                 output_stream << RED << "Unkwon" << RESET;
                 return output_stream;

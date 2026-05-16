@@ -20,11 +20,13 @@
  namespace gap::greedy{
 
     Element::Element(int id, float &score){
+
         this-> id = id;
         this -> score = score;
     }
 
     int Element::getId(){return id;}
+
     float Element::getScore(){return score;}
             
     bool Element::operator<(const Element &other) const{return score < other.score;}
