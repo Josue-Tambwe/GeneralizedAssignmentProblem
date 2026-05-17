@@ -984,7 +984,7 @@
                         << std::right << std::setw(primal_sep)   << ""
 
                         << std::right  << std::setw(w_gap) << std::fixed << std::setprecision(4)
-                        << ((primal_bound - dual_bound)/primal_bound)
+                        << (((primal_bound - dual_bound)/primal_bound) * 100.0)
                         << "\n\n";
 
 
@@ -1057,7 +1057,7 @@
                         << std::string(init_sep, ' ')
                         << std::left << std::setw(w_item)   << "optimality gap (%)"
                         << std::right  << " :  " 
-                        << std::left << MAGENTA <<  ((primal_bound - dual_bound) / primal_bound)
+                        << std::left << MAGENTA <<  (((primal_bound - dual_bound) / primal_bound) * 100.0)
                         << RESET
                         << std::setprecision(4)
                         << "\n"
