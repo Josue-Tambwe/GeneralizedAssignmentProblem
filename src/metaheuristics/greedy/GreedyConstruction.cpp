@@ -11,7 +11,7 @@
  */
  
  /** 
- * @file GreedyConstructionMinCost.cpp
+ * @file GreedyConstruction.cpp
  * @author Josué Tambwe
  * @date 17 Mar 2026
  */
