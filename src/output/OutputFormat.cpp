@@ -776,7 +776,6 @@
                           <<  BRIGHT_CYAN;
                 if(params.milp_solver == 'g'){std::cout << std::left << std::setw(w_set_value) << "Gurobi";}
                 if(params.milp_solver == 'h'){std::cout << std::left << std::setw(w_set_value) << "Highs";}
-                if(params.milp_solver == 'x'){std::cout << "Hexaly";}
                 std::cout << std::right << std::setw(w_set_value_sep)   << "" << RESET;
 
                 std::cout << std::left << std::setw(3) << "verbose"
@@ -1215,7 +1214,7 @@
                           <<  BRIGHT_CYAN;
                 if(params.milp_solver == 'g'){std::cout << std::left << std::setw(w_set_value_milp) << "Gurobi";}
                 if(params.milp_solver == 'h'){std::cout << std::left << std::setw(w_set_value_milp) << "Highs";}
-                if(params.milp_solver == 'x'){std::cout << "Hexaly";}
+                if(params.milp_solver == 'x'){std::cout << std::left << std::setw(w_set_value_milp) << "Hexaly";}
                 std::cout << std::right << std::setw(w_set_value_sep_milp)   << "" << RESET;
 
                 std::cout << std::left << std::setw(3) << "warm start"
