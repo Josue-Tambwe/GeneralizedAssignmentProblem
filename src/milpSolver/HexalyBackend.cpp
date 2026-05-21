@@ -38,10 +38,6 @@
 
     void HexalyBackend::solveIntegerModel(double time_limit){
 
-        /*if( optimizer.getState() != hexaly::HxState::Ready){
-            model.close();
-        }*/
-
         // setting the time limit
         optimizer.getParam().setTimeLimit(time_limit);
 
