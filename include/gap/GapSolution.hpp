@@ -14,7 +14,7 @@
 /** 
  * @class GapSolution
  * @file GapSolution.hpp
- * @brief Stores a solution to an instance of the Generalized Assignment Problem
+ * @brief Stores a solution relating to an instance of the Generalized Assignment Problem
  * @author Josué Tambwe
  * @date 25 Feb 2026
  */
