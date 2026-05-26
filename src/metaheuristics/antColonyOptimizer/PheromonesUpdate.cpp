@@ -30,9 +30,9 @@
                             float rho,
                             std::vector<std::vector<float>> &pheromone_matrix){
 
-        for(int task = start; task <= end; task++){
+        for(int agent = 0; agent < static_cast<int>(pheromone_matrix.size()); agent++){
 
-            for(int agent = 0; agent < static_cast<int>(pheromone_matrix.size()); agent++){
+            for(int task = start; task <= end; task++){
 
                 pheromone_matrix[agent][task] = std::max(min_pheromone, 
                                                         (1.0f - rho) * pheromone_matrix[agent][task]);
@@ -42,6 +42,8 @@
         }
 
     }
+
+    
 
 
 
