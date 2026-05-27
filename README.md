@@ -216,7 +216,7 @@ For this reason, the default construction strategy is the **risky‑task‑based
 
 Additionnal options are discribed in the help message, such as : 
 - **--rho** the rate of pheromones evaporation in the pheromone matrix after an iteration
-- **--gamma** the rate of randomization when considering the assignment of the first task. It enables diverfied ants (solutions)
+- **--gamma** the rate of randomization when considering the assignment of the first task. It enables diversified ants (solutions)
 - **--iterations** defines the number of iterations to perform. An iteration consists in treating each ant within the colony (construction + local search).
 - **--verbose** is a flag that enables the display of a solution when a better solution than the current best known solution is found.
 
