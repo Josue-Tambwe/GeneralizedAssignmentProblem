@@ -126,7 +126,6 @@
             // colony improvement by local search and reparation of infeasible ants
             antImprovement(reference_ant,
                            params,
-                           ants_construction_status,
                            colony,
                            instance);
 

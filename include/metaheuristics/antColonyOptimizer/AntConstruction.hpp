@@ -284,7 +284,6 @@ namespace gap::ACO{
           void multiAntImprovement(int start,
                                   int end,
                                   gap::GapSolution &reference_ant,
-                                  std::vector<bool> &ants_construction_status,
                                   std::vector<gap::GapSolution> &colony,
                                   gap::GapInstance &instance);
 
@@ -296,7 +295,6 @@ namespace gap::ACO{
           */
           void antImprovement(gap::GapSolution &reference_ant,
                               gap::Params &params,
-                              std::vector<bool> &ants_construction_status,
                               std::vector<gap::GapSolution> &colony,
                               gap::GapInstance &instance);
 

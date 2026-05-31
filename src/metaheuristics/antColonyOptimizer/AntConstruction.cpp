@@ -570,6 +570,7 @@
         }
 
         // when the solution of an ant has been constructed fully
+
         return true;
 
     }
@@ -688,14 +689,13 @@
     void multiAntImprovement(int start,
                             int end,
                             gap::GapSolution &reference_ant,
-                            std::vector<bool> &ants_construction_status,
                             std::vector<gap::GapSolution> &colony,
                             gap::GapInstance &instance){
 
         for(int ant = start; ant <= end; ant++){
 
             // case of fully constructed ant solution
-            if(ants_construction_status[ant]){
+            if(colony[ant].isFeasible(instance)){
 
                 // setting the ant solution status to Feasible
                 colony[ant].setStatus(gap::Status::FEASIBLE);
@@ -717,7 +717,6 @@
 
     void antImprovement(gap::GapSolution &reference_ant,
                         gap::Params &params,
-                        std::vector<bool> &ants_construction_status,
                         std::vector<gap::GapSolution> &colony,
                         gap::GapInstance &instance){
 
@@ -734,7 +733,6 @@
                                       start,
                                       end,
                                       std::ref(reference_ant),
-                                      std::ref(ants_construction_status),
                                       std::ref(colony),
                                       std::ref(instance));
         }
