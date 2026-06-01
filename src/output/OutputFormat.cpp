@@ -54,7 +54,7 @@
                         << "Number of ants within a colony for the ACO algorithm \n\n";
 
                 std::cout << "    " << setw(22) << left << "--solver=value"
-                        << "solver backend to use (gurobi, highs, hexaly). Hexaly is only used for a MILP resolution approch! \n\n \n";
+                        << "Solver backend to use (gurobi, highs, hexaly). Hexaly is only used for a MILP resolution approach \n\n \n";
         }
 
 
@@ -72,36 +72,36 @@
 
 
                 std::cout << "  " << setw(27) << left << "--warm-start"
-                        << "Provides a feasible starting point for the MILP resolution  \n \n";
+                        << "Provide a feasible starting point for the MILP resolution  \n \n";
 
 
                 std::cout << "  " << setw(27) << left << "--low-cost-construction" 
-                        << "Enable the cost-and-weight based priority rule when building initial solution for the Greedy algorithm\n\n";
+                        << "Enable the cost-and-weight based priority rule when building the initial solution for the Greedy algorithm\n\n";
 
                 std::cout << "  " << setw(27) << left << "--time-limit=value"
                         << "Time limit in seconds (default: 10)\n \n";
 
                 std::cout << "  " << setw(27) << left << "--iterations=value"
-                        << "Number of maximum iterations for the ACO algorithm (default: 1)\n \n";
+                        << "Number of iterations for the ACO algorithm (default: 1)\n \n";
 
 
                 std::cout << "  " << setw(27) << left << "--influence=value"
-                        << "Major influence in an ant solution construction  for the ACO algorithm  (values : balance, pheromone, heuristic) \n \n";
+                        << "Major influence when constructing a solution for the ACO algorithm  (values: balance, pheromone, heuristic) \n \n";
 
                 std::cout << "  " << setw(27) << left << "--rho=value"
-                        << "Rate in [0,1] of pheromones evaporation for the ACO algorithm (default: 0.1)\n \n";
+                        << "Pheromone evaporation rate in [0,1] for the ACO algorithm (default: 0.1)\n \n";
 
                 std::cout << "  " << setw(27) << left << "--gamma=value"
-                        << "Rate in [0,1] of randomization  for the assignment of the first task  for the ACO algorithm (default: 0.5)\n \n";
+                        << "Randomization rate in [0,1] for the assignment of the first task  for the ACO algorithm (default: 0.5)\n \n";
 
                 std::cout << "  " << setw(27) << left << "--gap=value"
-                        << "target optimality gap in [0,1] for the Branch And Bound algorithm (default: 0.0)\n \n";
+                        << "Target optimality gap in [0,1] for the Branch and Bound algorithm (default: 0.0)\n \n";
 
                 std::cout << "  " << setw(27) << left << "--exploration=value"
-                        << "nodes exploration startegy for the Branch And Bound algorithm (values : bfs, dfs)\n \n";
+                        << "Node exploration strategy for the Branch and Bound algorithm (values: bfs, dfs)\n \n";
 
                 std::cout << "  " << setw(27) << left << "--branching-rule=value"
-                        << "branching rule startegy for the Branch And Bound algorithm (values : one, zero, fractional)\n \n \n";
+                        << "Branching rule strategy for the Branch and Bound algorithm (values: one, zero, fractional)\n \n \n";
 
 
                 
