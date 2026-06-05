@@ -45,7 +45,7 @@
       }else{
 
         std::int64_t construction_value = solution.objectiveValue(instance);
-        log.info("the greedy construction heuristic succeed !");
+        log.info("the greedy construction heuristic succeeded !");
         timer.reset();
         
         if(params.verbose){solution.print(instance);}
