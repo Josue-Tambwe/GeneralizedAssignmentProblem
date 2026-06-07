@@ -263,7 +263,7 @@ The theoretical foundations and algorithmic components implemented in this solve
 - **Jacques Teghem** — *Recherche Opérationnelle, Tome 1*.  
   Éditions Ellipses, 2012.
 
-- **Johann Dréo, Alain Siarry, Patrick Siarry** — *Métaheuristiques pour l’optimisation difficile*.  
+- **Johann Dréo, Alain Petrowski, Patrick Siarry, Éric Taillard** — *Métaheuristiques pour l’optimisation difficile*.  
   Eyrolles, 2006.
 
 - **Rainer Burkard, Mauro Dell’Amico, Silvano Martello** — *Assignment Problems*.  
