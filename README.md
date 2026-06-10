@@ -172,22 +172,16 @@ ___
 
 The executable is located in the **bin/** directory after installation.
 
-## 1. Move into the **bin/** directory
+## Display the help message
 
 ```bash
-cd bin
+./bin/gap_solver --help
 ```
 
-## 2. Display the help message
+## Run the Greedy heuristic (construction + local search)
 
 ```bash
-./gap_solver --help
-```
-
-## 3. Run the Greedy heuristic (construction + local search)
-
-```bash
-./gap_solver --algorithm=greedy --instance=../benchmarks/gap_a/a05100 --nb-threads=4  --low-cost-construction
+./bin/gap_solver --algorithm=greedy --instance=benchmarks/gap_a/a05100 --nb-threads=4  --low-cost-construction
 ```
 
 - **--nb-threads** option is optional.
@@ -201,10 +195,9 @@ For this reason, the default construction strategy is the **risky‑task‑based
 ![](docs/img/run_greedy_full.png)
 
 
-## 4. Run the Ant Colony Optimizer 
+## Run the Ant Colony Optimizer 
 ```bash
-./gap_solver --algorithm=aco --instance=../benchmarks/gap_a/a20100  --time-limit=2 --nb-ants=200 
---influence=pheromone
+./bin/gap_solver --algorithm=aco --instance=benchmarks/gap_a/a20100  --time-limit=2 --nb-ants=200 --influence=pheromone
 ```
 
 - **--nb-ants** is a mandatory option. It defines the number of ants within the colony.
@@ -224,11 +217,10 @@ Additionnal options are discribed in the help message, such as :
 
 
 
-## 5. Run the Branch and Bound algorithm (with greedy primal solution)
+## Run the Branch and Bound algorithm (with greedy primal solution)
 
 ``` bash
-./gap_solver --algorithm=bab --instance=../benchmarks/gap_a/a05100  --time-limit=5 --solver=gurobi 
---exploration=bfs  --branching-rule=fractional --gap=0.0
+./bin/gap_solver --algorithm=bab --instance=benchmarks/gap_a/a05100  --time-limit=5 --solver=gurobi --exploration=bfs  --branching-rule=fractional --gap=0.0
 ```
 
 
@@ -242,10 +234,9 @@ Additionnal options are discribed in the help message, such as :
 
 ![](docs/img/run_bab.png)
 
-## 6. Run Milp backend Solvers
+## Run Milp backend Solvers
 ```bash
-./gap_solver --algorithm=milp --time-limit=60 --instance=../benchmarks/gap_a/a05100 --solver=hexaly  
---warm-start
+./bin/gap_solver --algorithm=milp --time-limit=60 --instance=benchmarks/gap_a/a05100 --solver=hexaly  --warm-start
 ```
 
 - **--warm-start** is not mandatory. It provides an initial solution (starting point) to the MILP solver.
