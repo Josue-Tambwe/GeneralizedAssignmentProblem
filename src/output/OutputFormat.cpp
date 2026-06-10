@@ -115,17 +115,17 @@
                 std::cout << " Examples:\n";
                 std::cout << " ---------\n\n";
 
-                std::cout << "    gap_solver --algorithm=greedy "
-                        << "--instance=../benchmarks/gap_a/a05100 --verbose\n\n";
+                std::cout << "    ./bin/gap_solver --algorithm=greedy "
+                        << "--instance=benchmarks/gap_a/a05100 --verbose\n\n";
 
-                std::cout << "    gap_solver --algorithm=aco "
-                        << "--instance=../benchmarks/gap_a/a05100 --time-limit=30  --nb-ants=100  --influence=pheromone --rho=0.15 \n \n";
+                std::cout << "    ./bin/gap_solver --algorithm=aco "
+                        << "--instance=benchmarks/gap_a/a05100 --time-limit=30  --nb-ants=100  --influence=pheromone --rho=0.15 \n \n";
 
-                std::cout << "    gap_solver --algorithm=bab "
-                        << "--instance=../benchmarks/gap_a/a05100  --time-limit=5 --solver=highs --exploration=dfs --gap=0.0 \n \n";
+                std::cout << "    ./bin/gap_solver --algorithm=bab "
+                        << "--instance=benchmarks/gap_a/a05100  --time-limit=5 --solver=highs --exploration=dfs --gap=0.0 \n \n";
 
-                std::cout << "    gap_solver --algorithm=milp "
-                        << "--instance=../benchmarks/gap_a/a05100 --solver=hexaly --time-limit=5 --warm-start\n\n\n";
+                std::cout << "    ./bin/gap_solver --algorithm=milp "
+                        << "--instance=benchmarks/gap_a/a05100 --solver=hexaly --time-limit=5 --warm-start\n\n\n";
         }
 
 
