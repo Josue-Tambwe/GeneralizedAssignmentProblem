@@ -52,6 +52,17 @@ This approach guarantees optimality but may become expensive for large instances
 
 To accelerate computation, the solver integrates **CPU multi‑threading** with parallel evaluation of neighborhoods, construction heuristics and pheromone updates. Multi‑threading provides a substantial speed‑up, especially on large instances where independent evaluations can be processed concurrently.
 
+# Benchmark Instances
+
+All benchmark instances used in this project come from the well‑known GAP benchmark library maintained by Yagiura et al. at Nagoya University:  
+[Benchmark GAP – Yagiura et al.](http://www.al.cm.is.nagoya-u.ac.jp/~yagiura/gap/)
+
+This dataset is widely used in the literature for evaluating heuristics, metaheuristics, and exact methods for the Generalized Assignment Problem.  
+It contains several categories of instances (A, B, C, D, E), ranging from small and easy to large and highly challenging.  
+In particular, instances from categories **D** and **E** are known to be difficult and are commonly used to stress‑test construction heuristics and local search procedures.
+
+
+>**Note** : **All instances follow the same standardized GAP input format, and the GAP‑Solver is designed to read this format directly without any preprocessing**.
 
 # Dependencies :
 
@@ -155,18 +166,6 @@ Then run the installer with the backends you want to enable :
 ./install.sh HAS_GUROBI HAS_HEXALY HAS_HIGHS
 ```
 ___
-
-# Benchmark Instances
-
-All benchmark instances used in this project come from the well‑known GAP benchmark library maintained by Yagiura et al. at Nagoya University:  
-[Benchmark GAP – Yagiura et al.](http://www.al.cm.is.nagoya-u.ac.jp/~yagiura/gap/)
-
-This dataset is widely used in the literature for evaluating heuristics, metaheuristics, and exact methods for the Generalized Assignment Problem.  
-It contains several categories of instances (A, B, C, D, E), ranging from small and easy to large and highly challenging.  
-In particular, instances from categories **D** and **E** are known to be difficult and are commonly used to stress‑test construction heuristics and local search procedures.
-
-
->**Note** : **All instances follow the same standardized GAP input format, and the GAP‑Solver is designed to read this format directly without any preprocessing**.
 
 
 # Usage / CLI examples
