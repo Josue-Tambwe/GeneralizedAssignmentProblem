@@ -1109,7 +1109,7 @@
                         << std::left << std::setw(w_nodes)   << "processed nodes"
                         << std::right  << " :  " 
                         << std::left << processed_nodes
-                        << "\n"
+                        << "\n\n"
 
                         << std::string(init_sep, ' ')
                         << std::left << std::setw(w_nodes)   << "nodes fathomed by infeasibility"
