@@ -51,7 +51,7 @@
     /**
      * @brief checks for integrality of the solution
      */
-    inline bool isInteger(std::vector<double> solution){
+    inline bool isInteger(std::vector<double> &solution){
 
         for(size_t i = 0; i < solution.size(); i++){
 
