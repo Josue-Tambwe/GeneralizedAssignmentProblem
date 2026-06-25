@@ -69,7 +69,7 @@
     /**
      * @brief finds the index of the branching variable
      */
-    inline int branchingVariableIndex(std::vector<double> solution, 
+    inline int branchingVariableIndex(std::vector<double> &solution, 
                                       gap::Params params){
 
         int index = -1;
