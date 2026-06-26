@@ -21,20 +21,8 @@
    #include "metaheuristics/greedy/RunGreedy.hpp"
    #include "metaheuristics/antColonyOptimizer/RunAntColonyOptimizer.hpp"
 
-   #if HAS_GUROBI
-   #include "milpSolver/GurobiBackend.hpp"
-   #endif
-
-   #if HAS_HEXALY
-   #include "milpSolver/HexalyBackend.hpp"
-   #endif
-
-   #if HAS_HIGHS
-   #include "milpSolver/HighsBackend.hpp"
-   #endif
    
    #if USE_BRANCH_AND_BOUND
-   #include "milpSolver/LPSolver.hpp"
    #include "branchAndBound/RunBranchAndBound.hpp"
    #endif
 

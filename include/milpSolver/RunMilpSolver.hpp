@@ -55,7 +55,7 @@
 
 
     /**
-     * @brief generates an initial with greedy construction + local search
+     * @brief generates an initial solution with greedy construction + local search
      */
     gap::GapSolution generateInitialSolution(gap::GapInstance &instance);
 
