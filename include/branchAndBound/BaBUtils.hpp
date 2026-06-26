@@ -70,7 +70,7 @@
      * @brief finds the index of the branching variable
      */
     inline int branchingVariableIndex(std::vector<double> &solution, 
-                                      gap::Params params){
+                                      gap::Params &params){
 
         int index = -1;
         double best_score = std::numeric_limits<double>::max();
