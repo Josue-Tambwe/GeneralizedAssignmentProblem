@@ -423,6 +423,14 @@
                     primal_solution.setStatus(gap::Status::OPTIMAL);
             }
 
+            // upadting the global dual bound
+            if(!open_nodes.isEmpty()){
+
+                dual_bound = open_nodes.getLowestDualBound();
+            }
+            else{dual_bound = primal_bound;}
+
+            // display of the final solution
             primal_solution.print(instance);
 
             finalStatisticsBaB(preprocessing_time,
